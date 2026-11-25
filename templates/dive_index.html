@@ -2,19 +2,106 @@
 {% block hero %}
 <section class="hero"><div class="wrap">
 <p class="crumb">Deeper dive</p>
-<h1 class="wide">DEEPER DIVE</h1>
-<p class="herolead">One page per measure, in the same five steps: what's normal, whether it's about the kind of place, the arithmetic that ties it to other measures, which relationships survive testing, and the places that break the pattern. Pick a place on any page to follow it through every chart.</p>
+<h1 class="wide">HOW SCHOOL MONEY AND PROPERTY TAXES WORK</h1>
+<p class="herolead">The background behind every Deeper dive: how Nebraska's school aid formula works, how property taxes and credits add up, and how the dives test what goes with what. Start here, then pick a measure.</p>
+<nav class="toc" aria-label="On this page"><a href="#what">What a dive is</a><a href="#schools">School money</a><a href="#taxes">Property taxes</a><a href="#tests">Testing</a><a href="#words">Words</a><a href="#pick">Pick a measure</a></nav>
 </div></section>
 {% endblock %}
 {% block main %}
-{% for level, title in (('system', 'School systems'), ('county', 'Counties')) %}
-<section class="block">
-<h2 class="sect">{{ title }}</h2>
-{% for g in group_order[level] %}{% set items = listing[level]|selectattr('group', 'equalto', g)|list %}{% if items %}
-<h3 class="mh">{{ g }}</h3>
-<ul class="divelist">{% for it in items|sort(attribute='key_indicator', reverse=True) %}<li><a href="{{ level }}/{{ it.key }}.html">{{ it.label }}</a>{% if it.key_indicator %} <span class="quiet">· key</span>{% endif %}</li>{% endfor %}</ul>
-{% endif %}{% endfor %}
+<div class="dive">
+
+<section class="dstep" id="what" aria-labelledby="h-what"><div class="dhead"><span class="dnum">01</span><div><p class="label">Start here</p><h2 id="h-what">What a Deeper dive is</h2></div></div>
+<p class="dlead">Each Deeper dive takes one measure, such as state aid per student or property taxes after credits, and asks whether the pattern on the map is real and what explains it. Every dive follows the same five steps, so you learn the order once.</p>
+<ol class="steps5" aria-label="The five steps of every Deeper dive">
+<li><span class="dnum">01</span><b>What's normal</b><span>Where most places sit, and whether this one is unusual</span></li>
+<li><span class="dnum">02</span><b>Kind of place</b><span>Whether size or tier explains the differences</span></li>
+<li class="main"><span class="dnum">03</span><b>Why, by design</b><span>The arithmetic or formula behind the measure</span></li>
+<li><span class="dnum">04</span><b>What goes with it</b><span>Which other measures move with it, beyond chance</span></li>
+<li><span class="dnum">05</span><b>Up close</b><span>One relationship, and the places that break it</span></li>
+</ol>
+<p class="note">Step 3 always comes before step 4. A relationship is only worth a look once the arithmetic that ties measures together is on the table. On any dive, pick a {{ 'system or county' }} to follow it through every chart.</p>
 </section>
-{% endfor %}
-<p class="note">How the dives test a relationship is set out in <a href="{{ root }}about.html#methods">Methods</a>, section 5. Terms are defined under <a href="{{ root }}about.html#terms">Key terms</a>.</p>
+
+<section class="dstep" id="schools" aria-labelledby="h-schools"><div class="dhead"><span class="dnum">02</span><div><p class="label">School money</p><h2 id="h-schools">How TEEOSA turns need into aid</h2></div></div>
+<p class="dlead"><b>TEEOSA</b>, the Tax Equity and Educational Opportunities Support Act, is Nebraska's main formula for state aid to schools. For {{ aid_year }} it pays <b>{{ aid_total }}</b> to {{ n_sys }} school systems. It works in three moves:</p>
+<ol class="moves">
+<li><b>Need.</b> The formula sets what each system needs: basic funding per student plus allowances for poverty, English learners, transportation and other costs. Statewide: {{ need_total }}.</li>
+<li><b>Resources.</b> It counts what each system can raise or already receives, mostly local effort: $1.00 for every $100 of the system's school adjusted valuation. Statewide: {{ res_total }}.</li>
+<li><b>The gap.</b> Where need is larger than resources, the state pays the gap as <b>equalization aid</b>. {{ n_eq }} of {{ n_sys }} systems receive it, {{ eq_total }} in all. Every system also receives <b>foundation aid</b> under LB 583 (2023), {{ found_total }} in all, plus smaller payments.</li>
+</ol>
+<p class="note">Statewide, resources ({{ res_total }}) are larger than need ({{ need_total }}) because systems with high school adjusted valuation per student count far more resources than they need. The gap that equalization aid fills exists only system by system.</p>
+<div class="panel">
+<h3>Taxable valuation and school adjusted valuation, used for different things</h3>
+<p><b>Taxable valuation</b> is the value of taxable property within a school district, as assessed by county assessors. It is the property tax base for the district's actual levy, expressed per $100 of taxable valuation. Every levy, tax bill and credit uses it.</p>
+<p><b>School adjusted valuation</b> is the value of taxable property within a school district, adjusted so values are measured consistently across the state: 96% of actual value for most real property and 72% for agricultural land. TEEOSA uses it to estimate local property tax resources (local effort, $1.00 for every $100). It is used only in the formula; no one is taxed on it.</p>
+<p class="quiet">For {{ aid_year }} the two are close statewide, {{ tv_total }} taxable and {{ sav_total }} school adjusted, but they can differ for a single system. {{ lx.short }}: {{ lex_tv }} taxable and {{ lex_sav }} school adjusted per formula student.</p>
+</div>
+<p class="dlead">Two systems, worked to the dollar from the {{ aid_year }} certification:</p>
+<div class="examples">{% for e in examples %}
+<div class="ex">
+<h3>{{ e.name }}</h3><p class="quiet">{{ e.where }} · {{ e.stu }} formula students</p>
+{{ e.bars|safe }}
+<table class="data extable">
+<tr class="h"><td colspan="2">Need</td></tr>
+{% for n, v in e.need_parts %}<tr><td class="in">{{ n }}</td><td class="num">{{ v }}</td></tr>{% endfor %}
+<tr class="b"><td>Formula need</td><td class="num">{{ e.need }}</td></tr>
+<tr class="h"><td colspan="2">Resources</td></tr>
+{% for n, v, twice in e.res_parts %}<tr><td class="in">{{ n }}{% if twice %} <span class="tag slate">also paid as aid</span>{% endif %}</td><td class="num">{{ v }}</td></tr>{% endfor %}
+<tr class="b"><td>Formula resources</td><td class="num">{{ e.res }}</td></tr>
+<tr class="b"><td>Equalization aid: need minus resources, if positive</td><td class="num">{{ e.eq }}</td></tr>
+<tr class="h"><td colspan="2">Paid as TEEOSA aid</td></tr>
+{% for n, v in e.aid_parts %}<tr><td class="in">{{ n }}</td><td class="num">{{ v }}</td></tr>{% endfor %}
+<tr class="t"><td>Total TEEOSA aid, certified</td><td class="num">{{ e.aid }}</td></tr>
+</table>
+<p class="getit"><a href="system/aid_ps.html?sel={{ e.code }}">Follow {{ e.short }} through the aid dive</a></p>
+</div>{% endfor %}</div>
+<div class="panel"><p><b>Why some payments appear twice.</b> Rows marked <span class="tag slate">also paid as aid</span> are counted as a resource and paid as aid. Counting a payment as a resource lowers equalization aid by the same amount, so for a system that receives equalization aid it adds only what is not counted. {{ lx.short }}'s foundation aid is {{ lx_found[0] }}, but the 60% counted as a resource ({{ lx_found[1] }}) replaced the same amount of equalization aid: foundation aid added {{ lx_found[2] }} to its total, the 40% outside resources. {{ ac.short }} has no equalization aid to replace, so all {{ ac_found }} of its foundation aid adds to its total.</p></div>
+<p class="note">{{ lx.short }}'s resources cover {{ (100 * lx.cover)|round|int }}% of its need, so most of its aid is equalization; its LEP allowance, {{ lx.lep_ps }} per formula student, is the {{ 'highest' if lx.lep_rank == 1 else lx.lep_rank|string ~ 'th highest' }} of {{ n_sys }}. {{ ac.short }}'s resources are {{ '%.1f'|format(ac.cover) }} times its need, so it receives no equalization aid; its aid is foundation aid and smaller payments, {{ ac.aid_ps }} per student, against a state median of {{ ac.median }}.</p>
+<h3 class="mh">Where property taxes and credits fit</h3>
+<p class="dlead">Each district sets its own property tax request. LB 243 (2023) caps its request authority at 3% growth a year plus allowances, and a vote of at least 70% of the board can raise the growth percentage by 4 to 7 points, depending on enrollment. The request divided by taxable valuation sets the levy. The General Fund and Special Building Fund levies together are generally limited to $1.05 per $100 of taxable valuation, plus any override voters approve; qualifying bond levies are outside the limit. For {{ budget_year }}, {{ votes }} of {{ n_budgets }} boards used that vote, and districts left {{ unused }} of authority unrequested. State property tax credits then pay part of each tax bill: {{ credit_share }} of all property taxes in tax year {{ y1 }}.</p>
+<h3 class="mh">How students are counted</h3>
+<ul class="fnotes">
+<li><b>Formula students</b>: the student count used in the TEEOSA calculation, enrollment adjusted for historical ADM trends, including qualifying early childhood students and students the district pays tuition for. Used for every aid and need measure.</li>
+<li><b>Average daily membership (ADM)</b>: the average number of students enrolled through the school year, not a single-day count. Used for spending and money received.</li>
+<li><b>Students living in a county</b>: an estimate that splits each district by where its children live. Used for county school figures.</li>
+</ul>
+</section>
+
+<section class="dstep" id="taxes" aria-labelledby="h-taxes"><div class="dhead"><span class="dnum">03</span><div><p class="label">Property taxes</p><h2 id="h-taxes">Taxable valuation, rate and credits multiply</h2></div></div>
+<p class="dlead">Two lines of arithmetic explain every county property tax figure on the site:</p>
+<div class="panel big"><p><b>Taxes levied</b> = taxable valuation × tax rate<br><b>Taxes after credits</b> = taxes levied × the share left after state credits</p></div>
+<p class="dlead">Statewide, from tax year {{ y0 }} to {{ y1 }}, in {{ y0 }} dollars:</p>
+<div class="scroll"><table class="data"><thead><tr><th>All 93 counties, {{ y0 }} dollars</th><th class="num">Tax year {{ y0 }}</th><th class="num">Tax year {{ y1 }}</th><th class="num">Change</th></tr></thead>
+<tbody>{% for lab, a0, a1, c, tone, b in ptax_rows %}<tr{% if b %} class="bold"{% endif %}><td>{{ lab }}</td><td class="num">{{ a0 }}</td><td class="num">{{ a1 }}</td><td class="num {{ tone }}">{{ c }}</td></tr>{% endfor %}</tbody></table></div>
+<p class="note">Each change multiplies. {{ credit_note }} See About. These are county totals, not one owner's bill: new construction adds to both taxable valuation and taxes.</p>
+<p class="getit"><a href="county/ptax_net_real_change.html">Every county, factor by factor: the property taxes dive</a></p>
+</section>
+
+<section class="dstep" id="tests" aria-labelledby="h-tests"><div class="dhead"><span class="dnum">04</span><div><p class="label">Testing</p><h2 id="h-tests">How the dives tell a pattern from chance</h2></div></div>
+<div class="grid4">
+<div><h3>Chance shows up when you look at many things</h3><p>Compare one measure with dozens of others and a few will line up by luck. Each dive corrects for the number of comparisons, and marks the relationships that survive as stronger than chance.</p></div>
+<div><h3>Some measures move together by arithmetic</h3><p>Aid per student and school adjusted valuation per student are tied by the formula itself. Pairs like that are explained in step 3, not tested as findings in step 4.</p></div>
+<div><h3>Ranks, not raw values</h3><p>Relationships are measured on rank order, so one extreme system or county cannot create a pattern on its own.</p></div>
+<div><h3>A relationship is not a cause</h3><p>Two measures can rise together because something else drives both. Each dive says what that might be, or that no formula links them, before it shows the relationship.</p></div>
+</div>
+</section>
+
+<section class="dstep" id="words" aria-labelledby="h-words"><div class="dhead"><span class="dnum">05</span><div><p class="label">Words</p><h2 id="h-words">Terms used on these pages</h2></div></div>
+<p class="note">The same definitions as <a href="{{ root }}about.html#terms">Key terms</a> on the About page.</p>
+{% for g in terms %}<h3 class="mh">{{ g.name }}</h3>
+<dl class="terms2">{% for r in g.rows %}<div><dt>{{ r.term }}</dt><dd>{{ r.definition }}</dd></div>{% endfor %}</dl>{% endfor %}
+</section>
+
+<section class="dstep" id="pick" aria-labelledby="h-pick"><div class="dhead"><span class="dnum">06</span><div><p class="label">Pick a measure</p><h2 id="h-pick">Every Deeper dive</h2></div></div>
+<h3 class="mh">Start with these three</h3>
+<div class="starts">{% for s in starts %}<a href="{{ s.href }}"><b>{{ s.title }}</b><span>{{ s.desc }}</span></a>{% endfor %}</div>
+<p class="note">Bold: the key measures for each level. Every measure has its own dive.</p>
+<div class="examples">{% for level, title in (('system', 'School systems'), ('county', 'Counties')) %}
+<div class="ex"><h3>{{ title }} · {{ listing[level].n }} measures</h3>
+{% for g in listing[level].groups %}{% if g['items'] %}<p class="label">{{ g.name }} · {{ g['items']|length }}</p>
+<ul class="mlist">{% for it in g['items'] %}<li><a href="{{ level }}/{{ it.key }}.html"{% if it.key_ind %} class="key"{% endif %}>{{ it.short }}</a></li>{% endfor %}</ul>{% endif %}{% endfor %}
+</div>{% endfor %}</div>
+</section>
+
+</div>
 {% endblock %}

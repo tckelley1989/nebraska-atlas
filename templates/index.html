@@ -1,16 +1,21 @@
 {% extends "base.html" %}
+{% from "_tiles.html" import tile_grid %}
+{% block hero %}
+<section class="hero"><div class="wrap">
+<p class="crumb">Findings · data through tax year 2025 and the {{ f.aid_year }} aid year</p>
+<h1 class="wide">{{ synthesis.headline_hero }}</h1>
+<p class="herolead">{{ hero_lead }}</p>
+</div></section>
+{% endblock %}
 {% block main %}
-<p class="label">Version 2 · under construction</p>
-<h1 class="wide">The Atlas is being rebuilt</h1>
-<p class="lead">This build reads every label, unit and color from the indicator registry. Below are the key indicators that will lead each page, as the registry defines them today.</p>
-{% for level, items in key_eight %}
-<section>
-<h2 class="label">Key eight · {{ level }}</h2>
-<ol class="keys">{% for r in items %}<li><span class="num">{{ r.key_order }}</span><span>{{ r.label }}</span><span class="tag {{ r.ramp }}">{{ r.ramp }}</span></li>{% endfor %}</ol>
-</section>
+<h2 class="sect">Nebraska at a glance</h2>
+{{ tile_grid(state_tiles, False, False) }}
+{% for x in findings %}
+<article class="finding{% if x.synthesis %} synth{% endif %}" id="{{ x.slug }}">
+{% if not x.synthesis %}<p class="ord">{{ x.n }}</p>{% endif %}
+<h2>{{ x.headline }}</h2>
+<div class="fbody">{{ x.html }}</div>
+{{ x.chart }}
+</article>
 {% endfor %}
-<section>
-<h2 class="label">Registry</h2>
-<p>{{ n_indicators }} indicators: {{ n_county }} county, {{ n_system }} school system. Crosswalk: {{ n_systems }} systems, {{ n_counties }} counties.</p>
-</section>
 {% endblock %}

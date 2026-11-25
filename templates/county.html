@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% from "_tiles.html" import tile_grid %}
+{% block hero %}
+<section class="hero"><div class="wrap">
+<p class="crumb"><a href="{{ root }}counties.html">Counties</a> / {{ tier }} · {{ crop }}</p>
+<h1 class="wide">{{ name|upper }}</h1>
+</div></section>
+{% endblock %}
+{% block main %}
+<p class="lead">{{ desc }}</p>
+{{ tile_grid(tiles, True) }}
+{% for g in groups %}
+<section class="block">
+<h2 class="sect">{{ g.name }}</h2>
+<div class="scroll"><table class="data"><thead><tr><th>Measure</th><th class="num">{{ name }}</th><th class="num">{{ tier }} tier</th><th class="num">Nebraska</th><th>Rank</th><th>Period</th></tr></thead>
+<tbody>{% for t in g['items'] %}<tr><td>{{ t.label }}</td><td class="num {{ t.tone }}">{{ t.value }}</td><td class="num">{{ t.tier }}</td><td class="num">{{ t.state }}</td><td>{{ t.rank }}</td><td class="quiet">{{ t.period }}</td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endfor %}
+{% if systems %}
+<section class="block"><h2 class="sect">School systems serving the county</h2>
+<ul class="links">{% for s in systems %}<li><a href="{{ root }}system/{{ s.code }}.html">{{ s.name }}</a></li>{% endfor %}</ul></section>
+{% endif %}
+{% endblock %}

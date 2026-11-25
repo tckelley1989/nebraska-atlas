@@ -1,0 +1,15 @@
+{% macro tile_grid(items, compare_tier=False, note=True) %}
+<section class="tiles" aria-label="Key indicators">
+{% for t in items %}
+<article class="tile">
+<h3>{{ t.short }}</h3>
+<p class="big {{ t.tone }}">{{ t.value }}</p>
+{% if t.pos is not none %}
+<div class="strip" role="img" aria-label="{{ t.rank }}"><span class="track"></span><span class="mid"></span><span class="dot" style="left:{{ t.pos }}%"></span></div>
+{% endif %}
+<p class="meta">{% if compare_tier %}<span>Tier {{ t.tier }} · State {{ t.state }}</span>{% elif t.median %}<span>Median {{ t.median }}</span>{% endif %}{% if t.cat_note %}<span>{{ t.cat_note }}</span>{% endif %}<span>{{ t.rank }}</span></p>
+</article>
+{% endfor %}
+</section>
+{% if note %}<p class="note">Diamond: this place among all places, lowest at left. Tick: the median.</p>{% endif %}
+{% endmacro %}

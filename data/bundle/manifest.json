@@ -1,0 +1,88 @@
+{
+  "built_utc": "2026-11-25T16:13:16+00:00",
+  "source_repo": "nebraska-economy",
+  "source_commit": "a827840cf498d3dece145c9ebb507e880a8d4d53",
+  "note": "Seeded by hand from a local pipeline build for Phase 2 development; the pipeline replaces it on its first run.",
+  "files": {
+    "counties.csv": {
+      "bytes": 50166,
+      "sha256": "f8c2940a666ccac5f5da7dd60697aa3d6029432aee34bc7771cea838f6f69c94"
+    },
+    "county_industry_jobs.csv": {
+      "bytes": 87977,
+      "sha256": "a48f9b51dbae606a31e997985f6debf0f3bd9b1bec2970bd7e0a76c72ef4d262"
+    },
+    "county_levels.csv": {
+      "bytes": 537135,
+      "sha256": "22af50c3e18aae3a8496efff5d74106e4d18a16c738f0493151c2778d97698e6"
+    },
+    "credits.csv": {
+      "bytes": 68754,
+      "sha256": "656810fa7f4c1bb49e4973f4ba152c09eb1a77c4d360b6e985ce1d5ca0f3ef02"
+    },
+    "data.js": {
+      "bytes": 800087,
+      "sha256": "beee59c0213a03acbb79668dd6bdf350de042ce5830411473a1ae3de3ad6ac58"
+    },
+    "data_sd.js": {
+      "bytes": 1372998,
+      "sha256": "08fbb6ec0932f6ed6e5585440d0c5ee0995ea04ece5a97a2da85dc4845c16b5e"
+    },
+    "deflators.csv": {
+      "bytes": 687,
+      "sha256": "29cdc5d4406f5a252db1afdbea32927247d86fc8f57cf4710407edb6dcfcf19a"
+    },
+    "district_county_weights.csv": {
+      "bytes": 28874,
+      "sha256": "ab8a2066878dbea8d1562578e3033b00c6eb559ed75aedf3afe922fe2d28b751"
+    },
+    "geo.js": {
+      "bytes": 121356,
+      "sha256": "b5e4ddfb289dcf1a1b471550c6346b922881158aed04169cc11d4c161ec68027"
+    },
+    "geo_sd.js": {
+      "bytes": 1182138,
+      "sha256": "d79194b67bfe92f4ebf8d962097caf248ab16e2cf069911aac93cfc8472b0a02"
+    },
+    "lb1107_claims.csv": {
+      "bytes": 1236,
+      "sha256": "9c85a6a0001e854ad4366debd87b7e6df3e852da764ce91652b86d256c77d274"
+    },
+    "lc2_budgets.csv": {
+      "bytes": 133882,
+      "sha256": "3556aa8ea00d9dddabeb18f533f74e81114edd0dad2e6c2901a0d88837bb90bd"
+    },
+    "property_taxes.csv": {
+      "bytes": 463858,
+      "sha256": "4ce12b742b8d5c76ef1148e151ca26170260e7dcd46afba51609c18117b50f00"
+    },
+    "property_taxes_by_class.csv": {
+      "bytes": 703135,
+      "sha256": "84ab9e06fce3b9b94d1e28a68ccaa2532cf625c5522043e8b38fe9e748cdae5b"
+    },
+    "school_formula.csv": {
+      "bytes": 29926,
+      "sha256": "65cf0a5c48c8d764bcba4314a95ac5a214869cd3bc5799490d8ac17446ab2a71"
+    },
+    "school_need_components.csv": {
+      "bytes": 2110890,
+      "sha256": "678eb412e72bb8940e70a01f8d107d35d66147c52e49a78f109a2c924d12d58c"
+    },
+    "school_outcomes.csv": {
+      "bytes": 72723,
+      "sha256": "853350c3480af1d093e9efdd93b3ed71c0d225aa2bbdbf012c07cd36c7b7d8b4"
+    },
+    "school_revenue.csv": {
+      "bytes": 407541,
+      "sha256": "fb6dc5c393cd7c81fdb8b85dd485da7b971a1f0c46d83bc585ded1ab1d464166"
+    },
+    "school_systems.csv": {
+      "bytes": 191125,
+      "sha256": "735ea822f84aac3be85d8a6166c8b8661b368ef4da142a8258af6bd8ecfefc3a"
+    },
+    "statewide.csv": {
+      "bytes": 15062,
+      "sha256": "62498f7c963dd6e3037d95767846fc9104cf923c58b6eaa53f0128a202c731a1"
+    }
+  }
+}

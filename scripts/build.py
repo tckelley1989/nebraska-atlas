@@ -81,7 +81,7 @@ def main():
 
     files = about.downloads(OUT)
     shutil.copy(ROOT / "data" / "bundle" / "manifest.json", OUT / "data" / "manifest.json")
-    write("about.html", "about.html", title="About", section="about", glossary=about.glossary(a),
+    write("about.html", "about.html", title="About", section="about", glossary=about.glossary(a), terms=about.terms(),
           methods=about.methods_html(), files=files, sources=about.sources(a), commit=a.manifest["source_commit"])
     (OUT / "assets" / "search-index.js").write_text(
         "window.LEDGER_SEARCH=" + json.dumps(about.search_index(a), ensure_ascii=False, separators=(",", ":")) + ";", encoding="utf-8")

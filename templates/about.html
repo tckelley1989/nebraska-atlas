@@ -4,7 +4,7 @@
 <p class="crumb">About · data built {{ built }}</p>
 <h1 class="wide">HOW THE LEDGER WORKS</h1>
 <p class="herolead">Every number on this site comes from a public source, is computed the same way for every place, and can be downloaded below.</p>
-<nav class="toc" aria-label="On this page"><a href="#read">Reading the pages</a><a href="#measures">Measures</a><a href="#methods">Methods</a><a href="#downloads">Downloads</a><a href="#sources">Sources</a></nav>
+<nav class="toc" aria-label="On this page"><a href="#read">Reading the pages</a><a href="#terms">Key terms</a><a href="#measures">Measures</a><a href="#methods">Methods</a><a href="#downloads">Downloads</a><a href="#sources">Sources</a></nav>
 </div></section>
 {% endblock %}
 {% block main %}
@@ -26,6 +26,17 @@
 <p class="quiet">Rust means down and slate means up; neither means good or bad. Each map uses one color ramp with its legend on screen, and the breaks are fixed, so a place changes color only when its data changes.</p>
 </div>
 </div>
+</section>
+
+<section class="block" id="terms">
+<h2 class="sect">Key terms</h2>
+<p>How Nebraska school finance names its parts. Two values are easy to confuse: <a href="#t-taxable-valuation">taxable valuation</a> is what levies and taxes apply to, and <a href="#t-school-adjusted-valuation">school adjusted valuation</a> is used only inside the aid formula.</p>
+{% for g in terms %}
+<div class="scroll"><table class="data gloss terms">
+<thead><tr><th>{{ g.name }}</th><th>Definition</th></tr></thead>
+<tbody>{% for r in g.rows %}<tr id="{{ r.anchor }}"><td><b>{{ r.term }}</b></td><td>{{ r.definition }}</td></tr>{% endfor %}</tbody>
+</table></div>
+{% endfor %}
 </section>
 
 <section class="block" id="measures">

@@ -1,4 +1,4 @@
-{% macro tile_grid(items, compare_tier=False) %}
+{% macro tile_grid(items, compare_tier=False, note=True) %}
 <section class="tiles" aria-label="Key indicators">
 {% for t in items %}
 <article class="tile">
@@ -11,5 +11,5 @@
 </article>
 {% endfor %}
 </section>
-<p class="note">Diamond: this place among all places, lowest at left. Tick: the median.</p>
+{% if note %}<p class="note">Diamond: this place among all places, lowest at left. Tick: the median.</p>{% endif %}
 {% endmacro %}

@@ -12,7 +12,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from atlas import pages, maps  # noqa: E402
+from atlas import pages, maps, facts, findings  # noqa: E402
 from atlas.data import Atlas  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,10 +47,21 @@ def main():
         html = env.get_template(template).render(root="../" * depth, **common, **ctx)
         (OUT / path).write_text(html, encoding="utf-8")
 
-    key_eight = [("counties", a.key_eight("county")), ("school systems", a.key_eight("system"))]
-    write("index.html", "index.html", title="Version 2", section="findings", key_eight=key_eight,
-          n_indicators=len(a.registry), n_county=sum(r["level"] == "county" for r in a.registry),
-          n_system=sum(r["level"] == "system" for r in a.registry), n_systems=len(a.systems_xw), n_counties=len(a.counties_xw))
+    f = facts.build(a)
+    fl = findings.load(f)
+    synth = next(x for x in fl if x["synthesis"])
+    synth["headline_hero"] = "Since 2019, Nebraska has lowered property tax bills mainly by paying part of them"
+    hero_lead = (f"Credits now cover {f['credit_share_state']} of all property taxes. Formula aid, which follows need, "
+                 f"grew {f['aid_change_dollars']} from 2019-20 to {f['aid_year']}.")
+    state = a.county_js["tiers"]["state"]
+    state_tiles = []
+    for r in a.key_eight("county"):
+        v = state["v"].get(r["key"]) if "v" in state else None
+        state_tiles.append({"short": r["short"], "value": state["d"].get(r["key"]) or "", "tone": pages.tone(r, v) if v is not None else
+                            ("up" if (state["d"].get(r["key"]) or "").startswith("+") else "down" if (state["d"].get(r["key"]) or "").startswith("\u2212") else ""),
+                            "pos": None, "tier": "", "state": "", "rank": r["period"], "median": None, "cat_note": ""})
+    write("index.html", "index.html", title="Findings", section="findings", f=f, findings=fl, synthesis=synth,
+          hero_lead=hero_lead, state_tiles=state_tiles)
 
     for code in a.formula:
         ctx = pages.system_page(a, code)

@@ -29,6 +29,10 @@ jobs:
         run: python -m pytest -q tests
       - name: Build site
         run: python scripts/build.py
+      - name: Install headless Chromium
+        run: python -m playwright install --with-deps chromium
+      - name: Render profile PDFs
+        run: python scripts/pdfs.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

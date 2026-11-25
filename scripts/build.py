@@ -12,7 +12,8 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from atlas import pages, maps, facts, findings  # noqa: E402
+import json
+from atlas import pages, maps, facts, findings, about  # noqa: E402
 from atlas.data import Atlas  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,6 +37,7 @@ def main():
         (OUT / d).mkdir(parents=True)
     shutil.copy(ROOT / "design" / "tokens.css", OUT / "assets" / "tokens.css")
     shutil.copy(ROOT / "templates" / "site.css", OUT / "assets" / "site.css")
+    shutil.copy(ROOT / "templates" / "search.js", OUT / "assets" / "search.js")
 
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=select_autoescape(["html"]),
                       trim_blocks=True, lstrip_blocks=True)
@@ -51,7 +53,7 @@ def main():
     fl = findings.load(f)
     synth = next(x for x in fl if x["synthesis"])
     synth["headline_hero"] = "Since 2019, Nebraska has lowered property tax bills mainly by paying part of them"
-    hero_lead = (f"Credits now cover {f['credit_share_state']} of all property taxes. Formula aid, which follows need, "
+    hero_lead = (f"Credits now cover {f['credit_share_state']} of all property taxes. Certified formula aid, which follows need, "
                  f"grew {f['aid_change_dollars']} from 2019-20 to {f['aid_year']}.")
     state = a.county_js["tiers"]["state"]
     state_tiles = []
@@ -67,13 +69,22 @@ def main():
         ctx = pages.system_page(a, code)
         write(f"system/{code}.html", "system.html", title=ctx["name"], section="schools",
               description=ctx["desc"][:300], **ctx)
+        (OUT / "system" / f"{code}.csv").write_text(about.profile_csv(a, "system", code, ctx["name"]), encoding="utf-8")
     for fips in a.counties_xw:
         ctx = pages.county_page(a, fips)
         write(f"county/{fips}.html", "county.html", title=ctx["name"], section="counties",
               description=ctx["desc"][:300], **ctx)
+        (OUT / "county" / f"{fips}.csv").write_text(about.profile_csv(a, "county", fips, ctx["name"]), encoding="utf-8")
     for level, page, section in (("system", "schools.html", "schools"), ("county", "counties.html", "counties")):
         ctx = maps.map_page(a, level)
         write(page, "map.html", section=section, **ctx)
+
+    files = about.downloads(OUT)
+    shutil.copy(ROOT / "data" / "bundle" / "manifest.json", OUT / "data" / "manifest.json")
+    write("about.html", "about.html", title="About", section="about", glossary=about.glossary(a),
+          methods=about.methods_html(), files=files, sources=about.sources(a), commit=a.manifest["source_commit"])
+    (OUT / "assets" / "search-index.js").write_text(
+        "window.LEDGER_SEARCH=" + json.dumps(about.search_index(a), ensure_ascii=False, separators=(",", ":")) + ";", encoding="utf-8")
 
     (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n" if DRAFT else "User-agent: *\nAllow: /\n")
     (OUT / ".nojekyll").write_text("")

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_tiles.html" import tile_grid %}
+{% from "_tiles.html" import tile_grid, term %}
 {% block hero %}
 <section class="hero"><div class="wrap">
 <p class="crumb"><a href="{{ root }}schools.html">School systems</a> / {{ code }} · {{ counties }}</p>
@@ -9,6 +9,7 @@
 {% endblock %}
 {% block main %}
 <p class="lead">{{ desc }}</p>
+<p class="getit"><a href="{{ code }}.csv" download>Download these numbers (CSV)</a><a href="{{ code }}.pdf">Download as PDF</a></p>
 {{ tile_grid(tiles) }}
 <section class="block">
 <h2 class="sect">How the formula works out</h2>
@@ -37,7 +38,7 @@
 <section class="block">
 <h2 class="sect">{{ g.name }}</h2>
 <div class="scroll"><table class="data"><thead><tr><th>Measure</th><th class="num">Value</th><th class="num">Median system</th><th>Rank</th><th>Period</th></tr></thead>
-<tbody>{% for t in g['items'] %}<tr><td>{{ t.label }}</td><td class="num {{ t.tone }}">{{ t.value }}</td><td class="num">{{ t.median or '' }}</td><td>{{ t.rank }}</td><td class="quiet">{{ t.period }}</td></tr>{% endfor %}</tbody></table></div>
+<tbody>{% for t in g['items'] %}<tr><td>{{ term(t, t.label) }}</td><td class="num {{ t.tone }}">{{ t.value }}</td><td class="num">{{ t.median or '' }}</td><td>{{ t.rank }}</td><td class="quiet">{{ t.period }}</td></tr>{% endfor %}</tbody></table></div>
 </section>
 {% endfor %}
 {% if towns %}<p class="note">Towns whose center lies in this system: {{ towns|join(', ') }}.</p>{% endif %}

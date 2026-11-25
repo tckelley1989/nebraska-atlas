@@ -16,9 +16,11 @@
 <header class="band"><div class="wrap head">
 <a class="brand" href="{{ root }}index.html">{{ quilt|safe }}<span>THE NEBRASKA LEDGER</span></a>
 <nav aria-label="Sections">{% for label, href, key in nav %}<a href="{{ root }}{{ href }}"{% if key == section %} aria-current="page"{% endif %}>{{ label }}</a>{% endfor %}</nav>
+<form class="search" role="search" data-root="{{ root }}" hidden><label for="q" class="vh">Find a school system, county or town</label><input id="q" type="search" placeholder="Find a system, county or town" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="qr"><ul id="qr" role="listbox" hidden></ul></form>
 </div></header>
 {% block hero %}{% endblock %}
 <main class="wrap">{% block main %}{% endblock %}</main>
 <footer class="band"><div class="wrap foot"><span>A personal project by Tyler Kelley. Not a product of the Nebraska Department of Education.</span><span>Data built {{ built }}</span></div></footer>
+<script src="{{ root }}assets/search.js" defer></script>
 </body>
 </html>

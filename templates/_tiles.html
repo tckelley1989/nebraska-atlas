@@ -1,8 +1,9 @@
+{% macro term(t, text, p="") %}<span class="term" tabindex="0" aria-describedby="d-{{ p }}{{ t.key }}">{{ text }}<span class="def" role="tooltip" id="d-{{ p }}{{ t.key }}"><b>{{ t.label }}.</b> {{ t.note }} <i>{{ t.source }}, {{ t.period }}.</i></span></span>{% endmacro %}
 {% macro tile_grid(items, compare_tier=False, note=True) %}
 <section class="tiles" aria-label="Key indicators">
 {% for t in items %}
 <article class="tile">
-<h3>{{ t.short }}</h3>
+<h3>{% if t.note %}{{ term(t, t.short, "k-") }}{% else %}{{ t.short }}{% endif %}</h3>
 <p class="big {{ t.tone }}">{{ t.value }}</p>
 {% if t.pos is not none %}
 <div class="strip" role="img" aria-label="{{ t.rank }}"><span class="track"></span><span class="mid"></span><span class="dot" style="left:{{ t.pos }}%"></span></div>

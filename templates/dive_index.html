@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block hero %}
+<section class="hero"><div class="wrap">
+<p class="crumb">Deeper dive</p>
+<h1 class="wide">DEEPER DIVE</h1>
+<p class="herolead">One page per measure, in the same five steps: what's normal, whether it's about the kind of place, the arithmetic that ties it to other measures, which relationships survive testing, and the places that break the pattern. Pick a place on any page to follow it through every chart.</p>
+</div></section>
+{% endblock %}
+{% block main %}
+{% for level, title in (('system', 'School systems'), ('county', 'Counties')) %}
+<section class="block">
+<h2 class="sect">{{ title }}</h2>
+{% for g in group_order[level] %}{% set items = listing[level]|selectattr('group', 'equalto', g)|list %}{% if items %}
+<h3 class="mh">{{ g }}</h3>
+<ul class="divelist">{% for it in items|sort(attribute='key_indicator', reverse=True) %}<li><a href="{{ level }}/{{ it.key }}.html">{{ it.label }}</a>{% if it.key_indicator %} <span class="quiet">· key</span>{% endif %}</li>{% endfor %}</ul>
+{% endif %}{% endfor %}
+</section>
+{% endfor %}
+<p class="note">How the dives test a relationship is set out in <a href="{{ root }}about.html#methods">Methods</a>, section 5. Terms are defined under <a href="{{ root }}about.html#terms">Key terms</a>.</p>
+{% endblock %}

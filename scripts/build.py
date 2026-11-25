@@ -13,7 +13,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import json
-from atlas import pages, maps, facts, findings, about  # noqa: E402
+from atlas import pages, maps, facts, findings, about, dive  # noqa: E402
 from atlas.data import Atlas  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,11 +33,12 @@ def main():
     a = Atlas()
     if OUT.exists():
         shutil.rmtree(OUT)
-    for d in ("assets", "system", "county"):
+    for d in ("assets", "system", "county", "dive/system", "dive/county"):
         (OUT / d).mkdir(parents=True)
     shutil.copy(ROOT / "design" / "tokens.css", OUT / "assets" / "tokens.css")
     shutil.copy(ROOT / "templates" / "site.css", OUT / "assets" / "site.css")
     shutil.copy(ROOT / "templates" / "search.js", OUT / "assets" / "search.js")
+    shutil.copy(ROOT / "templates" / "dive.js", OUT / "assets" / "dive.js")
 
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=select_autoescape(["html"]),
                       trim_blocks=True, lstrip_blocks=True)
@@ -78,6 +79,19 @@ def main():
     for level, page, section in (("system", "schools.html", "schools"), ("county", "counties.html", "counties")):
         ctx = maps.map_page(a, level)
         write(page, "map.html", section=section, **ctx)
+
+    # Deeper dive: one page per measure (design doc "Deeper Dive: Design")
+    ptax = dive.Ptax(a)
+    listing = {"system": [], "county": []}
+    for r in a.registry:
+        if r["format"] == "category":
+            continue
+        ctx = dive.page(a, r["level"], r["key"], ptax)
+        write(f"dive/{r['level']}/{r['key']}.html", "dive.html", title=f"Deeper dive: {r['label']}",
+              section="schools" if r["level"] == "system" else "counties", description=ctx["plain"], **ctx)
+        listing[r["level"]].append({"key": r["key"], "label": r["label"], "group": r["group"], "key_indicator": r["key_indicator"] == "yes"})
+    write("dive/index.html", "dive_index.html", title="Deeper dive", section="", listing=listing,
+          group_order=pages.GROUP_ORDER)
 
     files = about.downloads(OUT)
     shutil.copy(ROOT / "data" / "bundle" / "manifest.json", OUT / "data" / "manifest.json")

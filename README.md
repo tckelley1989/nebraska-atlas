@@ -28,7 +28,7 @@ It is version 2 of the Nebraska County Atlas. A personal project by Tyler Kelley
 ## Build locally
 
 ```
-pip install jinja2 pytest numpy
+pip install jinja2 pytest numpy markdown
 python -m pytest -q tests
 python scripts/build.py   # writes _site/
 ```

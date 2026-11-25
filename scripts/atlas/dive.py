@@ -39,9 +39,14 @@ def sg(r: float) -> str:
     return ("+" if r > 0 else fmt.MINUS) + f"{abs(r):.2f}"
 
 
+PROPER = ("General Fund", "English", "Special Building", "TEEOSA", "NSCAS", "ACT", "AQuESTT", "ELPA", "LEP", "CAP")
+
+
 def lc(s: str) -> str:
-    """Lowercase a label for use mid-sentence, keeping acronyms (TEEOSA, NSCAS, ACT)."""
-    return s if (len(s) > 1 and s[1].isupper()) else s[:1].lower() + s[1:]
+    """Lowercase a label for use mid-sentence, keeping acronyms and proper names (TEEOSA, General Fund, English)."""
+    if s.startswith(PROPER) or (len(s) > 1 and s[1].isupper()):
+        return s
+    return s[:1].lower() + s[1:]
 
 
 def word(r: float) -> str:
@@ -497,42 +502,71 @@ FNAME = {"g_val": "taxable valuation", "g_rate": "the rate", "g_left": "the shar
 
 
 def whys(d: Dive, rel: dict, ptax) -> list:
-    """Groups of (title, text) for the results that hold."""
-    out, none, by_factor, tv_both = [], [], {}, []
+    """Groups of (title, text) covering every result that holds (methods 5.9). A mechanism is stated only where there is
+    arithmetic behind it: the TEEOSA formula, the levy (the request divided by taxable valuation) and the three
+    property tax factors. Everything else is called an association, with its own correlation."""
+    out, none, by_factor, base_link, base_none, levies = [], [], {}, [], [], []
     lst = lambda rs: ", ".join(f'{lc(r["name"])} ({sg(r["rho"])})' for r in rs)
-    formula = "s01" in d.fam
+    cap = lambda s: s[:1].upper() + s[1:]
+    y = lc(d.row["short"])
+    tv = lambda k: d.driver_rho(k, "tv_ps")
+    w = lambda v: "with" if v > 0 else "against"
+    VAL = {"tv_ps", "val_ps"}
+    LEVY = {"lc2_limit_levy", "lc2_gf_levy"}
     for r in rel["holds"]:
-        if d.level == "system" and (r["lever"] or d.key in LEVERS):
-            lever = r if r["lever"] else {"name": d.row["short"], "key": d.key}
-            other = d.key if r["lever"] else r["key"]
-            a_ = d.driver_rho(lever["key"], "tv_ps"); b_ = d.driver_rho(other, "tv_ps")
-            oname = lc(d.a.ind[(other, "system")]["short"])
-            if abs(b_) >= .3:
-                text = (f'A school board sets {lc(lever["name"])} each budget year. To raise the same dollars per student, a system with less '
-                        f'taxable valuation per student needs a higher levy (rank correlation {sg(a_)}), and {oname} goes with taxable valuation '
-                        f'per student too ({sg(b_)}). The link runs through the tax base, not from the levy.')
-            else:
-                text = (f'A school board sets {lc(lever["name"])} each budget year. Its link with {oname} does not run through taxable valuation per student '
-                        f'({sg(b_)}), and no formula ties them: treat it as an association, not as an effect of the levy.')
-            if formula:
-                text += " A board's levy does not change its aid: local effort is always figured at $1.00 per $100 of school adjusted valuation."
-            if not any(t == "Why the levy goes with it" for t, _ in out):
-                out.append(("Why the levy goes with it", text))
+        k = r["key"]
+        # aid against taxable valuation per student: the formula's own arithmetic (local effort), only in the direction it predicts
+        pair = {d.key, k}
+        if "aid_ps" in pair and pair & VAL and r["rho"] < 0:
+            vname = lc(d.a.ind[((pair & VAL).pop(), "system")]["short"])
+            out.append(("Through the formula", f'TEEOSA aid per student goes against {vname} ({sg(r["rho"])}) because the '
+                        "formula's school adjusted valuation measures the same property: more of it means more local effort and less equalization aid."))
             continue
+        # a levy on the other side: collected below so the two levies read as one entry
+        if d.level == "system" and k in LEVY and d.key not in LEVERS:
+            levies.append(r)
+            continue
+        if d.level == "system" and k == "lc2_unused_share" and d.key not in LEVERS:
+            out.append(("Unused authority", f'Unused authority ({sg(r["rho"])}) is what a board chose not to request. No formula ties it to {y}; treat it as an association.'))
+            continue
+        # this page is a levy: report whether each partner shares its denominator
+        if d.level == "system" and d.key in LEVY:
+            (base_link if abs(tv(k)) >= .3 else base_none).append(r)
+            continue
+        # the property tax identity: the partner's strongest factor
         if d.level == "county" and ptax is not None and "c07" in d.fam:
-            fr = ptax.factor_rho(d, r["key"]); top = max(fr, key=lambda k: abs(fr[k]))
+            fr = ptax.factor_rho(d, k); top = max(fr, key=lambda x: abs(fr[x]))
             by_factor.setdefault(top, []).append((r, fr[top]))
             continue
-        drv = "tv_ps" if d.level == "system" else "pop_change"
-        if r["key"] == drv and drv == "tv_ps" and "s01" in d.fam:
-            out.append(("Taxable valuation per student", f'{d.row["short"]} goes against taxable valuation per student ({sg(r["rho"])}) because the formula\'s '
-                        "school adjusted valuation measures the same property: more of it means more local effort and less equalization aid."))
-            continue
-        if r["key"] != drv and d.key != drv:
-            a_, b_ = d.driver_rho(d.key, drv), d.driver_rho(r["key"], drv)
-            if abs(a_) >= .3 and abs(b_) >= .3:
-                tv_both.append((r, a_, b_)); continue
         none.append(r)
+    if levies:
+        names = " and ".join(f'{r["name"] if n == 0 else lc(r["name"])} ({sg(r["rho"])})' for n, r in enumerate(levies))
+        lv = " and ".join(sg(tv(r["key"])) for r in levies)
+        head = (f"{names}. The levy is the request divided by taxable valuation, so it runs low where taxable valuation per student is high "
+                f"(rank correlation{'s' if len(levies) > 1 else ''} {lv}). ")
+        b_ = tv(d.key)
+        if d.key in VAL:
+            text = head + ("That denominator is this measure" if d.key == "tv_ps" else "School adjusted valuation tracks taxable valuation (rank correlation " + sg(b_) + ")") + \
+                   ": the arithmetic runs from it to the levy, not from the levy to it."
+        elif abs(b_) >= .3:
+            text = head + (f"{cap(y)} goes {w(b_)} taxable valuation per student ({sg(b_)}). That shared denominator is the only arithmetic between them; "
+                           f"the levy does not set {y}.")
+            if d.key == "aid_ps":
+                text += " A board's levy does not change its aid: local effort is always figured at $1.00 per $100 of school adjusted valuation."
+        else:
+            text = (f"{names}. A school board sets the levy each budget year, and no formula ties it to {y}. {cap(y)} barely moves with taxable "
+                    f"valuation per student ({sg(b_)}), so the levy's denominator does not link them either. Treat it as an association.")
+        out.append(("A levy the board sets", text))
+    if base_link:
+        a_ = tv(d.key)
+        parts = [f'{lc(r["name"])} ({sg(r["rho"])}) is the denominator itself' if r["key"] == "tv_ps" else
+                 f'{lc(r["name"])} ({sg(r["rho"])}) goes {w(tv(r["key"]))} taxable valuation per student ({sg(tv(r["key"]))})' for r in base_link]
+        out.append(("Through the levy's denominator",
+                    f"The levy is the request divided by taxable valuation, so it runs low where taxable valuation per student is high (rank correlation {sg(a_)}). "
+                    + cap("; ".join(parts))
+                    + ". That shared denominator is the arithmetic link; it does not mean the levy moves these measures or they move the levy."))
+    if base_none:
+        out.append(("No formula link", f"{cap(lst(base_none))}. These do not share the levy's link through taxable valuation per student; no formula ties them to {y}."))
     for top, items in by_factor.items():
         for farm in (True, False):
             sub = [(r, v) for r, v in items if (r["key"] in FARM) == farm]
@@ -540,23 +574,17 @@ def whys(d: Dive, rel: dict, ptax) -> list:
                 continue
             rs = [r for r, _ in sub]; vals = [v for _, v in sub]
             rng = f"rank correlation {sg(vals[0])}" if len(vals) == 1 else f"rank correlations {sg(min(vals, key=abs))} to {sg(max(vals, key=abs))}"
-            text = f'{lst(rs)[:1].upper() + lst(rs)[1:]}: {"each goes" if len(rs) > 1 else "it goes"} mostly with {FNAME[top]} ({rng}), one of the three factors in step 3.'
+            text = f'{cap(lst(rs))}: {"each is" if len(rs) > 1 else "it is"} tied most closely to {FNAME[top]} ({rng}), one of the three factors in step 3.'
             if farm and top == "g_left":
                 cs = [c for c in d.codes if isinstance(d.a.value("county", c, "ptax_ag_share"), (int, float))]
                 rac = spear([(d.a.value("county", c, "ptax_ag_share"), d.a.value("county", c, "ptax_credit_share")) for c in cs])
                 text += (f" Counties where farm property pays more of the taxes also have more of the bill paid by credits (rank correlation {sg(rac)}). "
                          "The real property tax credit is figured separately for agricultural land.")
             if not farm:
-                text += " No formula ties these measures to property taxes."
+                text += " The factor is arithmetic; no formula ties these measures to it, so treat the link as an association."
             out.append(("Farm counties" if farm else f"Through {FNAME[top]}", text))
-    if tv_both:
-        drv_name = "taxable valuation per student" if d.level == "system" else "population change since 2019"
-        names = ", ".join(f'{lc(r["name"])} ({sg(b_)})' for r, _, b_ in tv_both)
-        out.append((f"Both follow {drv_name}",
-                    f"{names[:1].upper() + names[1:]} {'goes' if len(tv_both) == 1 else 'go'} with {drv_name}, as does {lc(d.row['short'])} "
-                    f"({sg(tv_both[0][1])}). The link runs through it, not between them."))
     if none:
-        out.append(("No formula link", f"{lst(none)[:1].upper() + lst(none)[1:]}. No formula ties {'it' if len(none) == 1 else 'these'} to {lc(d.row['short'])}; treat {'it as an association' if len(none) == 1 else 'them as associations'}."))
+        out.append(("No formula link", f"{cap(lst(none))}. No formula ties {'it' if len(none) == 1 else 'these'} to {y}; treat {'it as an association' if len(none) == 1 else 'them as associations'}."))
     return out
 
 
@@ -643,11 +671,14 @@ def page(a, level: str, key: str, ptax=None) -> dict:
     ctx["setaside"] = [dict(r, rho_f=sg(r["rho"])) for r in rel["setaside"]]
     # step 4
     holds = rel["holds"]; m = rel["m"]
-    levers = [r for r in holds if r["lever"]]
-    s4 = f"<b>{len(holds)} of {m}</b> measures go with {lc(row['short'])} more strongly than chance would explain."
+    levers = [r for r in holds if r["key"] in ("lc2_limit_levy", "lc2_gf_levy")]
+    s4 = f"<b>{len(holds)} of {m}</b> {'measure goes' if len(holds) == 1 else 'measures go'} with {lc(row['short'])} more strongly than chance would explain."
     if levers:
-        s4 += f" {'One is a levy' if len(levers) == 1 else 'Two are levies' if len(levers) == 2 else f'{len(levers)} are levies'} a school board sets; the box below says why they go with it."
+        s4 += f" {'One is a levy' if len(levers) == 1 else 'Two are levies'} a school board sets; the box below says how they line up with it."
     s4 += " The rest could be chance." if holds else " Any pattern among the rest could be chance."
+    if m == 0:
+        s4 = (f"Too few {nouns} have {lc(row['short'])} ({d.n}) to test it against other measures: a test needs at least {rel['min_n']}, "
+              f"half of all {nouns}, so a result from a few {nouns} never sits beside one from all of them.")
     ctx["s4_lead"] = s4
     ctx["whys"] = whys(d, rel, ptax)
     ctx["tested"] = [dict(r, rho_f=sg(r["rho"]), word=word(r["rho"]), bar=corr_bar(r["rho"]), within_f=sg(r["within"])) for r in rel["tested"][:8]]

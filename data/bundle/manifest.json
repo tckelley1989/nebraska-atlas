@@ -1,8 +1,7 @@
 {
-  "built_utc": "2026-11-25T17:19:34+00:00",
+  "built_utc": "2026-11-25T17:29:16+00:00",
   "source_repo": "nebraska-economy",
-  "source_commit": "095db57c97805264323cc6ceb977db6a6b80caa6",
-  "note": "Built locally from nebraska-economy fix-statsmodels with NDE's Nov 25 release; the pipeline replaces it on its next run.",
+  "source_commit": "659f2625fa34d20dacd5f6ad433457e0807dd8f2",
   "files": {
     "counties.csv": {
       "bytes": 50166,
@@ -21,8 +20,8 @@
       "sha256": "656810fa7f4c1bb49e4973f4ba152c09eb1a77c4d360b6e985ce1d5ca0f3ef02"
     },
     "data.js": {
-      "bytes": 800087,
-      "sha256": "beee59c0213a03acbb79668dd6bdf350de042ce5830411473a1ae3de3ad6ac58"
+      "bytes": 800088,
+      "sha256": "00a0876afbeca2ec6a1ad99229645c7a4864656600cf25a929358038c5b12339"
     },
     "data_sd.js": {
       "bytes": 1335905,
@@ -59,6 +58,10 @@
     "property_taxes_by_class.csv": {
       "bytes": 703135,
       "sha256": "84ab9e06fce3b9b94d1e28a68ccaa2532cf625c5522043e8b38fe9e748cdae5b"
+    },
+    "revisions.csv": {
+      "bytes": 348628,
+      "sha256": "1a10adc5d31ee6127a6a5920d2c7d5c342a4628d6f207f808b3016d398bb240b"
     },
     "school_formula.csv": {
       "bytes": 29926,

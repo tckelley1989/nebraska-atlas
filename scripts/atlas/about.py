@@ -33,6 +33,7 @@ FILES = {
     "district_county_weights.csv": "Each system's split across counties by where its Census children ages 5 to 17 live.",
     "deflators.csv": "Midwest CPI-U deflators (2019 = 1) by calendar and school year, with the BEA check deflator.",
     "statewide.csv": "Statewide totals behind the Findings, by topic, measure and year.",
+    "revisions.csv": "Every published value that changed since the previous build, with both values and both build dates.",
 }
 
 

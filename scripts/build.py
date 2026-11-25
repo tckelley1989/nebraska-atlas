@@ -82,6 +82,9 @@ def main():
 
     # Deeper dive: one page per measure (design doc "Deeper Dive: Design")
     ptax = dive.Ptax(a)
+    for lvl in ("system", "county"):
+        for fn, body in dive.shared_places(a, lvl, ptax).items():
+            (OUT / "assets" / fn).write_text(body, encoding="utf-8")
     for r in a.registry:
         if r["format"] == "category":
             continue

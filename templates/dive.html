@@ -68,5 +68,8 @@ Showing the 8 strongest of {{ m }}.{% if few %} Too few {{ nouns }} to test (und
 <p class="note">Methods sections 1.1, 5 and 8 · Terms are defined under <a href="{{ root }}about.html#terms">Key terms</a>.</p>
 </div>
 <script id="dive-data" type="application/json">{{ place_json|safe }}</script>
-<script src="{{ root }}assets/dive.js" defer></script>
+<script src="{{ root }}assets/dive-places-{{ level }}.js" defer></script>
+{% if mech_chart == "formula" %}<script src="{{ root }}assets/dive-formula.js" defer></script>
+{% elif mech_chart == "ptax" %}<script src="{{ root }}assets/dive-ptax.js" defer></script>
+{% endif %}<script src="{{ root }}assets/dive.js" defer></script>
 {% endblock %}

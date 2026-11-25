@@ -312,7 +312,7 @@ def strip(d: Dive, W: int) -> str:
             if d.clip and v > d.clip:
                 s.append(f'<path class="dd" data-c="{c}" d="M{cx - 4:.1f} {yy - 5:.1f}l7 5l-7 5z" fill="{DOT}"/>')
             else:
-                s.append(f'<circle class="dd" data-c="{c}" cx="{cx:.1f}" cy="{yy:.1f}" r="{2.6 if phone else 3.2}" fill="{DOT}" fill-opacity="0.75"/>')
+                s.append(f'<circle class="dd" data-c="{c}" cx="{cx:.1f}" cy="{yy:.1f}" r="{2.6 if phone else 3.2}"/>')
     return "".join(s + ["</svg>"])
 
 
@@ -354,7 +354,7 @@ def scatter(d: Dive, key: str, W: int) -> str:
             s.append(f'<path class="dd" data-c="{c}" d="M{SX(x) - 5:.1f} {SY(y) + 7:.1f}l5 -8l5 8z" fill="{DOT}"/>')
             lab.block((SX(x) - 6, SY(y) - 2, SX(x) + 6, SY(y) + 8))
         else:
-            s.append(f'<circle class="dd" data-c="{c}" cx="{SX(x):.1f}" cy="{SY(y):.1f}" r="{2.8 if phone else 3.4}" fill="{DOT}" fill-opacity="0.75"/>')
+            s.append(f'<circle class="dd" data-c="{c}" cx="{SX(x):.1f}" cy="{SY(y):.1f}" r="{2.8 if phone else 3.4}"/>')
     tries = [(9, -8, "start"), (-9, -8, "end"), (9, 15, "start"), (-9, 15, "end"), (-9, 28, "end"), (9, 28, "start"), (-9, 41, "end"), (9, 41, "start")]
     far = sorted(sc, key=lambda t: -abs(t[2] - (a0 + b * t[1])))[:5]
     names = d.a.systems_xw if L_ == "system" else d.a.counties_xw
@@ -478,7 +478,7 @@ class Ptax:
             else:
                 s.append(f'<text x="0" y="{cy + 4:.0f}" font-size="13" font-weight="600" fill="{INK}">{esc(label)}</text>')
             for c, x in self.f.items():
-                s.append(f'<circle class="dd" data-c="{c}" cx="{X(100 * x[k]):.1f}" cy="{cy + jit(c + k, 16):.1f}" r="{2.6 if phone else 3}" fill="{DOT}" fill-opacity="0.7"/>')
+                s.append(f'<circle class="dd" data-c="{c}" cx="{X(100 * x[k]):.1f}" cy="{cy + jit(c + k, 16):.1f}" r="{2.6 if phone else 3}"/>')
         s.append(f'<text x="{R}" y="{H - 2}" font-size="11.5" fill="{SUB}" text-anchor="end">Change since {self.y0}, each county · past ±45% at the edge</text>')
         return "".join(s + ["</svg>"])
 
@@ -608,6 +608,30 @@ def mechanism_note(d: Dive) -> list:
     return out
 
 
+def shared_names(a, level: str) -> dict:
+    xw = a.systems_xw if level == "system" else a.counties_xw
+    return {c: (r["display_name"] if level == "system" else r["name"] + " County") for c, r in xw.items()}
+
+
+def shared_places(a, level: str, ptax) -> dict:
+    """Place facts that do not change from one dive page to the next, one file each, cached by the browser once instead of
+    inlined on every page: names for every page; the formula (systems) or the property tax arithmetic (counties) only for
+    the pages that draw it."""
+    d0 = Dive(a, level, "aid_ps" if level == "system" else "ptax_net_real_change")
+    names, extra = {}, {}
+    for c, name in shared_names(a, level).items():
+        names[c] = {"n": name, "s": short_name(d0, c)}
+        if level == "system" and c in a.formula:
+            fp = formula_parts(a, c)
+            extra[c] = {"fx": {k: (round(x, 2) if isinstance(x, float) else x) for k, x in fp.items()},
+                        "why": (f"because its resources cover {100 * fp['res'] / fp['need']:.0f}% of its need" if fp["need"] else "")}
+        if level == "county" and c in ptax.f:
+            extra[c] = {"px": ptax.place(a, c)}
+    js = lambda v, o: f"window.{v}=" + json.dumps(o, ensure_ascii=False, separators=(",", ":")) + ";"
+    return {f"dive-places-{level}.js": js("DIVE_PLACES", names),
+            ("dive-formula.js" if level == "system" else "dive-ptax.js"): js("DIVE_EXTRA", extra)}
+
+
 def page(a, level: str, key: str, ptax=None) -> dict:
     d = Dive(a, level, key)
     row = d.row
@@ -698,19 +722,13 @@ def page(a, level: str, key: str, ptax=None) -> dict:
         peers = [x for x in d.v if d.group_of[x] == grp and (level == "county" or eqs[x] == eqs[c])]
         pmed = st.median(d.v[x] for x in peers)
         rank = 1 + sum(1 for x in d.v.values() if x > v)
-        p = {"n": a.systems_xw[c]["display_name"] if level == "system" else a.counties_xw[c]["name"] + " County", "s": short_name(d, c),
-             "v": d.fv(v), "r": f"{fmt.ordinal(rank)} highest of {d.n}", "g": grp,
+        p = {"v": d.fv(v), "r": f"{fmt.ordinal(rank)} highest of {d.n}", "g": grp,
              "pm": d.fv(pmed), "pn": len(peers), "pr": 1 + sum(1 for x in peers if d.v[x] > v),
              "pd": (f"{'equalized' if eqs[c] else 'not equalized'}, {grp.lower()} formula students" if level == "system" else grp.lower())}
-        if chart == "formula":
-            fp = formula_parts(a, c)
-            p["fx"] = {k: (round(x, 2) if isinstance(x, float) else x) for k, x in fp.items()}
-            p["why"] = (f"because its resources cover {100 * fp['res'] / fp['need']:.0f}% of its need" if fp["need"] else "")
-        if chart == "ptax" and c in ptax.f:
-            p["px"] = ptax.place(a, c)
         pl[c] = p
     ctx["place_json"] = json.dumps({"level": level, "key": key, "noun": noun, "nouns": nouns, "chart": chart, "places": pl,
                                     "y0": getattr(ptax, "y0", ""), "y1": getattr(ptax, "y1", ""),
                                     "d0": getattr(ptax, "d0", 0), "d1": getattr(ptax, "d1", 0), "aid_year": a.aid_year}, separators=(",", ":"))
-    ctx["options"] = sorted(((p["n"], c) for c, p in pl.items()))
+    names = shared_names(a, level)
+    ctx["options"] = sorted(((names[c], c) for c in pl))
     return ctx

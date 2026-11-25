@@ -26,8 +26,26 @@ def atlas():
 
 
 def page_data(level, key):
+    """The page's own data merged with the shared files it loads, as dive.js does."""
     t = (SITE / "dive" / level / f"{key}.html").read_text(encoding="utf-8")
-    return t, json.loads(re.search(r'<script id="dive-data" type="application/json">(.*?)</script>', t, re.S).group(1))
+    d = json.loads(re.search(r'<script id="dive-data" type="application/json">(.*?)</script>', t, re.S).group(1))
+    for src in re.findall(r'<script src="\.\./\.\./assets/(dive-(?:places|formula|ptax)[a-z-]*\.js)"', t):
+        body = (SITE / "assets" / src).read_text(encoding="utf-8")
+        shared = json.loads(body[body.index("=") + 1:-1])
+        for c, p in d["places"].items():
+            p.update(shared.get(c, {}))
+    return t, d
+
+
+def test_pages_load_only_the_shared_data_they_draw():
+    for p in (SITE / "dive").rglob("*.html"):
+        if p.name == "index.html":
+            continue
+        t = p.read_text(encoding="utf-8")
+        chart = json.loads(re.search(r'<script id="dive-data" type="application/json">(.*?)</script>', t, re.S).group(1))["chart"]
+        assert ("dive-formula.js" in t) == (chart == "formula"), p.name
+        assert ("dive-ptax.js" in t) == (chart == "ptax"), p.name
+        assert '"fx"' not in t and '"px"' not in t, p.name
 
 
 def test_a_page_for_every_measure(atlas):

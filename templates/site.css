@@ -186,6 +186,8 @@ code{font-size:.92em}
 .dlead{font-size:17px;line-height:1.5;max-width:820px;margin:0}
 .dchart{width:100%;height:auto;display:block;font-family:var(--font)}
 .w-phone{display:none}
+.dd{fill:#a87638}
+circle.dd{fill-opacity:.75}
 .dd.on{fill:var(--ink);fill-opacity:1;r:6px;stroke:var(--card);stroke-width:2px}
 path.dd.on{stroke:var(--ink);stroke-width:2px}
 .db.on{fill:var(--ink)}

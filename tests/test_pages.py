@@ -96,3 +96,16 @@ def fmt_change(x):
     sys.path.insert(0, str(ROOT / "scripts"))
     from atlas import fmt
     return fmt.signed(x, 1, "%")
+
+
+def test_formula_notes():
+    """Foundation aid net effect on every profile; stabilization and averaging notes only where they apply."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from atlas.data import Atlas
+    from atlas import pages
+    a = Atlas()
+    lex = pages.formula_notes(a, "24-0001")
+    assert "added $1,798,517" in lex[0]
+    stab = sum(1 for c in a.formula if (a.need_parts.get(c, {}).get("need_stabilization") or 0) != 0)
+    assert sum(1 for p in (SITE / "system").glob("*.html") if "needs stabilization" in p.read_text(encoding="utf-8")) == stab
+    assert all("Foundation aid paid" in p.read_text(encoding="utf-8") for p in (SITE / "system").glob("*.html"))

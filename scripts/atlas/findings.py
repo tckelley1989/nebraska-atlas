@@ -15,7 +15,7 @@ LAWS = [
      "Credits paid {credit_share_state} of all property taxes in 2025, {credit_share_rural} in rural counties and {credit_share_metro} in metro counties. From 2019, real taxes after credits changed {net_state} statewide while real taxes levied changed {levied_state}."),
     ("LB 583 (2023): foundation aid and special education",
      "Raise the state's investment in education and reduce schools' reliance on property taxes.",
-     "TEEOSA aid rose {aid_change_dollars} from 2019-20 to {aid_year}, as foundation aid ({foundation1}) took the place of equalization aid ({eq0} to {eq1})."),
+     "TEEOSA aid rose {aid_change_dollars} from 2019-20 to {aid_year}. Foundation aid paid {found_total}; because 60% counts as a resource, it added {found_net} and replaced {found_replaced} of equalization aid. Equalization aid fell from {eq0} to {eq1}, mostly as school adjusted valuation ({sav_growth}) outgrew need ({need_growth})."),
     ("LB 243 (2023): school property tax request cap",
      "Hold growth in each district's property tax request to 3% a year, with allowances, so new state money turns into property tax relief.",
      "Requests rose from {request0} in {budget_first} to {request1} in {budget_year} ({request_growth}). For {budget_year}, {votes1} of {districts1} boards voted to add authority and {unused1} went unrequested."),
@@ -39,9 +39,15 @@ def _num(s):
 
 def chart(kind: str, f: dict) -> str:
     if kind == "credits_vs_aid":
-        rows = [("Property tax credits", f["credits_gain_raw"], "+" + f["credits_gain"], "credits"),
-                ("TEEOSA aid", f["aid_gain_raw"], "+" + f["aid_gain"], "state")]
-        return f'<div class="bars" role="img" aria-label="Increase 2019-20 to {f["money_year"]}: credits {f["credits_gain"]}, TEEOSA aid {f["aid_gain"]}">{_bar_rows(rows, max(r[1] for r in rows))}</div>'
+        rows = [("School property tax relief", f["relief_gain_raw"], "+" + f["relief_gain"], "credits"),
+                ("TEEOSA aid", f["teeosa_gain_raw"], "+" + f["teeosa_gain"], "state")]
+        return f'<div class="bars" role="img" aria-label="Increase 2019-20 to {f["money_year"]}: relief {f["relief_gain"]}, TEEOSA aid {f["teeosa_gain"]}">{_bar_rows(rows, max(r[1] for r in rows))}</div>'
+    if kind == "equalization":
+        a_ = [("Formula need", f["need_gain_raw"], "+" + f["need_gain"], "ink"), ("Local effort", f["le_gain_raw"], "+" + f["le_gain"], "local")]
+        b_ = [("Foundation aid paid", f["found_total_raw"], f["found_total"], "state"), ("Added to total aid", f["found_net_raw"], f["found_net"], "statelite")]
+        mx = max(r[1] for r in a_ + b_)
+        return (f'<div class="bars" role="img" aria-label="2019-20 to {f["aid_year"]}: need {f["need_gain"]}, local effort {f["le_gain"]}; foundation aid {f["found_total"]} paid, {f["found_net"]} added">'
+                f'<p class="note">Change 2019-20 to {f["aid_year"]}, certified</p>{_bar_rows(a_, mx)}<p class="note">Foundation aid, {f["aid_year"]}</p>{_bar_rows(b_, mx)}</div>')
     if kind == "state_share":
         s0, s1, x0, x1 = f["share_raw"]
         def dots(label, a, b):

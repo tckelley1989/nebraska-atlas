@@ -41,6 +41,10 @@ class Atlas:
         self.geo_system = _js("geo_sd.js")
         self.deflators = {r["year"]: r for r in _csv(BUNDLE / "deflators.csv")}
         self.formula = {r["system"]: {k: _num(v) for k, v in r.items()} for r in _csv(BUNDLE / "school_formula.csv")}
+        self.need_parts = {}
+        for r in _csv(BUNDLE / "school_need_components.csv"):
+            if r["aid_year"] and int(float(r["aid_year"])) == int(next(iter(self.formula.values()))["aid_year"]):
+                self.need_parts.setdefault(r["system"], {})[r["component"]] = _num(r["amount"]) or 0
         self.cert = {}
         for r in _csv(BUNDLE / "school_systems.csv"):
             self.cert.setdefault(r["system"], {})[int(r["aid_year"])] = {k: _num(v) for k, v in r.items()}

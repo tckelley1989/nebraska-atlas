@@ -13,7 +13,7 @@ c11,county,sch_aid_ps|sch_eq_student_share|sch_state_share|sch_state_share_xc,Sc
 s01,system,aid_ps|need_ps|val_ps|poverty_ps|lep_ps|special_receipts_ps|transportation_ps|aid_ps_real_change,Aid is need minus resources; components are parts of need or resources
 s02,system,afr_state_share|afr_state_share_xc|aid_ps,State share includes aid
 s03,system,ppc_adm|ppc_real_change,Spending level and its change share one series
-s04,system,ppc_adm|need_ps|transportation_ps|special_receipts_ps,Need components are built from spending
+s04,system,ppc_adm|ppc_real_change|need_ps|transportation_ps|special_receipts_ps|aid_ps|aid_ps_real_change,"Basic funding and other need components are built from spending, and aid follows need"
 s05,system,lc2_gf_levy|lc2_unused_share,Levy and unused authority come from the same LC-2
 s06,system,val_ps|val_real_change|ag_share,"Valuation level, change and ag share share one base"
 s07,system,nscas_ela|nscas_math|nscas_scale_rel,Proficiency and scale-score measures share the same tests

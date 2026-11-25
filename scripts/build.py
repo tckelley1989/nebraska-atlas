@@ -53,7 +53,7 @@ def main():
     fl = findings.load(f)
     synth = next(x for x in fl if x["synthesis"])
     synth["headline_hero"] = "Since 2019, Nebraska has lowered property tax bills mainly by paying part of them"
-    hero_lead = (f"Credits now cover {f['credit_share_state']} of all property taxes. Certified formula aid, which follows need, "
+    hero_lead = (f"Credits now cover {f['credit_share_state']} of all property taxes. Certified formula aid "
                  f"grew {f['aid_change_dollars']} from 2019-20 to {f['aid_year']}.")
     state = a.county_js["tiers"]["state"]
     state_tiles = []

@@ -109,3 +109,36 @@ def test_formula_notes():
     stab = sum(1 for c in a.formula if (a.need_parts.get(c, {}).get("need_stabilization") or 0) != 0)
     assert sum(1 for p in (SITE / "system").glob("*.html") if "needs stabilization" in p.read_text(encoding="utf-8")) == stab
     assert all("Foundation aid paid" in p.read_text(encoding="utf-8") for p in (SITE / "system").glob("*.html"))
+
+
+NAMING = re.compile(r"(?i)(?<!taxable )(?<!school adjusted )\bvaluations?\b|\btaxable values?\b|\bproperty wealth\b"
+                    r"|\bassessed values?\b|(?-i:(?<!School ))\b(?i:adjusted values?)\b|\bof value\b")
+
+
+def test_valuation_naming_rule():
+    """Taxable valuation (assessed; levy, taxes, credits) or school adjusted valuation (the formula only):
+    never bare "valuation", "taxable value", "of value", "assessed value" or "property wealth".
+    Revenue's report title, School Adjusted Value, is allowed. Data keys and CSV headers are skipped."""
+    hits = []
+    for p in SITE.rglob("*"):
+        if p.suffix not in (".html", ".js", ".csv"):
+            continue
+        t = p.read_text(encoding="utf-8", errors="ignore")
+        t = re.sub(r'"?[a-z0-9_]*valuation[a-z0-9_]*"?\s*[:,]', "k,", t)
+        hits += [f"{p.name}: …{t[max(0, m.start() - 40):m.end() + 10]}…" for m in NAMING.finditer(t)]
+    assert not hits, f"{len(hits)} hits, e.g. " + " | ".join(sorted(set(hits))[:5])
+
+
+def test_periods_follow_the_bundle():
+    """A measure's period comes from the bundle when the bundle labels it, so labels move with the data."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from atlas.data import Atlas
+    a = Atlas()
+    for (key, level), r in a.ind.items():
+        js = a.county_js if level == "county" else a.system_js
+        p = ((js.get("indicators") or {}).get(key) or {}).get("period")
+        if p:
+            assert r["period"] == p, (level, key, r["period"], p)
+    t = (SITE / "system" / "28-0001.html").read_text(encoding="utf-8")
+    lc2 = a.system_js["indicators"]["lc2_limit_levy"]["period"]
+    assert lc2 in t

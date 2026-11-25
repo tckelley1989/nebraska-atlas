@@ -97,7 +97,7 @@ def system_page(a, code: str) -> dict:
     ps = lambda x: fmt.money(x / stu) if stu else "n/a"
     steps = [
         ("Formula need", "formula_need", allps("formula_need"), "need"),
-        ("Local effort, $1.00 per $100 of adjusted valuation", "local_effort", "", "res"),
+        ("Local effort, $1.00 per $100 of school adjusted valuation", "local_effort", "", "res"),
         ("Other receipts", "other_receipts", "", "res"),
         ("Allocated income tax", "income_tax_rebate", "", "res"),
         ("Net option enrollment funding", "option_funding", "", "res"),
@@ -131,7 +131,7 @@ def system_page(a, code: str) -> dict:
         v0, v1 = a.calendar_deflator(2018), a.calendar_deflator(a.aid_year - 1)
         pairs = [
             ("Formula students", base["formula_students"], now["formula_students"], lambda x: f"{x:,.0f}"),
-            ("Adjusted valuation, 2019 dollars", base["teeosa_adjusted_valuation"] * v0, now["teeosa_adjusted_valuation"] * v1, fmt.money),
+            ("School adjusted valuation, 2019 dollars", base["teeosa_adjusted_valuation"] * v0, now["teeosa_adjusted_valuation"] * v1, fmt.money),
             ("Formula need per student, 2019 dollars", base["formula_need"] / base["formula_students"] * d0, now["formula_need"] / now["formula_students"] * d1, fmt.money),
             ("TEEOSA aid per formula student, 2019 dollars", base["total_state_aid"] / base["formula_students"] * d0, now["total_state_aid"] / now["formula_students"] * d1, fmt.money),
         ]

@@ -1,0 +1,43 @@
+/* Rusted Modern design tokens. Locked November 25, 2026.
+   Every page, map, chart and PDF uses these values and nothing else.
+   One color, one meaning: see README "Color rules". */
+:root {
+  /* Ground and ink */
+  --ink: #2c2c2c;          /* text, dark bands, buttons */
+  --ground: #f3eee6;       /* page */
+  --card: #fbf8f3;         /* raised surfaces */
+  --rule: #ddd5c8;         /* dividers */
+  --sub: #5e5a54;          /* secondary text */
+
+  /* Brand (logo and active-page underline only, never data or buttons) */
+  --rust: #c1432e;
+  --slate: #4b6777;
+  --tan: #ce9e62;
+
+  /* Change since base year: down (rust) / little change / up (slate). Text versions for numbers. */
+  --change-1: #9b3221; --change-2: #d06d55; --change-3: #f0c9bd;
+  --change-4: #e6e1d8;
+  --change-5: #c9d5de; --change-6: #7f98ab; --change-7: #3f5a6b;
+  --down-text: #9b3221;
+  --up-text: #3f5a6b;
+
+  /* How much, 6 steps: darker means more */
+  --howmuch6-1: #f4e9d8; --howmuch6-2: #e3cba4; --howmuch6-3: #ce9e62;
+  --howmuch6-4: #a87638; --howmuch6-5: #73501f; --howmuch6-6: #3f2b10;
+
+  /* How much, 7 steps (general fund levy) */
+  --howmuch7-1: #f4e9d8; --howmuch7-2: #e8d3b2; --howmuch7-3: #d8b583; --howmuch7-4: #c39553;
+  --howmuch7-5: #9c7134; --howmuch7-6: #6b4b1d; --howmuch7-7: #3f2b10;
+
+  /* Who pays (categorical) */
+  --state: #4b6777;        /* state money, equalization aid */
+  --credits: #ce9e62;      /* property tax credits */
+  --local: #8a847b;        /* local money */
+  --federal: #b8c6d2;      /* federal money */
+  --none: #cfc8bc;         /* no data or not applicable */
+
+  /* Type */
+  --font: 'Archivo', system-ui, sans-serif;
+  --wide: 125%;            /* headlines and names, weight 800 */
+  --narrow: 75%;           /* labels, weight 700, caps */
+}

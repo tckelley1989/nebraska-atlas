@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% if draft %}<meta name="robots" content="noindex, nofollow">{% endif %}
+<title>{{ title }} · Nebraska County Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ root }}assets/tokens.css">
+<link rel="stylesheet" href="{{ root }}assets/site.css">
+</head>
+<body>
+{% if draft %}<div class="draft">Draft. Numbers are not yet checked against the current Atlas. The live Atlas is still the reference.</div>{% endif %}
+<header class="band"><div class="wrap head">
+<a class="brand" href="{{ root }}index.html">{{ quilt|safe }}<span>NEBRASKA COUNTY ATLAS</span></a>
+<nav aria-label="Sections"><a href="#">Findings</a><a href="#">Schools</a><a href="#">Counties</a><a href="#">About</a></nav>
+</div></header>
+<main class="wrap">{% block main %}{% endblock %}</main>
+<footer class="band"><div class="wrap foot"><span>A personal project by Tyler Kelley. Not a product of the Nebraska Department of Education.</span><span>Built {{ built }}</span></div></footer>
+</body>
+</html>

@@ -1,0 +1,245 @@
+system_code,display_name,nde_name,counties
+01-0003,Kenesaw Public Schools,,"Adams, Kearney, Hall"
+01-0018,Hastings Public Schools,,Adams
+01-0090,Adams Central Public Schools,,"Adams, Clay, Hall, Kearney, Webster"
+01-0123,Silver Lake Public Schools,,"Adams, Webster, Franklin, Kearney"
+02-0009,Neligh-Oakdale Schools,,"Antelope, Pierce"
+02-0018,Elgin Public Schools,,"Antelope, Boone, Wheeler"
+02-0115,Summerland Public Schools,,"Antelope, Holt, Wheeler, Knox"
+03-0500,Arthur County Schools,,"Arthur, McPherson, Keith"
+04-0001,Banner County Public Schools,,"Banner, Morrill, Scotts Bluff"
+05-0071,Sandhills Public Schools,,"Blaine, Thomas, Brown, Custer, Logan, Loup"
+06-0001,Boone Central Schools,,"Boone, Antelope"
+06-0017,St. Edward Public Schools,,"Boone, Platte, Nance"
+06-0075,Riverside Public Schools,,"Boone, Greeley, Nance, Wheeler"
+07-0006,Alliance Public Schools,,"Box Butte, Sheridan, Morrill"
+07-0010,Hemingford Public Schools,,"Box Butte, Dawes, Sheridan"
+08-0051,Boyd County Schools,,"Boyd, Holt, Knox"
+09-0010,Ainsworth Community Schools,,"Brown, Rock"
+10-0002,Gibbon Public Schools,,"Buffalo, Kearney"
+10-0007,Kearney Public Schools,,"Buffalo, Kearney, Phelps"
+10-0009,Elm Creek Public Schools,,"Buffalo, Phelps, Dawson"
+10-0019,Shelton Public Schools,,"Buffalo, Hall, Adams, Kearney"
+10-0069,Ravenna Public Schools,,"Buffalo, Sherman"
+10-0105,Pleasanton Public Schools,,"Buffalo, Sherman"
+10-0119,Amherst Public Schools,,Buffalo
+11-0001,Tekamah-Herman Community Schools,,"Burt, Washington"
+11-0014,Oakland Craig Public Schools,,"Burt, Cuming, Dodge"
+11-0020,Lyons-Decatur Northeast Schools,,"Burt, Thurston, Cuming"
+12-0056,David City Public Schools,,"Butler, Saunders"
+12-0502,East Butler Public Schools,,"Butler, Saunders, Seward"
+13-0001,Plattsmouth Community Schools,,Cass
+13-0022,Weeping Water Public Schools,,Cass
+13-0032,Louisville Public Schools,,"Cass, Sarpy"
+13-0056,Conestoga Public Schools,,"Cass, Otoe"
+13-0097,Elmwood-Murdock Public Schools,,"Cass, Otoe"
+14-0008,Hartington Newcastle Public Schools,,"Cedar, Dixon"
+14-0045,Randolph Public Schools,,"Cedar, Pierce, Wayne"
+14-0054,Laurel-Concord-Coleridge School,,"Cedar, Dixon, Wayne"
+14-0101,Wynot Public Schools,,"Cedar, Dixon"
+15-0010,Chase County Schools,,"Chase, Dundy"
+15-0536,Wauneta-Palisade Public Schools,,"Chase, Hitchcock, Hayes, Dundy"
+16-0006,Valentine Community Schools,,"Cherry, Brown"
+16-0030,Cody-Kilgore Public Schools,,Cherry
+17-0001,Sidney Public Schools,,Cheyenne
+17-0003,Leyton Public Schools,,"Cheyenne, Morrill"
+17-0009,Potter-Dix Public Schools,,"Cheyenne, Kimball, Banner"
+18-0002,Sutton Public Schools,,"Clay, Fillmore, Hamilton, York"
+18-0011,Harvard Public Schools,,"Clay, Hamilton"
+18-0501,Sandy Creek Schools,,"Clay, Adams, Nuckolls"
+19-0039,Leigh Community Schools,,"Colfax, Platte, Stanton"
+19-0058,Clarkson Public Schools,,"Colfax, Stanton, Platte"
+19-0070,Howells-Dodge Consolidated Schools,,"Dodge, Colfax, Cuming, Stanton"
+19-0123,Schuyler Community Schools,,"Colfax, Butler"
+20-0001,West Point Public Schools,,Cuming
+20-0020,Bancroft-Rosalie Community Schools,,"Cuming, Thurston, Burt"
+20-0030,Wisner-Pilger Public Schools,,"Cuming, Stanton, Wayne"
+21-0015,Anselmo-Merna Public Schools,,"Custer, Blaine"
+21-0025,Broken Bow Public Schools,,Custer
+21-0044,Ansley Public Schools,,"Custer, Buffalo"
+21-0084,Sargent Public Schools,,"Custer, Blaine"
+21-0089,Arnold Public Schools,,"Custer, Lincoln, Logan"
+21-0180,Callaway Public Schools,,"Custer, Dawson"
+22-0011,South Sioux City Community Schools,,Dakota
+22-0031,Homer Community Schools,,"Dakota, Thurston"
+23-0002,Chadron Public Schools,,"Dawes, Sheridan"
+23-0071,Crawford Public Schools,,"Dawes, Sioux"
+24-0001,Lexington Public Schools,,"Dawson, Gosper"
+24-0004,Overton Public Schools,,"Dawson, Phelps"
+24-0011,Cozad Community Schools,,"Dawson, Custer"
+24-0020,Gothenburg Public Schools,,"Dawson, Lincoln, Custer"
+24-0101,Sumner-Eddyville-Miller Schools,,"Dawson, Buffalo, Custer"
+25-0025,Creek Valley Schools,,"Deuel, Cheyenne, Garden"
+25-0095,South Platte Public Schools,,"Deuel, Keith, Perkins, Garden"
+26-0001,Ponca Public Schools,,"Dixon, Dakota"
+26-0070,Allen Consolidated Schools,,"Dixon, Dakota"
+26-0561,Emerson-Hubbard Public Schools,,"Dakota, Dixon, Thurston"
+27-0001,Fremont Public Schools,,"Dodge, Saunders, Douglas"
+27-0062,Scribner-Snyder Community Schools,,"Dodge, Cuming"
+27-0594,Logan View Public Schools,,"Dodge, Washington, Burt, Cuming"
+27-0595,North Bend Central Public Schools,,"Dodge, Saunders, Colfax"
+28-0001,Omaha Public Schools,,"Douglas, Sarpy"
+28-0010,Elkhorn Public Schools,,Douglas
+28-0015,Douglas County West Community Schools,,Douglas
+28-0017,Millard Public Schools,,"Douglas, Sarpy"
+28-0054,Ralston Public Schools,,Douglas
+28-0059,Bennington Public Schools,,"Douglas, Washington"
+28-0066,Westside Community Schools,,Douglas
+29-0117,Dundy County Stratton Public Schools,,"Dundy, Hitchcock, Hayes"
+30-0025,Fillmore Central Public Schools,,Fillmore
+30-0054,Shickley Public Schools,,"Fillmore, Clay, Thayer"
+31-0506,Franklin Public Schools,,"Franklin, Harlan"
+32-0046,Maywood Public Schools,,"Frontier, Lincoln"
+32-0095,Eustis-Farnam Public Schools,,"Frontier, Dawson, Gosper, Lincoln"
+32-0125,Medicine Valley Public Schools,,"Frontier, Lincoln"
+33-0018,Arapahoe Public Schools,,"Furnas, Gosper, Frontier"
+33-0021,Cambridge Public Schools,,"Furnas, Frontier, Red Willow, Gosper"
+33-0540,Southern Valley Schools,,"Furnas, Harlan, Gosper"
+34-0001,Southern School District 1,,"Gage, Pawnee"
+34-0015,Beatrice Public Schools,,Gage
+34-0034,Freeman Public Schools,,"Gage, Johnson, Otoe, Lancaster"
+34-0100,Diller-Odell Public Schools,,"Gage, Jefferson, Pawnee"
+35-0001,Garden County Schools,,"Garden, Morrill, Keith"
+36-0100,Burwell Public Schools,,"Garfield, Valley, Holt"
+37-0030,Elwood Public Schools,,"Gosper, Dawson, Frontier"
+38-0011,Hyannis Area Schools,,"Grant, Cherry, Sheridan"
+39-0060,Central Valley Public Schools,,"Greeley, Valley, Howard, Nance, Boone, Sherman"
+40-0002,Grand Island Public Schools,,Hall
+40-0082,Northwest Public Schools,,"Hall, Merrick, Howard"
+40-0083,Wood River Rural Schools,,Hall
+40-0126,Doniphan-Trumbull Public Schools,,"Hall, Clay, Adams, Hamilton"
+41-0002,Giltner Public Schools,,Hamilton
+41-0091,Hampton Public School,,"Hamilton, York"
+41-0504,Aurora Public Schools,,"Hamilton, Hall"
+42-0002,Alma Public Schools,,"Harlan, Furnas"
+43-0079,Hayes Center Public Schools,,"Hayes, Frontier, Hitchcock"
+44-0070,Hitchcock County School System,,"Hitchcock, Red Willow"
+45-0007,O'Neill Public Schools,,Holt
+45-0044,Stuart Public Schools,,Holt
+45-0137,Chambers Public Schools,,"Holt, Garfield, Wheeler"
+45-0239,West Holt Public Schools,,Holt
+46-0001,Mullen Public Schools,,"Hooker, Cherry, Thomas"
+47-0001,St. Paul Public Schools,,"Howard, Greeley"
+47-0100,Centura Public Schools,,"Hall, Howard, Sherman, Buffalo"
+47-0103,Elba Public Schools,,Howard
+48-0008,Fairbury Public Schools,,"Jefferson, Thayer"
+48-0300,Tri County Public Schools,,"Saline, Jefferson, Gage"
+48-0303,Meridian Public Schools,,"Saline, Jefferson, Thayer, Fillmore"
+49-0033,Sterling Public Schools,,"Johnson, Otoe"
+49-0050,Johnson County Central Public Schools,,"Johnson, Otoe, Nemaha, Pawnee"
+50-0001,Wilcox-Hildreth Public Schools,,"Franklin, Kearney, Harlan, Phelps"
+50-0501,Axtell Community Schools,,"Kearney, Phelps"
+50-0503,Minden Public Schools,,"Kearney, Franklin, Adams"
+51-0001,Ogallala Public Schools,,"Keith, Perkins"
+51-0006,Paxton Consolidated Schools,,"Keith, Perkins, Lincoln"
+52-0100,Keya Paha County Schools,,"Keya Paha, Boyd, Brown"
+53-0001,Kimball Public Schools,,Kimball
+54-0013,Creighton Community Public Schools,,"Knox, Antelope, Pierce"
+54-0096,Crofton Community Schools,,"Knox, Cedar"
+54-0501,Niobrara Public Schools,,Knox
+54-0505,Isanti Community School,,Knox
+54-0576,Wausa Public Schools,,"Knox, Cedar, Pierce"
+54-0583,Verdigre Public Schools,,"Knox, Holt"
+54-0586,Bloomfield Community Schools,,"Knox, Cedar"
+55-0001,Lincoln Public Schools,,Lancaster
+55-0145,Waverly School District 145,,"Lancaster, Cass, Otoe, Saunders"
+55-0148,Malcolm Public Schools,,"Lancaster, Seward"
+55-0160,Norris School District 160,,"Lancaster, Gage, Otoe"
+55-0161,Raymond Central Public Schools,,"Saunders, Lancaster, Seward, Butler"
+56-0001,North Platte Public Schools,,Lincoln
+56-0006,Brady Public Schools,,Lincoln
+56-0007,Maxwell Public Schools,,Lincoln
+56-0037,Hershey Public Schools,,Lincoln
+56-0055,Sutherland Public Schools,,Lincoln
+56-0565,Wallace Public School District 65 R,,"Lincoln, Perkins, Hayes"
+57-0501,Stapleton Public Schools,,"Logan, Lincoln, McPherson"
+58-0025,Loup County Public Schools,,"Loup, Blaine, Custer"
+59-0001,Madison Public Schools,,"Madison, Platte, Stanton"
+59-0002,Norfolk Public Schools,,"Madison, Stanton, Wayne, Pierce"
+59-0005,Battle Creek Public Schools,,"Madison, Pierce"
+59-0013,Newman Grove Public Schools,,"Madison, Platte, Boone"
+59-0080,Elkhorn Valley Schools,,"Madison, Antelope, Pierce, Boone"
+60-0090,McPherson County Schools,,"McPherson, Lincoln"
+61-0004,Central City Public Schools,,"Merrick, Hamilton"
+61-0049,Palmer Public Schools,,"Merrick, Howard, Nance"
+62-0021,Bayard Public Schools,,"Morrill, Scotts Bluff, Banner"
+62-0063,Bridgeport Public Schools,,"Morrill, Box Butte"
+63-0001,Fullerton Public Schools,,"Nance, Merrick, Boone"
+63-0030,Twin River Public Schools,,"Nance, Platte, Merrick, Polk"
+64-0023,Johnson-Brock Public Schools,,"Nemaha, Johnson, Otoe, Pawnee, Richardson"
+64-0029,Auburn Public Schools,,Nemaha
+65-0005,Lawrence-Nelson Public Schools,,"Nuckolls, Webster, Clay, Adams"
+65-0011,Superior Public Schools,,"Nuckolls, Webster"
+66-0027,Syracuse-Dunbar-Avoca Schools,,"Otoe, Cass, Johnson"
+66-0111,Nebraska City Public Schools,,"Otoe, Cass, Nemaha"
+66-0501,Palmyra District OR-1,,"Lancaster, Otoe"
+67-0001,Pawnee City Public Schools,,"Pawnee, Richardson"
+67-0069,Lewiston Consolidated Schools,,"Pawnee, Gage, Johnson"
+68-0020,Perkins County Schools,,"Perkins, Chase, Keith, Lincoln"
+69-0044,Holdrege Public Schools,,"Phelps, Harlan"
+69-0054,Bertrand Public Schools,,"Phelps, Gosper"
+69-0055,Loomis Public Schools,,"Phelps, Harlan"
+70-0002,Pierce Public Schools,,"Pierce, Wayne"
+70-0005,Plainview Public Schools,,"Pierce, Antelope, Knox"
+70-0542,Osmond Community Schools,,"Pierce, Knox"
+71-0001,Columbus Public Schools,,"Platte, Butler, Polk"
+71-0005,Lakeview Community Schools,,"Platte, Butler"
+71-0067,Humphrey Public Schools,,"Platte, Madison"
+72-0015,Cross County Community Schools,,"Polk, York"
+72-0019,Osceola Public Schools,,Polk
+72-0032,Shelby-Rising City Public Schools,,"Polk, Butler"
+72-0075,High Plains Community Schools,,"Merrick, Polk, Hamilton, York, Nance"
+73-0017,McCook Public Schools,,"Red Willow, Frontier, Hitchcock, Hayes"
+73-0179,Southwest Public Schools,,"Red Willow, Furnas, Frontier"
+74-0056,Falls City Public Schools,,"Richardson, Nemaha"
+74-0070,Humboldt Table Rock Steinauer,,"Richardson, Pawnee, Nemaha, Johnson"
+75-0100,Rock County Public Schools,,"Rock, Brown"
+76-0002,Crete Public Schools,,"Saline, Lancaster, Seward, Gage"
+76-0044,Dorchester Public School,,"Saline, Seward"
+76-0082,Wilber-Clatonia Public Schools,,"Saline, Gage, Lancaster"
+76-0090,Exeter-Milligan-Friend Public Schools,,"Saline, Fillmore, Seward, York"
+77-0001,Bellevue Public Schools,,Sarpy
+77-0027,Papillion La Vista Community Schools,,Sarpy
+77-0037,Gretna Public Schools,,"Sarpy, Douglas, Saunders"
+77-0046,Springfield Platteview Community Schools,,Sarpy
+78-0001,Ashland-Greenwood Public Schools,,"Saunders, Cass, Sarpy"
+78-0009,Yutan Public Schools,,"Saunders, Douglas"
+78-0039,Wahoo Public Schools,,Saunders
+78-0072,Mead Public Schools,,Saunders
+78-0107,Cedar Bluffs Public Schools,,Saunders
+79-0002,Minatare Public Schools,,Scotts Bluff
+79-0011,Morrill Public Schools,,"Scotts Bluff, Sioux"
+79-0016,Gering Public Schools,,Scotts Bluff
+79-0031,Mitchell Public Schools,,"Scotts Bluff, Sioux"
+79-0032,Scottsbluff Public Schools,,"Scotts Bluff, Morrill"
+80-0005,Milford Public Schools,,"Seward, Lancaster, Saline"
+80-0009,Seward Public Schools,,"Seward, Butler"
+80-0567,Centennial Public Schools,,"Seward, York, Butler, Polk"
+81-0003,Hay Springs Public Schools,,"Sheridan, Dawes"
+81-0010,Gordon-Rushville Public Schools,,"Sheridan, Cherry"
+82-0001,Loup City Public Schools,,"Sherman, Valley, Howard"
+82-0015,Litchfield Public Schools,,"Sherman, Custer"
+83-0500,Sioux County Public Schools,,"Sioux, Dawes"
+84-0003,Stanton Community Schools,,Stanton
+85-0060,Deshler Public Schools,,"Thayer, Nuckolls"
+85-0070,Thayer Central Community Schools,,"Thayer, Nuckolls"
+85-2001,Bruning-Davenport Unified System,,"Thayer, Fillmore, Nuckolls, Clay"
+86-0001,Thedford Public Schools,,"Thomas, Cherry"
+87-0001,Pender Public Schools,,"Thurston, Cuming, Wayne"
+87-0013,Walthill Public Schools,,Thurston
+87-0016,Umoⁿhoⁿ Nation Public Schools,,Thurston
+87-0017,Winnebago Public Schools District 17,,Thurston
+88-0005,Ord Public Schools,,"Valley, Garfield, Custer, Greeley"
+88-0021,Arcadia Public Schools,,"Valley, Sherman, Custer"
+89-0001,Blair Community Schools,,Washington
+89-0003,Fort Calhoun Community Schools,,"Washington, Douglas"
+89-0024,Arlington Public Schools,,"Washington, Douglas, Dodge"
+90-0017,Wayne Community Schools,,"Wayne, Dixon"
+90-0560,Wakefield Public Schools,,"Dixon, Wayne, Thurston"
+90-0595,Winside Public Schools,,"Wayne, Stanton"
+91-0002,Red Cloud Community Schools,,"Webster, Franklin"
+91-0074,Blue Hill Community Schools,,"Webster, Adams, Clay"
+92-0045,Wheeler Central Schools,,"Wheeler, Garfield, Greeley, Holt"
+93-0012,York Public Schools,,York
+93-0083,McCool Junction Public Schools,,"York, Fillmore"
+93-0096,Heartland Community Schools,,"York, Hamilton, Fillmore"

@@ -1,7 +1,7 @@
 {
-  "built_utc": "2026-11-25T19:14:21+00:00",
+  "built_utc": "2026-11-25T19:41:15+00:00",
   "source_repo": "nebraska-economy",
-  "source_commit": "4c2d9578cd2da88e3310c21bebe69ead9f6a614e",
+  "source_commit": "f88b5dffb6689ac06550e45899a2183212166017",
   "files": {
     "counties.csv": {
       "bytes": 50167,
@@ -20,12 +20,12 @@
       "sha256": "656810fa7f4c1bb49e4973f4ba152c09eb1a77c4d360b6e985ce1d5ca0f3ef02"
     },
     "data.js": {
-      "bytes": 800490,
-      "sha256": "e8e7dd6654cfe17eb38879dc41b33b026e3b7621291b91e8e1f3e06e6118d850"
+      "bytes": 802284,
+      "sha256": "ccdbb3cd9aaabdee07595070ee8b6301c72d391f4335d2cc05db4fa707821c60"
     },
     "data_sd.js": {
-      "bytes": 1337469,
-      "sha256": "71434b272b8805dcd05da984bd0eb9a85ee469b78ab63b6a9f23e7c8973b3f2a"
+      "bytes": 1397152,
+      "sha256": "3375ddccb8321d79cdbd19026affb04aa513e8ba86df0682b513a74a7625c5f7"
     },
     "deflators.csv": {
       "bytes": 687,

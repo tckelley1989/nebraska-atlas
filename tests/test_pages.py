@@ -128,6 +128,7 @@ def test_valuation_naming_rule():
         t = re.sub(r'(?<=,)valuation(?=,)', "k", t)  # bare CSV fields
         # the glossary entry that defines taxable valuation as assessed value
         t = re.sub(r'<tr id="t-taxable-valuation">.*?</tr>', "", t, flags=re.S)
+        t = re.sub(r"<dt>Taxable valuation</dt><dd>.*?</dd>", "", t, flags=re.S)  # the same definition on the dive landing page
         t = re.sub(r"(?<![A-Za-z])#?t-[a-z0-9-]+", "anchor", t)  # term anchors such as t-school-adjusted-valuation
         hits += [f"{p.name}: …{t[max(0, m.start() - 40):m.end() + 10]}…" for m in NAMING.finditer(t)]
     assert not hits, f"{len(hits)} hits, e.g. " + " | ".join(sorted(set(hits))[:5])

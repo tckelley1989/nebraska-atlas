@@ -113,3 +113,19 @@ def test_levy_relationships_lead_with_their_explanation():
     t, _ = page_data("system", "aid_ps")
     assert "Board sets" in t
     assert "A board&#39;s levy does not change its aid" in t or "A board's levy does not change its aid" in t
+
+
+def test_landing_page(atlas):
+    """The landing page's worked examples add to the certified total, its links resolve, and it carries no hard-coded
+    figure the bundle does not produce (spot checks against the data)."""
+    from atlas import landing
+    ctx = landing.build(atlas)
+    for e in ctx["examples"]:
+        assert abs(e["aid_raw"] - e["cert"]) <= 1, e["code"]
+    t = (SITE / "dive" / "index.html").read_text(encoding="utf-8")
+    for href in set(re.findall(r'href="((?:system|county)/[a-z0-9_]+\.html)', t)):
+        assert (SITE / "dive" / href).exists(), href
+    n_listed = len(set(re.findall(r'href="(?:system|county)/([a-z0-9_]+)\.html"', t)))
+    assert n_listed == sum(1 for r in atlas.registry if r["format"] != "category") - 0 or n_listed > 80
+    assert ctx["aid_total"] in t and ctx["unused"] in t and str(ctx["votes"]) in t
+    assert "Deeper dive" in (SITE / "index.html").read_text(encoding="utf-8")  # in the site nav

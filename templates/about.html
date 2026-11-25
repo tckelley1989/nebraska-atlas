@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block hero %}
+<section class="hero"><div class="wrap">
+<p class="crumb">About · data built {{ built }}</p>
+<h1 class="wide">HOW THE LEDGER WORKS</h1>
+<p class="herolead">Every number on this site comes from a public source, is computed the same way for every place, and can be downloaded below.</p>
+<nav class="toc" aria-label="On this page"><a href="#read">Reading the pages</a><a href="#measures">Measures</a><a href="#methods">Methods</a><a href="#downloads">Downloads</a><a href="#sources">Sources</a></nav>
+</div></section>
+{% endblock %}
+{% block main %}
+<section class="block" id="read">
+<h2 class="sect">Reading the pages</h2>
+<div class="two">
+<div>
+<p><b>Findings</b> sets out what the data shows statewide. <b>Schools</b> and <b>Counties</b> make up the Atlas: a map of every measure, and a profile page for each of the 244 school systems and 93 counties.</p>
+<p>Each profile leads with eight key measures. The diamond on each tile places it among all systems or all counties, lowest at the left; the tick marks the median. Hover over or tab to a measure's name for its definition.</p>
+<p>Every change carries a sign. Money over time is in 2019 dollars unless the label says otherwise.</p>
+</div>
+<div>
+<p class="label">Color</p>
+<p class="legend"><span><span class="sw change7-1"></span><span class="sw change7-2"></span><span class="sw change7-3"></span></span> Fell
+<span><span class="sw change7-4"></span></span> About the same
+<span><span class="sw change7-5"></span><span class="sw change7-6"></span><span class="sw change7-7"></span></span> Rose</p>
+<p class="legend"><span>{% for i in range(1, 7) %}<span class="sw howmuch6-{{ i }}"></span>{% endfor %}</span> How much: less to more</p>
+<p class="legend"><span class="sw state"></span> State money <span class="sw" style="background:var(--credits)"></span> Property tax credits <span class="sw" style="background:var(--local)"></span> Local money</p>
+<p class="quiet">Rust means down and slate means up; neither means good or bad. Each map uses one color ramp with its legend on screen, and the breaks are fixed, so a place changes color only when its data changes.</p>
+</div>
+</div>
+</section>
+
+<section class="block" id="measures">
+<h2 class="sect">Measures</h2>
+<p>{{ glossary[0].n }} county measures and {{ glossary[1].n }} school system measures. Key measures are marked.</p>
+{% for lv in glossary %}
+<h3 class="mh">{{ lv.title }}</h3>
+{% for g in lv.groups %}
+<div class="scroll"><table class="data gloss">
+<thead><tr><th>{{ g.name }}</th><th>Definition</th><th>Source and period</th></tr></thead>
+<tbody>{% for r in g.rows %}<tr id="{{ r.anchor }}"><td><b>{{ r.label }}</b>{% if r.key_indicator == "yes" %} <span class="key">Key</span>{% endif %}</td><td>{{ r.note }}{% if r.small_n_note %} <span class="quiet">{{ r.small_n_note }}.</span>{% endif %}</td><td class="quiet">{{ r.source }}. {{ r.period }}{% if r.preliminary %}; {{ r.preliminary }}{% endif %}.</td></tr>{% endfor %}</tbody>
+</table></div>
+{% endfor %}
+{% endfor %}
+</section>
+
+<section class="block methods" id="methods">
+<h2 class="sect">Methods</h2>
+<p>These rules apply to every measure. A measure that needs an exception has it written here and in the registry before the build uses it.</p>
+{{ methods|safe }}
+</section>
+
+<section class="block" id="downloads">
+<h2 class="sect">Downloads</h2>
+<p>The same files the site is built from. They open in Excel. Each profile page also has a one-page CSV of its own numbers and a PDF.</p>
+<div class="scroll"><table class="data">
+<thead><tr><th>File</th><th>What it holds</th><th class="num">Rows</th><th class="num">Size</th></tr></thead>
+<tbody>{% for d in files %}<tr><td><a href="{{ root }}data/{{ d.name }}" download>{{ d.name }}</a></td><td>{{ d.desc }}</td><td class="num">{{ d.rows }}</td><td class="num">{{ d.size }}</td></tr>{% endfor %}</tbody>
+</table></div>
+<p class="quiet">Built from <code>nebraska-economy</code> commit {{ commit[:7] }} on {{ built }}. Each file's SHA-256 checksum is in <a href="{{ root }}data/manifest.json">manifest.json</a>.</p>
+</section>
+
+<section class="block" id="sources">
+<h2 class="sect">Sources</h2>
+<div class="scroll"><table class="data">
+<thead><tr><th>Source</th><th>Used for</th></tr></thead>
+<tbody>{% for s in sources %}<tr><td>{{ s.name }}</td><td class="quiet">{{ s.levels }}</td></tr>{% endfor %}</tbody>
+</table></div>
+<p>The Nebraska Ledger is a personal project by Tyler Kelley. It is not a product of the Nebraska Department of Education, and nothing here is an official figure.</p>
+</section>
+{% endblock %}

@@ -31,7 +31,7 @@ def tile(a, level: str, place: str, row: dict) -> dict:
         "cat_note": cat_note, "key": k, "label": row["label"], "short": row["short"], "value": v if isinstance(v, str) else fmt.value(v, row, a.text(level, place, k)),
         "tone": tone(row, v), "rank": f"{fmt.ordinal(rk[0])} highest of {rk[1]}" if rk else "",
         "pos": rk[2] if rk else None, "median": med, "categorical": row["format"] == "category",
-        "source": row["source"], "period": row["period"],
+        "source": row["source"], "period": row["period"], "note": row["note"],
     }
 
 

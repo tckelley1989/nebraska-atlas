@@ -14,10 +14,11 @@
   --slate: #4b6777;
   --tan: #ce9e62;
 
-  /* Change since base year: down (rust) / little change / up (slate). Text versions for numbers. */
-  --change-1: #9b3221; --change-2: #d06d55; --change-3: #f0c9bd;
-  --change-4: #e6e1d8;
-  --change-5: #c9d5de; --change-6: #7f98ab; --change-7: #3f5a6b;
+  /* Change since base year: down (rust) / little change / up (slate). Text versions for numbers.
+     Light steps tuned November 25 so every neighbor separates by 10+ under color-blind simulation. */
+  --change-1: #9b3221; --change-2: #d06d55; --change-3: #d9aea1;
+  --change-4: #e2ddd4;
+  --change-5: #aebcc6; --change-6: #7f98ab; --change-7: #3f5a6b;
   --down-text: #9b3221;
   --up-text: #3f5a6b;
 
@@ -26,8 +27,8 @@
   --howmuch6-4: #a87638; --howmuch6-5: #73501f; --howmuch6-6: #3f2b10;
 
   /* How much, 7 steps (general fund levy) */
-  --howmuch7-1: #f4e9d8; --howmuch7-2: #e8d3b2; --howmuch7-3: #d8b583; --howmuch7-4: #c39553;
-  --howmuch7-5: #9c7134; --howmuch7-6: #6b4b1d; --howmuch7-7: #3f2b10;
+  --howmuch7-1: #f4e9d8; --howmuch7-2: #e0c59c; --howmuch7-3: #cf9f64; --howmuch7-4: #ae7d3f;
+  --howmuch7-5: #885f29; --howmuch7-6: #63441a; --howmuch7-7: #3f2b10;
 
   /* Who pays (categorical) */
   --state: #4b6777;        /* state money, equalization aid */

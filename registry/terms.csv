@@ -44,6 +44,6 @@ Aid and certification,School district,"An individual public school district that
 Aid and certification,Local system,"The unit TEEOSA calculates aid for: one district or, where applicable, several districts whose needs and resources are combined. The 244 systems on this site.",approved
 Students,Formula students,"The student count used in TEEOSA: enrollment adjusted for historical ADM trends, including qualifying early childhood students and students the district pays tuition for.",approved
 Students,Average daily membership (ADM),"The average number of students enrolled through the school year, not a single-day count.",approved
-Reading the dives,Tier,"Metropolitan, micropolitan or rural, by the county's Census area.",draft
-Reading the dives,Size band,"Districts grouped by formula students: under 200, 200 to 499, 500 to 999, 1,000 to 4,999, and 5,000 or more.",draft
-Reading the dives,Median and middle half,The median is the middle value; the middle half is the range holding the middle 50% of places.,draft
+Reading the dives,Tier,"Metropolitan, micropolitan or rural, by the county's Census area.",approved
+Reading the dives,Size band,"Districts grouped by formula students: under 200, 200 to 499, 500 to 999, 1,000 to 4,999, and 5,000 or more.",approved
+Reading the dives,Median and middle half,The median is the middle value; the middle half is the range holding the middle 50% of places.,approved

@@ -1,0 +1,23 @@
+family,chart,why
+s01,formula,"Aid is formula need minus formula resources, plus foundation aid and a few smaller payments; need, its allowances and school adjusted valuation are inputs to that arithmetic."
+s02,,"The state share of receipts counts TEEOSA aid among state sources, so the two rise together by construction."
+s03,,Spending per pupil and its change since 2019-20 are two views of one series.
+s04,,"Basic funding and several allowances are built from districts' past spending, so spending and need move together, and aid follows need."
+s05,,"The levy is the request divided by certified taxable valuation, and unused authority is authority minus the request; both come from the same LC-2 budget form."
+s06,,"School adjusted valuation, taxable valuation, its change and the ag share all describe one tax base."
+s07,,Proficiency and the scale score come from the same NSCAS tests.
+s08,,Four- and five-year graduation rates follow the same student cohorts.
+s09,,The ACT benchmark and composite come from the same test.
+s10,,Average experience and the share of inexperienced teachers describe the same staff.
+s11,,Aid per student changes with the student count.
+c01,,Payroll and all-jobs counts share the same jobs.
+c02,,Wage level and its change are two views of one series.
+c03,,Income level and its change are two views of one series.
+c04,,Migration is a component of population change.
+c05,,Both describe the same age distribution.
+c06,,Farm income and livestock sales overlap.
+c07,ptax,"Taxes after credits are taxable valuation × the average rate × the share left after state credits; taxes levied, taxable valuation, the rate and the credit share are the parts of that identity."
+c08,,Agricultural land's share of taxable valuation drives its share of taxes.
+c09,,Credits and the school share are shares of the same tax bill.
+c10,,"The state share measures come from the same school receipts, and property tax credits count as state money in them."
+c11,,School aid and the state share come from the same certification.

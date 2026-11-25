@@ -5,7 +5,7 @@ c03,county,pcpi_real|pcpi_real_change,Income level and its change share one seri
 c04,county,pop_change|net_mig_rate,Migration is a component of population change
 c05,county,share_65plus|median_age,Both describe the same age distribution
 c06,county,farm_share|livestock_share,Farm income and livestock sales overlap
-c07,county,ptax_real_change|ptax_value_real_change|ptax_net_real_change|ptax_rate|ptax_credit_share,"Taxes, value, rate and credits are linked by arithmetic"
+c07,county,ptax_real_change|ptax_value_real_change|ptax_net_real_change|ptax_rate|ptax_credit_share|sch_state_share_change,"Taxes, value, rate and credits are linked by arithmetic; the state share change counts the same credits as state money"
 c08,county,ptax_value_ag_share|ptax_ag_share,Ag share of value drives ag share of taxes
 c09,county,ptax_credit_share|ptax_school_share,Credits and school share are shares of the same tax bill
 c10,county,sch_state_share|sch_state_share_xc|sch_state_share_change|sch_state_share_xc_change,State share measures from the same receipts

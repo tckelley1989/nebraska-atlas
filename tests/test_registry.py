@@ -48,3 +48,12 @@ def test_crosswalk_counts():
         assert sum(1 for _ in f) - 1 == 244
     with open(ROOT / "registry" / "crosswalk_counties.csv", encoding="utf-8") as f:
         assert sum(1 for _ in f) - 1 == 93
+
+
+def test_families_column_matches_families_file():
+    """Each measure's families column lists exactly the families in registry/families.csv that contain it."""
+    fams = list(csv.DictReader(open(ROOT / "registry" / "families.csv", encoding="utf-8")))
+    for r in rows():
+        col = {x for x in r["families"].split("|") if x}
+        true = {f["family"] for f in fams if f["level"] == r["level"] and r["key"] in f["members"].split("|")}
+        assert col == true, (r["key"], col, true)

@@ -25,6 +25,7 @@
 {% for ind in indicators %}
 <div class="ranks" data-k="{{ ind.key }}"{% if not loop.first %} hidden{% endif %}>
 <p class="quiet">{{ ind.period }} · Source: {{ ind.source }}{% if ind.median %} · Median {{ ind.median }}{% endif %}</p>
+<p class="dive-go"><a href="{{ root }}dive/{{ level }}/{{ ind.key }}.html">Deeper dive: is this pattern real, and what explains it?</a></p>
 {% if ind.top %}
 <div class="two">
 <div><h3 class="label">Highest five</h3><ol>{% for r in ind.top %}<li><a href="{{ root }}{{ r.href }}">{{ r.name }}</a> <b class="{{ r.tone }}">{{ r.value }}</b></li>{% endfor %}</ol></div>

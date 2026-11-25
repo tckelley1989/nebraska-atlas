@@ -124,7 +124,8 @@ def test_valuation_naming_rule():
         if p.suffix not in (".html", ".js", ".csv"):
             continue
         t = p.read_text(encoding="utf-8", errors="ignore")
-        t = re.sub(r'"?[a-z0-9_]*valuation[a-z0-9_]*"?\s*[:,]', "k,", t)
+        t = re.sub(r'"[a-z0-9_]*valuation[a-z0-9_]*"\s*:', '"k":', t)  # data keys
+        t = re.sub(r'(?<=,)valuation(?=,)', "k", t)  # bare CSV fields
         # the glossary entry that defines taxable valuation as assessed value
         t = re.sub(r'<tr id="t-taxable-valuation">.*?</tr>', "", t, flags=re.S)
         t = re.sub(r"(?<![A-Za-z])#?t-[a-z0-9-]+", "anchor", t)  # term anchors such as t-school-adjusted-valuation

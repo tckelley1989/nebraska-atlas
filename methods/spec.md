@@ -37,19 +37,19 @@ Each rule below is a registry column, so the build applies it without page code.
 
 Values an agency withholds are never estimated and never shown as zero.
 
-## 4. NSCAS results from grade rows
+## 4. NSCAS results
 
-Source: `_grade_sum()` and `_totals()` in `pipeline/indicators_nep.py`; the audit sums the same cells independently in `audit/transforms/40_schools.sql`.
+Source: `_totals()` and `nscas` year selection in `pipeline/indicators_nep.py`; the audit applies the same rule independently in `audit/transforms/40_schools.sql`.
 
-NDE stopped publishing all-grades NSCAS rows with its 2025-26 Education Profile release (November 25, 2026). Every year is now built the same way:
+NDE stopped publishing all-grades NSCAS rows with its 2025-26 Education Profile release (November 25, 2026), and kept grade rows. NDE withholds a grade's counts when the group is small or its percent is extreme: every grade it shows has an on-track share between 20% and 82%. So the grades left over are not a fair sample of the system.
 
-1. On track, advanced and tested counts are summed over grades 3 to 8, for all students and for each subgroup (free or reduced-price lunch, special education, English learners).
-2. A grade NDE marks "NA" had no students and is skipped. A grade NDE withholds ("*") blanks the total, because the rest would undercount.
-3. Grade 11, the alternate assessment, is left out. NDE withholds it for nearly every system.
+1. Proficiency and the subgroup gaps use NDE's own all-grades totals, from the latest year NDE published them (2024-25), labeled with that year. They move to 2025-26 when NDE publishes 2025-26 totals.
+2. Where NDE published an all-grades count, it is used as published; a withheld count stays withheld. Only a count NDE did not publish is summed from grades 3 to 8.
+3. Summing the grades NDE did show was tested against NDE's 2024-25 totals and rejected: keeping systems with up to 10% of students withheld reaches 44 systems for mathematics, with errors up to 7.3 points.
 4. Percents are computed from the counts. NDE's own percent columns are not read.
-5. The scale score against the state uses the same cells: for grades 3 to 8, the system's grade average less the state's, weighted by the system's tested counts. Any withheld grade blanks it.
+5. The scale score against the state and growth use 2025-26 grade rows: for grades 3 to 8, the system's grade average less the state's, weighted by the system's tested counts. Any withheld grade blanks it, so they cover few systems.
 
-NDE withholds most small grades, so these measures are blank for most systems: in 2025-26, English language arts for 211 of 244 systems and mathematics for 229. The earlier "scores against systems with similar students" model needed most systems and was dropped.
+Coverage with NDE's 2024-25 totals: mathematics 221 of 244 systems, English language arts 235, science 121.
 
 ## 5. Relationship finder
 

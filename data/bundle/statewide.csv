@@ -11,7 +11,7 @@ school_money,other_local,2018-19,131138523.0
 school_money,local,2018-19,2598570406.0
 school_money,federal,2018-19,215610611.0
 school_money,state_share,2018-19,37.419557
-school_money,state_share_xc,2018-19,34.472755
+school_money,state_share_xc,2018-19,33.438001
 school_money,teeosa_share,2018-19,25.770099
 school_money,local_share,2018-19,56.805844
 school_money,county_esu_share,2018-19,0.479784
@@ -36,7 +36,7 @@ school_money,other_local,2019-20,113265884.0
 school_money,local,2019-20,2610518114.0
 school_money,federal,2019-20,222776040.0
 school_money,state_share,2019-20,38.141147
-school_money,state_share_xc,2019-20,34.693529
+school_money,state_share_xc,2019-20,33.654453
 school_money,teeosa_share,2019-20,26.100586
 school_money,local_share,2019-20,56.266713
 school_money,county_esu_share,2019-20,0.37639
@@ -61,7 +61,7 @@ school_money,other_local,2020-21,238245414.0
 school_money,local,2020-21,2483199969.0
 school_money,federal,2020-21,303528330.0
 school_money,state_share,2020-21,36.558315
-school_money,state_share_xc,2020-21,33.195432
+school_money,state_share_xc,2020-21,32.111288
 school_money,teeosa_share,2020-21,25.002748
 school_money,local_share,2020-21,56.11933
 school_money,county_esu_share,2020-21,0.405988
@@ -86,7 +86,7 @@ school_money,other_local,2021-22,78562158.0
 school_money,local,2021-22,2393314515.767014
 school_money,federal,2021-22,396984353.0
 school_money,state_share,2021-22,34.976309
-school_money,state_share_xc,2021-22,31.581558
+school_money,state_share_xc,2021-22,30.433649
 school_money,teeosa_share,2021-22,23.666114
 school_money,local_share,2021-22,56.203873
 school_money,county_esu_share,2021-22,0.373899
@@ -111,7 +111,7 @@ school_money,other_local,2022-23,135490729.0
 school_money,local,2022-23,2687028171.694068
 school_money,federal,2022-23,463348382.0
 school_money,state_share,2022-23,34.351401
-school_money,state_share_xc,2022-23,30.975281
+school_money,state_share_xc,2022-23,29.835029
 school_money,teeosa_share,2022-23,22.961943
 school_money,local_share,2022-23,55.967256
 school_money,county_esu_share,2022-23,0.356301
@@ -136,7 +136,7 @@ school_money,other_local,2023-24,160503067.0
 school_money,local,2023-24,3148252926.0
 school_money,federal,2023-24,459562022.0
 school_money,state_share,2023-24,39.173551
-school_money,state_share_xc,2023-24,35.69176
+school_money,state_share_xc,2023-24,34.443185
 school_money,teeosa_share,2023-24,23.337032
 school_money,local_share,2023-24,51.803821
 school_money,county_esu_share,2023-24,0.339539
@@ -161,7 +161,7 @@ school_money,other_local,2024-25,182021889.0
 school_money,local,2024-25,2619270612.0
 school_money,federal,2024-25,524279926.0
 school_money,state_share,2024-25,51.230418
-school_money,state_share_xc,2024-25,35.180855
+school_money,state_share_xc,2024-25,33.91372
 school_money,teeosa_share,2024-25,21.560807
 school_money,local_share,2024-25,38.895255
 school_money,county_esu_share,2024-25,0.376453

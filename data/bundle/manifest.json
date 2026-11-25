@@ -1,11 +1,11 @@
 {
-  "built_utc": "2026-11-25T17:29:16+00:00",
+  "built_utc": "2026-11-25T19:14:21+00:00",
   "source_repo": "nebraska-economy",
-  "source_commit": "659f2625fa34d20dacd5f6ad433457e0807dd8f2",
+  "source_commit": "4c2d9578cd2da88e3310c21bebe69ead9f6a614e",
   "files": {
     "counties.csv": {
-      "bytes": 50166,
-      "sha256": "f8c2940a666ccac5f5da7dd60697aa3d6029432aee34bc7771cea838f6f69c94"
+      "bytes": 50167,
+      "sha256": "60919f5838142e0468e786f68ae2e6576a12317ebcc98aab1101060623176f20"
     },
     "county_industry_jobs.csv": {
       "bytes": 87977,
@@ -20,12 +20,12 @@
       "sha256": "656810fa7f4c1bb49e4973f4ba152c09eb1a77c4d360b6e985ce1d5ca0f3ef02"
     },
     "data.js": {
-      "bytes": 800088,
-      "sha256": "00a0876afbeca2ec6a1ad99229645c7a4864656600cf25a929358038c5b12339"
+      "bytes": 800490,
+      "sha256": "e8e7dd6654cfe17eb38879dc41b33b026e3b7621291b91e8e1f3e06e6118d850"
     },
     "data_sd.js": {
-      "bytes": 1335905,
-      "sha256": "aa00b66fd6909f0451de5f41d70807ce1b08f32501774550a50dfc1c7a574cf8"
+      "bytes": 1337469,
+      "sha256": "71434b272b8805dcd05da984bd0eb9a85ee469b78ab63b6a9f23e7c8973b3f2a"
     },
     "deflators.csv": {
       "bytes": 687,
@@ -44,8 +44,8 @@
       "sha256": "d79194b67bfe92f4ebf8d962097caf248ab16e2cf069911aac93cfc8472b0a02"
     },
     "lb1107_claims.csv": {
-      "bytes": 1236,
-      "sha256": "9c85a6a0001e854ad4366debd87b7e6df3e852da764ce91652b86d256c77d274"
+      "bytes": 1312,
+      "sha256": "249bae66b5cd911cd32ec0b619efbcb0e81e615891a4603ed3a61332bb795aad"
     },
     "lc2_budgets.csv": {
       "bytes": 133882,
@@ -60,8 +60,8 @@
       "sha256": "84ab9e06fce3b9b94d1e28a68ccaa2532cf625c5522043e8b38fe9e748cdae5b"
     },
     "revisions.csv": {
-      "bytes": 348628,
-      "sha256": "1a10adc5d31ee6127a6a5920d2c7d5c342a4628d6f207f808b3016d398bb240b"
+      "bytes": 348748,
+      "sha256": "666b15e9cc9b1d09a96fa7e86aaa54edc3e140ea0b1308444e6beb0c92f0287f"
     },
     "school_formula.csv": {
       "bytes": 29926,
@@ -76,8 +76,8 @@
       "sha256": "b7c4bce178e7720d54e13741820c052861a5ee8d3a0e9ba8874c60b0b6379439"
     },
     "school_revenue.csv": {
-      "bytes": 407541,
-      "sha256": "fb6dc5c393cd7c81fdb8b85dd485da7b971a1f0c46d83bc585ded1ab1d464166"
+      "bytes": 407458,
+      "sha256": "8157a43ca8d2285b214c78054ddfafa10d60a5be640337dd7840e3e3d105fde6"
     },
     "school_systems.csv": {
       "bytes": 191125,
@@ -85,7 +85,7 @@
     },
     "statewide.csv": {
       "bytes": 15062,
-      "sha256": "62498f7c963dd6e3037d95767846fc9104cf923c58b6eaa53f0128a202c731a1"
+      "sha256": "fa5d37dc115d575877fa6077b8a14c7027e04944d9403a11147c057a1276f0f2"
     }
   }
 }

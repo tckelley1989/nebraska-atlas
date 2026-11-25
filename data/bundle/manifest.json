@@ -1,7 +1,7 @@
 {
-  "built_utc": "2026-11-25T19:41:15+00:00",
+  "built_utc": "2026-11-25T20:57:03+00:00",
   "source_repo": "nebraska-economy",
-  "source_commit": "f88b5dffb6689ac06550e45899a2183212166017",
+  "source_commit": "0a9063f3311455d6ed9f3e29b84a70da5142eb07",
   "files": {
     "counties.csv": {
       "bytes": 50167,
@@ -24,8 +24,8 @@
       "sha256": "ccdbb3cd9aaabdee07595070ee8b6301c72d391f4335d2cc05db4fa707821c60"
     },
     "data_sd.js": {
-      "bytes": 1397152,
-      "sha256": "3375ddccb8321d79cdbd19026affb04aa513e8ba86df0682b513a74a7625c5f7"
+      "bytes": 1443347,
+      "sha256": "16480fec3e790b4be703a1b8c2c5a6275f825258a7ae30ff6c4c8bb6ed156a81"
     },
     "deflators.csv": {
       "bytes": 687,
@@ -72,8 +72,8 @@
       "sha256": "678eb412e72bb8940e70a01f8d107d35d66147c52e49a78f109a2c924d12d58c"
     },
     "school_outcomes.csv": {
-      "bytes": 54227,
-      "sha256": "b7c4bce178e7720d54e13741820c052861a5ee8d3a0e9ba8874c60b0b6379439"
+      "bytes": 61507,
+      "sha256": "84ac9740b90ad35a54cc14db223414fd49000c44537db41edfb931f80c89d0eb"
     },
     "school_revenue.csv": {
       "bytes": 407458,

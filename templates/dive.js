@@ -1,7 +1,8 @@
 /* Deeper dive place mode: ?sel=<code> marks one place in every chart and draws its own step 3.
    Every number comes from the page's embedded data, written at build. Without a selection the page is the state view. */
 (function () {
-  var D = JSON.parse(document.getElementById("dive-data").textContent), P = D.places;
+  var D = JSON.parse(document.getElementById("dive-data").textContent), P = D.places, S = window.DIVE_PLACES || {}, X = window.DIVE_EXTRA || {};
+  Object.keys(P).forEach(function (c) { [S[c], X[c]].forEach(function (s) { for (var k in s || {}) P[c][k] = s[k]; }); });
   var INK = "#2c2c2c", SUB = "#5e5a54", RULE = "#ddd5c8", CARD = "#fbf8f3", RUST = "#c1432e", SLATE = "#4b6777",
       SLATE_L = "#8aa0ad", SLATE_LL = "#c3cfd6", LOCAL = "#8a847b", LOCAL_L = "#bdb7ad", NEED1 = "#e6ded1", NEED2 = "#d6ccbc", NS = "http://www.w3.org/2000/svg";
   var MINUS = "−";

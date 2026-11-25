@@ -1,0 +1,23 @@
+family,level,members,why_excluded
+c01,county,jobs_change|all_jobs_change,Payroll and all-jobs counts share the same jobs
+c02,county,aww_real|aww_real_change,Wage level and its change share one series
+c03,county,pcpi_real|pcpi_real_change,Income level and its change share one series
+c04,county,pop_change|net_mig_rate,Migration is a component of population change
+c05,county,share_65plus|median_age,Both describe the same age distribution
+c06,county,farm_share|livestock_share,Farm income and livestock sales overlap
+c07,county,ptax_real_change|ptax_value_real_change|ptax_net_real_change|ptax_rate|ptax_credit_share,"Taxes, value, rate and credits are linked by arithmetic"
+c08,county,ptax_value_ag_share|ptax_ag_share,Ag share of value drives ag share of taxes
+c09,county,ptax_credit_share|ptax_school_share,Credits and school share are shares of the same tax bill
+c10,county,sch_state_share|sch_state_share_xc|sch_state_share_change|sch_state_share_xc_change,State share measures from the same receipts
+c11,county,sch_aid_ps|sch_eq_student_share|sch_state_share|sch_state_share_xc,School aid and state share measures from the same certification
+s01,system,aid_ps|need_ps|val_ps|poverty_ps|lep_ps|special_receipts_ps|transportation_ps|aid_ps_real_change,Aid is need minus resources; components are parts of need or resources
+s02,system,afr_state_share|afr_state_share_xc|aid_ps,State share includes aid
+s03,system,ppc_adm|ppc_real_change,Spending level and its change share one series
+s04,system,ppc_adm|need_ps|transportation_ps|special_receipts_ps,Need components are built from spending
+s05,system,lc2_gf_levy|lc2_unused_share,Levy and unused authority come from the same LC-2
+s06,system,val_ps|val_real_change|ag_share,"Valuation level, change and ag share share one base"
+s07,system,nscas_ela|nscas_math|nscas_scale_rel|nscas_vs_expected,Proficiency and scale-score measures share the same tests
+s08,system,grad_rate|grad_rate_5yr,Four- and five-year rates share the same cohorts
+s09,system,act_benchmark|act_composite,ACT benchmark and composite share the same test
+s10,system,teacher_exp|teacher_inexp,Average experience and inexperienced share describe the same staff
+s11,system,stu_change|aid_ps_real_change,Aid per student changes with the student count

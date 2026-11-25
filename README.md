@@ -27,7 +27,7 @@ built from public data. A personal project by Tyler Kelley, not a product of the
 ## Build locally
 
 ```
-pip install jinja2 pytest
+pip install jinja2 pytest numpy
 python -m pytest -q tests
 python scripts/build.py   # writes _site/
 ```

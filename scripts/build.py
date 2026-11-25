@@ -25,7 +25,7 @@ QUILT = ('<svg width="28" height="28" viewBox="0 0 30 30" aria-hidden="true">'
          '<path d="M0 15H15V30Z" fill="#f3eee6"/><path d="M0 15V30H15Z" fill="#4b6777"/>'
          '<path d="M15 15H30V30Z" fill="#ce9e62"/><path d="M15 15V30H30Z" fill="#c1432e"/></svg>')
 NAV = [("Findings", "index.html", "findings"), ("Schools", "schools.html", "schools"),
-       ("Counties", "counties.html", "counties"), ("About", "about.html", "about")]
+       ("Counties", "counties.html", "counties"), ("About", "about.html", "about")]  # Schools and Counties make up the Atlas section
 
 
 def main():

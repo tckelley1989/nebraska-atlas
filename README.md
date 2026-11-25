@@ -1,7 +1,8 @@
-# Nebraska County Atlas, version 2
+# The Nebraska Ledger
 
-Schools, property taxes and the local economy for Nebraska's 93 counties and 244 school systems,
-built from public data. A personal project by Tyler Kelley, not a product of the Nebraska Department of Education.
+Nebraska's school money, property taxes and local economy for all 93 counties and 244 school systems,
+built from public data. The Ledger has three sections: the **Atlas** (maps and profiles), **Findings**, and **Nebraska Ledger Monthly** (the newsletter, from March 2027).
+It is version 2 of the Nebraska County Atlas. A personal project by Tyler Kelley, not a product of the Nebraska Department of Education.
 
 **Status:** under construction. The site carries a draft banner and tells search engines not to index it until launch (target February 15, 2027).
 

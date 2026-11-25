@@ -39,6 +39,13 @@ class Atlas:
         self.system_js = _js("data_sd.js")
         self.geo_county = _js("geo.js")
         self.geo_system = _js("geo_sd.js")
+        # Periods follow the data. The bundle labels each measure's latest period, so a new LAUS month or LC-2 year
+        # moves the label with the values. The registry period is the fallback for measures the bundle leaves unlabeled.
+        for (key, level), r in self.ind.items():
+            js = self.county_js if level == "county" else self.system_js
+            p = ((js.get("indicators") or {}).get(key) or {}).get("period")
+            if p:
+                r["registry_period"], r["period"] = r["period"], p
         self.deflators = {r["year"]: r for r in _csv(BUNDLE / "deflators.csv")}
         self.formula = {r["system"]: {k: _num(v) for k, v in r.items()} for r in _csv(BUNDLE / "school_formula.csv")}
         self.need_parts = {}

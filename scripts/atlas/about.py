@@ -18,14 +18,14 @@ ROOT = BUNDLE.parents[1]
 # One line per published file. A bundle file missing from this list fails the test gate.
 FILES = {
     "counties.csv": "One row per county, tier and the state: every county measure on the site, as plain numbers.",
-    "school_systems.csv": "TEEOSA certification by system and aid year: formula students, need, equalization aid, total aid, adjusted valuation.",
+    "school_systems.csv": "TEEOSA certification by system and aid year: formula students, need, equalization aid, total aid, school adjusted valuation.",
     "school_formula.csv": "The latest certification, step by step for every system: need, each resource, equalization and foundation aid.",
     "school_need_components.csv": "Formula need split into its components, by system and aid year.",
     "school_revenue.csv": "Money received by system and school year from Annual Financial Reports, with credits shown separately.",
     "school_outcomes.csv": "NSCAS results, graduation rates and teacher pay and experience by system.",
     "lc2_budgets.csv": "LC-2 budget forms: property tax authority, board votes and requests by system and budget year.",
-    "property_taxes.csv": "Taxable value and taxes levied by county, tax year and taxing authority.",
-    "property_taxes_by_class.csv": "Taxable value and taxes levied by county, tax year and property class.",
+    "property_taxes.csv": "Taxable valuation and taxes levied by county, tax year and taxing authority.",
+    "property_taxes_by_class.csv": "Taxable valuation and taxes levied by county, tax year and property class.",
     "credits.csv": "State property tax credits by county, tax year and program, with how each amount was found.",
     "lb1107_claims.csv": "LB 1107 income tax credit claims and the school share used to split them.",
     "county_industry_jobs.csv": "Payroll jobs by county and industry sector, 2019 against the latest four quarters.",

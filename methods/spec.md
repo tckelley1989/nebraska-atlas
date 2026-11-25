@@ -20,7 +20,7 @@ Written November 25, 2026 from the rules the v1 pipeline (`nebraska-economy`) ru
 2. Real dollars use the Midwest CPI-U with 2019 as the base:
    - calendar-year average for economic and property tax data
    - September to August average for school years; an unfinished school year uses the latest 12 published months
-   - valuation is deflated by the CPI of its calendar year
+   - school adjusted valuation and taxable valuation are deflated by the CPI of their calendar year
 3. BEA's state and local government consumption price index is the robustness check. Both deflators are published in `deflators.csv`.
 4. Tax years and school years are kept apart. Tax year Y is levied in fall Y and paid inside school fiscal year Y. Neither is subtracted from the other.
 
@@ -68,7 +68,7 @@ Labeled estimates, with their tested error, published on the About page and reco
 
 | Estimate | Method | Tested error |
 |---|---|---|
-| County splits of school students, aid and money | District split by 2020 Census children ages 5 to 17 | 5.6% of taxable value placed in the wrong county across the 200 districts that cross county lines (worst district 36%) |
+| County splits of school students, aid and money | District split by 2020 Census children ages 5 to 17 | 5.6% of taxable valuation placed in the wrong county across the 200 districts that cross county lines (worst district 36%) |
 | County real property credits, tax years 2019 to 2021 | Statewide rates applied to county value | 0.4% median, 5.9% worst, tested on certified years 2022 to 2025 |
 | LB 1107 credits | Revenue's all-filer totals, split by Revenue's own school and community college split, then by tax base | Untestable assumption: owners claim at the same rate everywhere |
 

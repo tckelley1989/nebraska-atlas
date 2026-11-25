@@ -49,6 +49,44 @@ def grouped(a, level: str, place: str, extra=None) -> list:
     return out
 
 
+def formula_notes(a, code: str) -> list:
+    """Plain-language notes under the formula table: what foundation aid added, and need set by stabilization
+    or system averaging (glossary definitions; methods spec, school section)."""
+    f = a.formula[code]
+    g = lambda k: f[k] or 0
+    out = []
+    fin, fout, eq = g("foundation_aid"), g("foundation_out"), g("equalization_aid")
+    cf = max(0.0, g("formula_need") - (g("total_resources") - fin))
+    net = fin + fout - (cf - eq)
+    if eq > 0:
+        out.append(f"Foundation aid paid {fmt.money(fin + fout)}. The 60% counted as a resource ({fmt.money(fin)}) lowered equalization aid by the same amount, "
+                   f"so foundation aid added {fmt.money(net)} to total aid.")
+    elif cf > 0:
+        out.append(f"Foundation aid paid {fmt.money(fin + fout)}. Without the 60% counted as a resource, this system would receive {fmt.money(cf)} in equalization aid, "
+                   f"so foundation aid added {fmt.money(net)} to total aid.")
+    else:
+        out.append(f"Foundation aid paid {fmt.money(fin + fout)}, all of it added to total aid: resources exceed need even without the 60% counted as a resource.")
+    parts = a.need_parts.get(code, {})
+    st = parts.get("need_stabilization", 0)
+    if st > 0:
+        out.append(f"Formula needs stabilization raised need by {fmt.money(st)}, holding it at 100% of last year's final recalculated need, "
+                   "so need per student is not directly comparable with other systems.")
+    elif st < 0:
+        out.append(f"Formula needs stabilization lowered need by {fmt.money(-st)}, holding it at 112% of last year's final recalculated need, "
+                   "so need per student is not directly comparable with other systems.")
+    sa = parts.get("system_averaging", 0)
+    if sa:
+        out.append(f"Need includes a system averaging adjustment of {fmt.money(sa)}, made because basic funding fell well below the statewide average spending of comparable districts.")
+    yrs = a.cert.get(code, {})
+    if yrs.get(2019) and yrs.get(a.aid_year):
+        was, now = (yrs[2019]["equalization_aid"] or 0) > 0, eq > 0
+        if was and not now:
+            out.append("This system received equalization aid in 2019-20 and no longer does.")
+        elif now and not was:
+            out.append("This system did not receive equalization aid in 2019-20 and does now.")
+    return out
+
+
 def system_page(a, code: str) -> dict:
     xw = a.systems_xw[code]
     rec = a.system_js["districts"][code]
@@ -101,7 +139,9 @@ def system_page(a, code: str) -> dict:
             ch = (x1 / x0 - 1) * 100 if x0 else None
             since.append({"label": label, "base": f_(x0), "now": f_(x1), "change": fmt.pct_change(ch) if ch is not None else "n/a",
                           "tone": "" if ch is None or round(ch, 1) == 0 else ("up" if ch > 0 else "down")})
+    notes = formula_notes(a, code)
     return {
+        "notes": notes,
         "code": code, "name": xw["display_name"], "counties": xw["counties"], "towns": xw["towns"].split("|") if xw["towns"] else [],
         "students": f"{stu:,.0f}", "equalized": (f["equalization_aid"] or 0) > 0, "desc": rec.get("desc", ""),
         "tiles": [tile(a, "system", code, r) for r in a.key_eight("system")], "steps": table, "segs": segs,

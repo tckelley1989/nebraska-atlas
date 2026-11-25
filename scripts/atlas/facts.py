@@ -95,6 +95,50 @@ def build(a) -> dict:
         "wage_rural": tv("rural", "aww_real_change"), "wage_metro": tv("metro", "aww_real_change"),
         "inc_rural": tv("rural", "pcpi_real_change"), "inc_metro": tv("metro", "pcpi_real_change"),
     }
+    # Total state-funded relief on school property taxes, LB 1107 included in both years whether it was
+    # claimed on income tax returns (through tax year 2023) or booked by districts (from 2024).
+    relief = lambda y: (sm("credits", y) or 0) + (sm("lb1107", y) or 0)
+    f["lb1107_0"] = money_m(sm("lb1107", y0) or 0)
+    f["relief_gain_raw"] = relief(y1) - relief(y0)
+    f["relief_gain"] = money_m(f["relief_gain_raw"])
+    f["teeosa_gain_raw"] = sm("teeosa", y1) - sm("teeosa", y0)
+    f["teeosa_gain"] = money_m(f["teeosa_gain_raw"])
+
+    # Why equalization aid fell: certified need and school adjusted valuation, 2019-20 against the latest aid year.
+    # The local effort rate was $1.00 per $100 in every aid year from 2019-20 on ($1.02 in 2018-19).
+    LER = 0.01
+    both = [c for c, yrs in a.cert.items() if yrs.get(2019) and yrs.get(a.aid_year)]
+    csum = lambda y, k: sum(a.cert[c][y][k] or 0 for c in both)
+    n0, n1 = csum(2019, "formula_need"), csum(a.aid_year, "formula_need")
+    v0, v1 = csum(2019, "teeosa_adjusted_valuation"), csum(a.aid_year, "teeosa_adjusted_valuation")
+    f["need_gain_raw"], f["le_gain_raw"] = n1 - n0, (v1 - v0) * LER
+    f["need_gain"], f["le_gain"] = money_m(n1 - n0), money_m((v1 - v0) * LER)
+    f["need_growth"], f["sav_growth"] = fmt.signed((n1 / n0 - 1) * 100, 0, "%"), fmt.signed((v1 / v0 - 1) * 100, 0, "%")
+    g_ = lambda r, k: r[k] or 0
+    found = fnet = feq = fneq = eqcf = 0.0
+    flip = set()
+    for c, r in a.formula.items():
+        fin, fout, eq = g_(r, "foundation_aid"), g_(r, "foundation_out"), g_(r, "equalization_aid")
+        cf = max(0.0, g_(r, "formula_need") - (g_(r, "total_resources") - fin))   # equalization if foundation aid were not a resource
+        found += fin + fout; fnet += fin + fout - (cf - eq); eqcf += cf
+        if eq > 0:
+            feq += fin + fout; fneq += fin + fout - (cf - eq)
+        elif cf > 0:
+            flip.add(c)
+    f["found_total"], f["found_net"], f["found_net_raw"], f["found_total_raw"] = money_m(found), money_m(fnet), fnet, found
+    f["found_replaced"] = money_m(found - fnet)
+    f["found_eq_total"], f["found_eq_net"] = money_m(feq), money_m(fneq)
+    f["found_eq_share"] = f"{100 * fneq / feq:.0f}%" if feq else "n/a"
+    f["eq_counterfactual"] = money_m(eqcf)
+    f["n_flip"] = len(flip)
+    eqd = lambda c, y: (a.cert[c][y]["equalization_aid"] or 0) > 0
+    left = [c for c in both if eqd(c, 2019) and not eqd(c, a.aid_year)]
+    f["n_left"] = len(left)
+    f["n_joined"] = sum(1 for c in both if not eqd(c, 2019) and eqd(c, a.aid_year))
+    f["n_left_le"] = sum(1 for c in left if (a.cert[c][a.aid_year]["teeosa_adjusted_valuation"] - a.cert[c][2019]["teeosa_adjusted_valuation"]) * LER
+                         > a.cert[c][a.aid_year]["formula_need"] - a.cert[c][2019]["formula_need"])
+    f["n_left_flip"] = len(set(left) & flip)
+
     cc = {}
     with open(a_bundle(a, "property_taxes.csv"), newline="") as fh:
         for r in csv.DictReader(fh):

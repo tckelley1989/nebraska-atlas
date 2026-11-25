@@ -35,3 +35,19 @@ def test_change_numbers_signed(findings):
     for x in findings:
         for n in re.findall(r"changed ([^\s,]+%)", str(x["html"])):
             assert n[0] in "+−", (x["slug"], n)
+
+
+def test_foundation_and_relief_arithmetic():
+    from atlas import facts
+    from atlas.data import Atlas
+    f = facts.build(Atlas())
+    assert abs(f["found_net_raw"] + (f["found_total_raw"] - f["found_net_raw"]) - f["found_total_raw"]) < 1
+    assert 0 < f["found_net_raw"] < f["found_total_raw"]
+    assert f["n_left_le"] <= f["n_left"] and f["n_left_flip"] <= f["n_left"]
+    assert f["relief_gain_raw"] > f["teeosa_gain_raw"] > 0  # Finding 1's headline direction
+
+
+def test_findings_wording_rules(findings):
+    text = " ".join(str(x["html"]) + str(x["chart"]) + x["headline"] for x in findings)
+    for banned in ("property wealth", "which follows need", "took the place of", "rose +", "rose −"):
+        assert banned not in text, banned

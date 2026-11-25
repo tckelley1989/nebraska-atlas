@@ -22,6 +22,7 @@
 <thead><tr><th>Step</th><th>{{ aid_year }} certification</th><th class="num">Dollars</th><th class="num">Per formula student</th><th class="num">All systems, per student</th></tr></thead>
 <tbody>{% for s in steps %}<tr{% if s.bold %} class="bold"{% endif %}><td>{{ s.n }}</td><td>{{ s.label }}</td><td class="num">{{ s.dollars }}</td><td class="num">{{ s.ps }}</td><td class="num">{{ s.all }}</td></tr>{% endfor %}</tbody>
 </table></div>
+{% if notes %}<ul class="fnotes">{% for n in notes %}<li>{{ n }}</li>{% endfor %}</ul>{% endif %}
 <p class="note">Source: Nebraska Department of Education, TEEOSA state aid certification. Every build checks that resources add to the certified total and that equalization aid equals need minus resources.</p>
 </section>
 {% if since %}

@@ -90,7 +90,7 @@ Labeled estimates, with their tested error, published on the About page and reco
 
 1. Money received is what each district reported in its Annual Financial Report from 2018-19 on, for the taxpayer-supported funds (general, depreciation, employee benefit, contingency, bond, special building, qualified capital purpose, cooperative).
 2. NDE's standard state share is state sources over the four General Fund receipt totals, as reported.
-3. "Credits counted as local" moves property tax credits paid by the state back to local, since they pay part of a tax the school board levies.
+3. "Credits counted as local" moves property tax credits (03131) and homestead exemption reimbursement (03130) paid by the state back to local, since both pay part of a tax the school board levies.
 4. The LB 1107 income tax credit claimed against school taxes, booked by districts as local taxes, is moved to state, split by each district's property tax receipts outside the bond fund (an estimate).
 5. Federal money is shown but kept out of the state share.
 

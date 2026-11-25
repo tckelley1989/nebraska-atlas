@@ -13,7 +13,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import json
-from atlas import pages, maps, facts, findings, about, dive  # noqa: E402
+from atlas import pages, maps, facts, findings, about, dive, landing  # noqa: E402
 from atlas.data import Atlas  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,7 +26,7 @@ QUILT = ('<svg width="28" height="28" viewBox="0 0 30 30" aria-hidden="true">'
          '<path d="M0 15H15V30Z" fill="#f3eee6"/><path d="M0 15V30H15Z" fill="#4b6777"/>'
          '<path d="M15 15H30V30Z" fill="#ce9e62"/><path d="M15 15V30H30Z" fill="#c1432e"/></svg>')
 NAV = [("Findings", "index.html", "findings"), ("Schools", "schools.html", "schools"),
-       ("Counties", "counties.html", "counties"), ("About", "about.html", "about")]  # Schools and Counties make up the Atlas section
+       ("Counties", "counties.html", "counties"), ("Deeper dive", "dive/index.html", "dive"), ("About", "about.html", "about")]  # Schools and Counties make up the Atlas section
 
 
 def main():
@@ -82,16 +82,13 @@ def main():
 
     # Deeper dive: one page per measure (design doc "Deeper Dive: Design")
     ptax = dive.Ptax(a)
-    listing = {"system": [], "county": []}
     for r in a.registry:
         if r["format"] == "category":
             continue
         ctx = dive.page(a, r["level"], r["key"], ptax)
         write(f"dive/{r['level']}/{r['key']}.html", "dive.html", title=f"Deeper dive: {r['label']}",
-              section="schools" if r["level"] == "system" else "counties", description=ctx["plain"], **ctx)
-        listing[r["level"]].append({"key": r["key"], "label": r["label"], "group": r["group"], "key_indicator": r["key_indicator"] == "yes"})
-    write("dive/index.html", "dive_index.html", title="Deeper dive", section="", listing=listing,
-          group_order=pages.GROUP_ORDER)
+              section="dive", description=ctx["plain"], **ctx)
+    write("dive/index.html", "dive_index.html", title="Deeper dive: how school money and property taxes work", section="dive", **landing.build(a))
 
     files = about.downloads(OUT)
     shutil.copy(ROOT / "data" / "bundle" / "manifest.json", OUT / "data" / "manifest.json")

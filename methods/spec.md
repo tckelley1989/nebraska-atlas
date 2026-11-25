@@ -95,6 +95,7 @@ Labeled estimates, with their tested error, published on the About page and reco
 3. "Credits counted as local" moves property tax credits paid by the state back to local, since they pay part of a tax the school board levies.
 4. The LB 1107 income tax credit claimed against school taxes, booked by districts as local taxes, is moved to state, split by each district's property tax receipts outside the bond fund (an estimate).
 5. Federal money is shown but kept out of the state share.
+6. Tax year 2023 is LB 34's missing year. Its school taxes were paid in 2024 and claimed in income tax year 2024, when the credit covers community college taxes only. The School District Property Tax Relief Credit starts with tax year 2024 statements. So school taxes levied in 2023 and paid after Jan. 2, 2024 got neither credit, and the LB 1107 school credit for 2023-24 is $0 by rule, not missing data. It is not zero school relief, since the Property Tax Credit Act credit still applied. 2023 taxes paid by Jan. 2, 2024 could claim the old credit in income tax year 2023, and they are counted with tax year 2022.
 
 ## Open items for v2
 

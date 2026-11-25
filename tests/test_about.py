@@ -66,7 +66,7 @@ def test_search_index_covers_every_place():
     kinds = {}
     for e in idx:
         kinds[e["k"]] = kinds.get(e["k"], 0) + 1
-        assert (SITE / e["u"]).exists(), e
+        assert (SITE / e["u"].split("#")[0]).exists(), e
     assert kinds["School system"] == 244 and kinds["County"] == 93 and kinds["Town"] > 400
 
 
@@ -87,3 +87,23 @@ def test_profiles_link_csv_and_pdf():
 def test_pdf_step_runs_in_ci():
     wf = (ROOT / ".github" / "workflows" / "pages.yml").read_text()
     assert "scripts/pdfs.py" in wf and wf.index("scripts/build.py") < wf.index("scripts/pdfs.py") < wf.index("upload-pages-artifact")
+
+
+def test_key_terms():
+    """Approved terms are on the About page once each, with an anchor and a search entry; drafts are not."""
+    rows = list(csv.DictReader(open(ROOT / "registry" / "terms.csv", encoding="utf-8")))
+    assert {r["status"] for r in rows} <= {"approved", "draft"}
+    assert len({r["term"].lower() for r in rows}) == len(rows)
+    from atlas import about
+    assert {r["group"] for r in rows} <= set(about.TERM_GROUPS)
+    t = (SITE / "about.html").read_text(encoding="utf-8")
+    search = (SITE / "assets" / "search-index.js").read_text(encoding="utf-8")
+    for r in rows:
+        a = about.term_anchor(r["term"])
+        if r["status"] == "approved":
+            assert t.count(f'id="{a}"') == 1, r["term"]
+            assert f"about.html#{a}" in search, r["term"]
+        else:
+            assert f'id="{a}"' not in t, r["term"]
+    for r in rows:
+        assert "—" not in r["definition"], r["term"]

@@ -42,6 +42,21 @@ def term_id(level, key):
     return f"m-{level}-{key}"
 
 
+TERM_GROUPS = ["Students", "Need", "Resources and aid", "Aid and certification", "Property value and taxes", "Reading the dives"]
+
+
+def term_anchor(term: str) -> str:
+    return "t-" + re.sub(r"[^a-z0-9]+", "-", term.lower()).strip("-")
+
+
+def terms():
+    """School finance terms from registry/terms.csv. Only approved definitions are published; drafts wait for review."""
+    with open(ROOT / "registry" / "terms.csv", newline="", encoding="utf-8") as fh:
+        rows = [r for r in csv.DictReader(fh) if r["status"] == "approved"]
+    groups = [{"name": g, "rows": [dict(r, anchor=term_anchor(r["term"])) for r in rows if r["group"] == g]} for g in TERM_GROUPS]
+    return [g for g in groups if g["rows"]]
+
+
 def glossary(a):
     out = []
     for level, title in (("county", "County measures"), ("system", "School system measures")):
@@ -115,4 +130,7 @@ def search_index(a):
     for t in a.towns:
         if t["system_code"] in a.formula:
             idx.append({"n": t["town"], "k": "Town", "x": a.systems_xw[t["system_code"]]["display_name"], "u": f"system/{t['system_code']}.html"})
+    for g in terms():
+        for r in g["rows"]:
+            idx.append({"n": r["term"], "k": "Term", "x": g["name"], "u": f"about.html#{r['anchor']}"})
     return idx

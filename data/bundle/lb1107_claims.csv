@@ -1,0 +1,6 @@
+tax_year_levied,income_tax_year_paid,claims_used,claims_used_source,individual_returns_school,individual_returns_community_college,individual_returns_total,school_share_used,school_share_method
+2019,2020,82000000.0,https://nebraskaexaminer.com/2024/09/08/a-missing-year-no-income-tax-credits-for-nebraskans-to-offset-school-property-taxes-paid-in-2024/,67672844.0,,67672844.0,1.0,school only (77-6703)
+2020,2021,422000000.0,https://nebraskaexaminer.com/2024/09/08/a-missing-year-no-income-tax-credits-for-nebraskans-to-offset-school-property-taxes-paid-in-2024/,274469910.0,,274469910.0,1.0,school only (77-6703)
+2021,2022,562000000.0,https://nebraskaexaminer.com/2024/09/08/a-missing-year-no-income-tax-credits-for-nebraskans-to-offset-school-property-taxes-paid-in-2024/,357840993.0,35361921.0,393202914.0,0.910067,Revenue individual returns
+2022,2023,477000000.0,https://nebraskaexaminer.com/2024/09/08/a-missing-year-no-income-tax-credits-for-nebraskans-to-offset-school-property-taxes-paid-in-2024/,385362523.0,69669753.0,455032276.0,0.846891,Revenue individual returns
+2023,2024,117332466.0,Revenue Individual Income Tax Credits workbook (individual returns only),,117332466.0,117332466.0,0.0,community college only (LB 34)

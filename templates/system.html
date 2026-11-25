@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% from "_tiles.html" import tile_grid %}
+{% block hero %}
+<section class="hero"><div class="wrap">
+<p class="crumb"><a href="{{ root }}schools.html">School systems</a> / {{ code }} · {{ counties }}</p>
+<h1 class="wide">{{ name|upper }}</h1>
+<p class="badges">{% if equalized %}<span class="badge state">Receives equalization aid</span>{% else %}<span class="badge">No equalization aid</span>{% endif %}<span class="badge">{{ students }} formula students</span><span class="badge">{{ aid_year }} certification</span></p>
+</div></section>
+{% endblock %}
+{% block main %}
+<p class="lead">{{ desc }}</p>
+{{ tile_grid(tiles) }}
+<section class="block">
+<h2 class="sect">How the formula works out</h2>
+<p>Formula need of {{ need }} {% if equalized %}is {{ eq }} more than resources of {{ resources }}, so the system receives that gap as equalization aid.{% else %}is covered by resources of {{ resources }}, so the system receives no equalization aid.{% endif %}</p>
+<div class="fbar" role="img" aria-label="Formula need {{ need }}; resources {{ resources }}; equalization aid {{ eq }}">
+<div class="frow"><span>Formula need</span><div class="need">{{ need }}</div></div>
+<div class="frow"><span>Resources{% if equalized %} + aid{% endif %}</span><div class="parts">{% for s in segs %}<div class="{{ s.cls }}" style="width:{{ s.pct }}%"><span>{{ s.label }} {{ s.amount }}</span></div>{% endfor %}</div></div>
+</div>
+<div class="scroll"><table class="data">
+<thead><tr><th>Step</th><th>{{ aid_year }} certification</th><th class="num">Dollars</th><th class="num">Per formula student</th><th class="num">All systems, per student</th></tr></thead>
+<tbody>{% for s in steps %}<tr{% if s.bold %} class="bold"{% endif %}><td>{{ s.n }}</td><td>{{ s.label }}</td><td class="num">{{ s.dollars }}</td><td class="num">{{ s.ps }}</td><td class="num">{{ s.all }}</td></tr>{% endfor %}</tbody>
+</table></div>
+<p class="note">Source: Nebraska Department of Education, TEEOSA state aid certification. Every build checks that resources add to the certified total and that equalization aid equals need minus resources.</p>
+</section>
+{% if since %}
+<section class="block">
+<h2 class="sect">Since 2019-20</h2>
+<div class="scroll"><table class="data">
+<thead><tr><th></th><th class="num">2019-20</th><th class="num">{{ aid_year }}</th><th class="num">Change</th></tr></thead>
+<tbody>{% for r in since %}<tr><td>{{ r.label }}</td><td class="num">{{ r.base }}</td><td class="num">{{ r.now }}</td><td class="num {{ r.tone }}">{{ r.change }}</td></tr>{% endfor %}</tbody>
+</table></div>
+<p class="note">2019 dollars with the Midwest CPI-U: school-year averages for need and aid, the valuation's calendar year for valuation.</p>
+</section>
+{% endif %}
+{% for g in groups %}
+<section class="block">
+<h2 class="sect">{{ g.name }}</h2>
+<div class="scroll"><table class="data"><thead><tr><th>Measure</th><th class="num">Value</th><th class="num">Median system</th><th>Rank</th><th>Period</th></tr></thead>
+<tbody>{% for t in g['items'] %}<tr><td>{{ t.label }}</td><td class="num {{ t.tone }}">{{ t.value }}</td><td class="num">{{ t.median or '' }}</td><td>{{ t.rank }}</td><td class="quiet">{{ t.period }}</td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endfor %}
+{% if towns %}<p class="note">Towns whose center lies in this system: {{ towns|join(', ') }}.</p>{% endif %}
+{% endblock %}

@@ -4,12 +4,12 @@
 <h1 class="wide">The Atlas is being rebuilt</h1>
 <p class="lead">This build reads every label, unit and color from the indicator registry. Below are the key indicators that will lead each page, as the registry defines them today.</p>
 {% for level, items in key_eight %}
-<section>
+<section class="keyset">
 <h2 class="label">Key eight · {{ level }}</h2>
-<ol class="keys">{% for r in items %}<li><span class="num">{{ r.key_order }}</span><span>{{ r.label }}</span><span class="tag {{ r.ramp }}">{{ r.ramp }}</span></li>{% endfor %}</ol>
+<ol class="keys">{% for r in items %}<li><span class="ord">{{ r.key_order }}</span><span>{{ r.label }}</span><span class="tag {{ r.ramp }}">{{ r.ramp }}</span></li>{% endfor %}</ol>
 </section>
 {% endfor %}
-<section>
+<section class="keyset">
 <h2 class="label">Registry</h2>
 <p>{{ n_indicators }} indicators: {{ n_county }} county, {{ n_system }} school system. Crosswalk: {{ n_systems }} systems, {{ n_counties }} counties.</p>
 </section>

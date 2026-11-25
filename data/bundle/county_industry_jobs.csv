@@ -1,0 +1,1241 @@
+fips,county,sector,sector_name,jobs_2019,jobs_latest_4_quarters,status
+31001,Adams,ss1011,Natural resources and mining,286.666667,282.333333,published
+31001,Adams,ss1012,Construction,820.333333,1086.833333,published
+31001,Adams,ss1013,Manufacturing,2759.333333,2804.916667,published
+31001,Adams,ss1021,"Trade, transportation and utilities",2512.583333,2441.583333,published
+31001,Adams,ss1022,Information,138.166667,120.5,published
+31001,Adams,ss1023,Financial activities,473.916667,444.916667,published
+31001,Adams,ss1024,Professional and business services,1037.333333,1081.416667,published
+31001,Adams,ss1025,Education and health services,3169.083333,2944.5,published
+31001,Adams,ss1026,Leisure and hospitality,1496.0,1592.5,published
+31001,Adams,ss1027,Other services,427.333333,417.75,published
+31001,Adams,priv,All private jobs,13120.75,13217.25,published
+31001,Adams,gov,"Government (federal, state and local)",2273.666667,2302.083333,published
+31001,Adams,total,All payroll jobs,15394.416667,15519.333333,published
+31003,Antelope,ss1011,Natural resources and mining,197.416667,257.166667,published
+31003,Antelope,ss1012,Construction,205.833333,200.083333,published
+31003,Antelope,ss1013,Manufacturing,110.583333,95.0,published
+31003,Antelope,ss1021,"Trade, transportation and utilities",602.75,616.25,published
+31003,Antelope,ss1022,Information,,,withheld
+31003,Antelope,ss1023,Financial activities,98.666667,121.833333,published
+31003,Antelope,ss1024,Professional and business services,,,withheld
+31003,Antelope,ss1025,Education and health services,293.75,315.333333,published
+31003,Antelope,ss1026,Leisure and hospitality,60.916667,78.416667,published
+31003,Antelope,ss1027,Other services,75.916667,56.166667,published
+31003,Antelope,rest,Private sectors not disclosed (private jobs less published sectors),43.0,56.5,computed
+31003,Antelope,priv,All private jobs,1688.833333,1796.75,published
+31003,Antelope,gov,"Government (federal, state and local)",504.25,409.333333,published
+31003,Antelope,total,All payroll jobs,2193.083333,2206.083333,published
+31005,Arthur,ss1011,Natural resources and mining,,,withheld
+31005,Arthur,ss1012,Construction,,,withheld
+31005,Arthur,ss1021,"Trade, transportation and utilities",,,withheld
+31005,Arthur,ss1022,Information,,,withheld
+31005,Arthur,ss1023,Financial activities,,,withheld
+31005,Arthur,ss1024,Professional and business services,,,withheld
+31005,Arthur,ss1025,Education and health services,,,withheld
+31005,Arthur,ss1026,Leisure and hospitality,,,withheld
+31005,Arthur,ss1027,Other services,,,withheld
+31005,Arthur,rest,Private sectors not disclosed (private jobs less published sectors),40.583333,34.166667,computed
+31005,Arthur,priv,All private jobs,40.583333,34.166667,published
+31005,Arthur,gov,"Government (federal, state and local)",,,withheld
+31005,Arthur,total,All payroll jobs,88.916667,83.75,published
+31007,Banner,ss1011,Natural resources and mining,,,withheld
+31007,Banner,ss1012,Construction,,,withheld
+31007,Banner,ss1023,Financial activities,,,withheld
+31007,Banner,ss1024,Professional and business services,,,withheld
+31007,Banner,ss1026,Leisure and hospitality,,,withheld
+31007,Banner,priv,All private jobs,,,withheld
+31007,Banner,gov,"Government (federal, state and local)",,,withheld
+31007,Banner,total,All payroll jobs,106.666667,131.333333,published
+31009,Blaine,ss1011,Natural resources and mining,,,withheld
+31009,Blaine,ss1012,Construction,,,withheld
+31009,Blaine,ss1021,"Trade, transportation and utilities",,,withheld
+31009,Blaine,ss1023,Financial activities,,,withheld
+31009,Blaine,ss1025,Education and health services,,,withheld
+31009,Blaine,ss1026,Leisure and hospitality,,,withheld
+31009,Blaine,rest,Private sectors not disclosed (private jobs less published sectors),45.583333,61.166667,computed
+31009,Blaine,priv,All private jobs,45.583333,61.166667,published
+31009,Blaine,gov,"Government (federal, state and local)",,,withheld
+31009,Blaine,total,All payroll jobs,125.25,132.583333,published
+31011,Boone,ss1011,Natural resources and mining,367.083333,354.833333,published
+31011,Boone,ss1012,Construction,,,withheld
+31011,Boone,ss1013,Manufacturing,,,withheld
+31011,Boone,ss1021,"Trade, transportation and utilities",524.583333,548.583333,published
+31011,Boone,ss1022,Information,,,withheld
+31011,Boone,ss1023,Financial activities,,,withheld
+31011,Boone,ss1024,Professional and business services,36.0,89.583333,published
+31011,Boone,ss1025,Education and health services,244.666667,213.416667,published
+31011,Boone,ss1026,Leisure and hospitality,130.416667,148.166667,published
+31011,Boone,ss1027,Other services,,,withheld
+31011,Boone,rest,Private sectors not disclosed (private jobs less published sectors),385.583333,354.0,computed
+31011,Boone,priv,All private jobs,1688.333333,1708.583333,published
+31011,Boone,gov,"Government (federal, state and local)",694.0,719.75,published
+31011,Boone,total,All payroll jobs,2382.333333,2428.333333,published
+31013,Box Butte,ss1011,Natural resources and mining,230.75,244.0,published
+31013,Box Butte,ss1012,Construction,,,withheld
+31013,Box Butte,ss1013,Manufacturing,,,withheld
+31013,Box Butte,ss1021,"Trade, transportation and utilities",865.0,898.333333,published
+31013,Box Butte,ss1022,Information,64.0,55.666667,published
+31013,Box Butte,ss1023,Financial activities,154.833333,195.583333,published
+31013,Box Butte,ss1024,Professional and business services,156.25,142.083333,published
+31013,Box Butte,ss1025,Education and health services,264.583333,260.166667,published
+31013,Box Butte,ss1026,Leisure and hospitality,421.583333,353.166667,published
+31013,Box Butte,ss1027,Other services,109.916667,131.583333,published
+31013,Box Butte,rest,Private sectors not disclosed (private jobs less published sectors),436.833333,397.5,computed
+31013,Box Butte,priv,All private jobs,2703.75,2678.083333,published
+31013,Box Butte,gov,"Government (federal, state and local)",1050.416667,1034.416667,published
+31013,Box Butte,total,All payroll jobs,3754.166667,3712.5,published
+31015,Boyd,ss1011,Natural resources and mining,54.75,49.583333,published
+31015,Boyd,ss1012,Construction,15.166667,8.833333,published
+31015,Boyd,ss1013,Manufacturing,15.75,15.0,published
+31015,Boyd,ss1021,"Trade, transportation and utilities",118.75,127.666667,published
+31015,Boyd,ss1022,Information,,,withheld
+31015,Boyd,ss1023,Financial activities,33.166667,33.5,published
+31015,Boyd,ss1024,Professional and business services,,,withheld
+31015,Boyd,ss1025,Education and health services,,,withheld
+31015,Boyd,ss1026,Leisure and hospitality,29.916667,38.0,published
+31015,Boyd,ss1027,Other services,,,withheld
+31015,Boyd,rest,Private sectors not disclosed (private jobs less published sectors),96.916667,82.166667,computed
+31015,Boyd,priv,All private jobs,364.416667,354.75,published
+31015,Boyd,gov,"Government (federal, state and local)",231.666667,172.416667,published
+31015,Boyd,total,All payroll jobs,596.083333,527.166667,published
+31017,Brown,ss1011,Natural resources and mining,107.333333,239.666667,published
+31017,Brown,ss1012,Construction,67.166667,83.416667,published
+31017,Brown,ss1013,Manufacturing,61.416667,49.916667,published
+31017,Brown,ss1021,"Trade, transportation and utilities",309.0,260.0,published
+31017,Brown,ss1022,Information,,,withheld
+31017,Brown,ss1023,Financial activities,48.666667,43.166667,published
+31017,Brown,ss1024,Professional and business services,,,withheld
+31017,Brown,ss1025,Education and health services,99.25,117.5,published
+31017,Brown,ss1026,Leisure and hospitality,66.416667,74.5,published
+31017,Brown,ss1027,Other services,,,withheld
+31017,Brown,rest,Private sectors not disclosed (private jobs less published sectors),77.666667,85.666667,computed
+31017,Brown,priv,All private jobs,836.916667,953.833333,published
+31017,Brown,gov,"Government (federal, state and local)",400.75,434.333333,published
+31017,Brown,total,All payroll jobs,1237.666667,1388.166667,published
+31019,Buffalo,ss1011,Natural resources and mining,561.333333,461.0,published
+31019,Buffalo,ss1012,Construction,1255.5,1469.833333,published
+31019,Buffalo,ss1013,Manufacturing,3425.5,3332.25,published
+31019,Buffalo,ss1021,"Trade, transportation and utilities",5390.083333,5527.25,published
+31019,Buffalo,ss1022,Information,272.916667,181.5,published
+31019,Buffalo,ss1023,Financial activities,938.0,865.0,published
+31019,Buffalo,ss1024,Professional and business services,2518.583333,2587.583333,published
+31019,Buffalo,ss1025,Education and health services,4480.75,4686.0,published
+31019,Buffalo,ss1026,Leisure and hospitality,3278.333333,3519.0,published
+31019,Buffalo,ss1027,Other services,992.25,1006.833333,published
+31019,Buffalo,priv,All private jobs,23113.25,23636.25,published
+31019,Buffalo,gov,"Government (federal, state and local)",4045.5,4486.416667,published
+31019,Buffalo,total,All payroll jobs,27158.75,28122.666667,published
+31021,Burt,ss1011,Natural resources and mining,118.583333,135.416667,published
+31021,Burt,ss1012,Construction,90.666667,77.0,published
+31021,Burt,ss1013,Manufacturing,127.25,137.333333,published
+31021,Burt,ss1021,"Trade, transportation and utilities",376.583333,340.0,published
+31021,Burt,ss1022,Information,,,withheld
+31021,Burt,ss1023,Financial activities,82.666667,92.5,published
+31021,Burt,ss1024,Professional and business services,84.666667,67.166667,published
+31021,Burt,ss1025,Education and health services,150.75,65.166667,published
+31021,Burt,ss1026,Leisure and hospitality,105.666667,141.333333,published
+31021,Burt,ss1027,Other services,,,withheld
+31021,Burt,rest,Private sectors not disclosed (private jobs less published sectors),77.333333,70.583333,computed
+31021,Burt,priv,All private jobs,1214.166667,1126.5,published
+31021,Burt,gov,"Government (federal, state and local)",571.666667,577.583333,published
+31021,Burt,total,All payroll jobs,1785.833333,1704.083333,published
+31023,Butler,ss1011,Natural resources and mining,255.166667,301.5,published
+31023,Butler,ss1012,Construction,,,withheld
+31023,Butler,ss1013,Manufacturing,,,withheld
+31023,Butler,ss1021,"Trade, transportation and utilities",435.083333,406.666667,published
+31023,Butler,ss1022,Information,,,withheld
+31023,Butler,ss1023,Financial activities,94.083333,90.166667,published
+31023,Butler,ss1024,Professional and business services,,,withheld
+31023,Butler,ss1025,Education and health services,267.666667,278.166667,published
+31023,Butler,ss1026,Leisure and hospitality,,,withheld
+31023,Butler,ss1027,Other services,,,withheld
+31023,Butler,rest,Private sectors not disclosed (private jobs less published sectors),843.833333,867.916667,computed
+31023,Butler,priv,All private jobs,1895.833333,1944.416667,published
+31023,Butler,gov,"Government (federal, state and local)",675.166667,730.5,published
+31023,Butler,total,All payroll jobs,2571.0,2674.916667,published
+31025,Cass,ss1011,Natural resources and mining,244.583333,259.833333,published
+31025,Cass,ss1012,Construction,341.666667,616.416667,published
+31025,Cass,ss1013,Manufacturing,599.0,490.666667,published
+31025,Cass,ss1021,"Trade, transportation and utilities",1429.5,1425.75,published
+31025,Cass,ss1022,Information,19.083333,16.75,published
+31025,Cass,ss1023,Financial activities,238.333333,220.666667,published
+31025,Cass,ss1024,Professional and business services,261.333333,280.666667,published
+31025,Cass,ss1025,Education and health services,453.25,524.5,published
+31025,Cass,ss1026,Leisure and hospitality,672.583333,694.833333,published
+31025,Cass,ss1027,Other services,156.833333,164.25,published
+31025,Cass,priv,All private jobs,4416.166667,4694.333333,published
+31025,Cass,gov,"Government (federal, state and local)",1395.0,1513.25,published
+31025,Cass,total,All payroll jobs,5811.166667,6207.583333,published
+31027,Cedar,ss1011,Natural resources and mining,246.083333,279.083333,published
+31027,Cedar,ss1012,Construction,163.0,188.333333,published
+31027,Cedar,ss1013,Manufacturing,218.833333,161.666667,published
+31027,Cedar,ss1021,"Trade, transportation and utilities",637.166667,664.0,published
+31027,Cedar,ss1022,Information,34.75,24.416667,published
+31027,Cedar,ss1023,Financial activities,142.5,162.416667,published
+31027,Cedar,ss1024,Professional and business services,94.583333,72.333333,published
+31027,Cedar,ss1025,Education and health services,252.5,222.25,published
+31027,Cedar,ss1026,Leisure and hospitality,98.916667,127.083333,published
+31027,Cedar,ss1027,Other services,67.916667,78.666667,published
+31027,Cedar,priv,All private jobs,1956.25,1980.25,published
+31027,Cedar,gov,"Government (federal, state and local)",689.166667,703.0,published
+31027,Cedar,total,All payroll jobs,2645.416667,2683.25,published
+31029,Chase,ss1011,Natural resources and mining,358.916667,326.166667,published
+31029,Chase,ss1012,Construction,,,withheld
+31029,Chase,ss1013,Manufacturing,,,withheld
+31029,Chase,ss1021,"Trade, transportation and utilities",498.75,450.416667,published
+31029,Chase,ss1022,Information,,,withheld
+31029,Chase,ss1023,Financial activities,87.333333,84.5,published
+31029,Chase,ss1024,Professional and business services,55.75,57.25,published
+31029,Chase,ss1025,Education and health services,80.916667,86.75,published
+31029,Chase,ss1026,Leisure and hospitality,93.583333,109.166667,published
+31029,Chase,ss1027,Other services,,,withheld
+31029,Chase,rest,Private sectors not disclosed (private jobs less published sectors),142.083333,121.666667,computed
+31029,Chase,priv,All private jobs,1317.333333,1235.916667,published
+31029,Chase,gov,"Government (federal, state and local)",513.833333,491.333333,published
+31029,Chase,total,All payroll jobs,1831.166667,1727.25,published
+31031,Cherry,ss1011,Natural resources and mining,220.333333,286.083333,published
+31031,Cherry,ss1012,Construction,135.166667,131.083333,published
+31031,Cherry,ss1013,Manufacturing,59.166667,60.0,published
+31031,Cherry,ss1021,"Trade, transportation and utilities",494.583333,483.833333,published
+31031,Cherry,ss1022,Information,12.833333,22.416667,published
+31031,Cherry,ss1023,Financial activities,70.75,78.166667,published
+31031,Cherry,ss1024,Professional and business services,119.416667,114.583333,published
+31031,Cherry,ss1025,Education and health services,179.833333,117.333333,published
+31031,Cherry,ss1026,Leisure and hospitality,339.083333,342.583333,published
+31031,Cherry,ss1027,Other services,53.5,45.166667,published
+31031,Cherry,priv,All private jobs,1684.666667,1681.25,published
+31031,Cherry,gov,"Government (federal, state and local)",604.333333,595.0,published
+31031,Cherry,total,All payroll jobs,2289.0,2276.25,published
+31033,Cheyenne,ss1011,Natural resources and mining,83.916667,66.75,published
+31033,Cheyenne,ss1012,Construction,85.833333,68.583333,published
+31033,Cheyenne,ss1013,Manufacturing,320.416667,337.25,published
+31033,Cheyenne,ss1021,"Trade, transportation and utilities",1179.833333,1039.083333,published
+31033,Cheyenne,ss1022,Information,31.666667,36.416667,published
+31033,Cheyenne,ss1023,Financial activities,131.416667,102.583333,published
+31033,Cheyenne,ss1024,Professional and business services,431.916667,298.166667,published
+31033,Cheyenne,ss1025,Education and health services,583.25,760.0,published
+31033,Cheyenne,ss1026,Leisure and hospitality,477.583333,465.416667,published
+31033,Cheyenne,ss1027,Other services,70.916667,80.5,published
+31033,Cheyenne,priv,All private jobs,3396.75,3254.75,published
+31033,Cheyenne,gov,"Government (federal, state and local)",769.166667,701.75,published
+31033,Cheyenne,total,All payroll jobs,4165.916667,3956.5,published
+31035,Clay,ss1011,Natural resources and mining,180.833333,201.833333,published
+31035,Clay,ss1012,Construction,189.75,214.166667,published
+31035,Clay,ss1013,Manufacturing,314.25,91.333333,published
+31035,Clay,ss1021,"Trade, transportation and utilities",494.75,437.166667,published
+31035,Clay,ss1022,Information,,,withheld
+31035,Clay,ss1023,Financial activities,86.583333,84.083333,published
+31035,Clay,ss1024,Professional and business services,,,withheld
+31035,Clay,ss1025,Education and health services,186.25,178.916667,published
+31035,Clay,ss1026,Leisure and hospitality,86.5,61.0,published
+31035,Clay,ss1027,Other services,48.166667,38.5,published
+31035,Clay,rest,Private sectors not disclosed (private jobs less published sectors),49.583333,52.916667,computed
+31035,Clay,priv,All private jobs,1636.666667,1359.916667,published
+31035,Clay,gov,"Government (federal, state and local)",,,withheld
+31035,Clay,total,All payroll jobs,2358.75,2052.75,published
+31037,Colfax,ss1011,Natural resources and mining,412.166667,255.583333,published
+31037,Colfax,ss1012,Construction,,,withheld
+31037,Colfax,ss1013,Manufacturing,,,withheld
+31037,Colfax,ss1021,"Trade, transportation and utilities",865.416667,812.583333,published
+31037,Colfax,ss1022,Information,,,withheld
+31037,Colfax,ss1023,Financial activities,106.833333,98.0,published
+31037,Colfax,ss1024,Professional and business services,,,withheld
+31037,Colfax,ss1025,Education and health services,170.166667,224.583333,published
+31037,Colfax,ss1026,Leisure and hospitality,143.333333,169.25,published
+31037,Colfax,ss1027,Other services,,,withheld
+31037,Colfax,rest,Private sectors not disclosed (private jobs less published sectors),2563.166667,2642.916667,computed
+31037,Colfax,priv,All private jobs,4261.083333,4202.916667,published
+31037,Colfax,gov,"Government (federal, state and local)",791.916667,713.833333,published
+31037,Colfax,total,All payroll jobs,5053.0,4916.75,published
+31039,Cuming,ss1011,Natural resources and mining,421.666667,458.5,published
+31039,Cuming,ss1012,Construction,210.416667,240.0,published
+31039,Cuming,ss1013,Manufacturing,421.666667,436.083333,published
+31039,Cuming,ss1021,"Trade, transportation and utilities",680.666667,630.25,published
+31039,Cuming,ss1022,Information,72.5,41.416667,published
+31039,Cuming,ss1023,Financial activities,215.333333,238.583333,published
+31039,Cuming,ss1024,Professional and business services,169.666667,177.583333,published
+31039,Cuming,ss1025,Education and health services,389.333333,552.25,published
+31039,Cuming,ss1026,Leisure and hospitality,255.75,231.916667,published
+31039,Cuming,ss1027,Other services,147.583333,142.5,published
+31039,Cuming,priv,All private jobs,2984.583333,3149.083333,published
+31039,Cuming,gov,"Government (federal, state and local)",736.75,770.166667,published
+31039,Cuming,total,All payroll jobs,3721.333333,3919.25,published
+31041,Custer,ss1011,Natural resources and mining,489.25,603.083333,published
+31041,Custer,ss1012,Construction,,,withheld
+31041,Custer,ss1013,Manufacturing,,,withheld
+31041,Custer,ss1021,"Trade, transportation and utilities",773.166667,780.916667,published
+31041,Custer,ss1022,Information,,,withheld
+31041,Custer,ss1023,Financial activities,205.666667,193.0,published
+31041,Custer,ss1024,Professional and business services,164.833333,192.583333,published
+31041,Custer,ss1025,Education and health services,552.833333,512.75,published
+31041,Custer,ss1026,Leisure and hospitality,389.75,355.083333,published
+31041,Custer,ss1027,Other services,,,withheld
+31041,Custer,rest,Private sectors not disclosed (private jobs less published sectors),1027.916667,1014.916667,computed
+31041,Custer,priv,All private jobs,3603.416667,3652.333333,published
+31041,Custer,gov,"Government (federal, state and local)",904.5,863.0,published
+31041,Custer,total,All payroll jobs,4507.916667,4515.333333,published
+31043,Dakota,ss1011,Natural resources and mining,,,withheld
+31043,Dakota,ss1012,Construction,,,withheld
+31043,Dakota,ss1013,Manufacturing,5058.166667,5916.25,published
+31043,Dakota,ss1021,"Trade, transportation and utilities",2872.083333,3062.916667,published
+31043,Dakota,ss1022,Information,,,withheld
+31043,Dakota,ss1023,Financial activities,755.25,969.0,published
+31043,Dakota,ss1024,Professional and business services,505.833333,473.166667,published
+31043,Dakota,ss1025,Education and health services,589.166667,651.083333,published
+31043,Dakota,ss1026,Leisure and hospitality,728.833333,874.833333,published
+31043,Dakota,ss1027,Other services,,,withheld
+31043,Dakota,rest,Private sectors not disclosed (private jobs less published sectors),813.083333,925.916667,computed
+31043,Dakota,priv,All private jobs,11322.416667,12873.166667,published
+31043,Dakota,gov,"Government (federal, state and local)",1156.75,1238.333333,published
+31043,Dakota,total,All payroll jobs,12479.166667,14111.5,published
+31045,Dawes,ss1011,Natural resources and mining,,,withheld
+31045,Dawes,ss1012,Construction,88.083333,83.083333,published
+31045,Dawes,ss1013,Manufacturing,,,withheld
+31045,Dawes,ss1021,"Trade, transportation and utilities",686.166667,709.666667,published
+31045,Dawes,ss1022,Information,,,withheld
+31045,Dawes,ss1023,Financial activities,97.916667,106.666667,published
+31045,Dawes,ss1024,Professional and business services,134.75,79.666667,published
+31045,Dawes,ss1025,Education and health services,408.916667,465.0,published
+31045,Dawes,ss1026,Leisure and hospitality,399.416667,380.833333,published
+31045,Dawes,ss1027,Other services,,,withheld
+31045,Dawes,rest,Private sectors not disclosed (private jobs less published sectors),138.75,124.083333,computed
+31045,Dawes,priv,All private jobs,1954.0,1949.0,published
+31045,Dawes,gov,"Government (federal, state and local)",1088.833333,1109.25,published
+31045,Dawes,total,All payroll jobs,3042.833333,3058.25,published
+31047,Dawson,ss1011,Natural resources and mining,475.416667,553.0,published
+31047,Dawson,ss1012,Construction,326.25,410.833333,published
+31047,Dawson,ss1013,Manufacturing,3697.5,3249.0,published
+31047,Dawson,ss1021,"Trade, transportation and utilities",1866.5,1773.916667,published
+31047,Dawson,ss1022,Information,87.5,46.083333,published
+31047,Dawson,ss1023,Financial activities,284.083333,350.0,published
+31047,Dawson,ss1024,Professional and business services,667.75,544.333333,published
+31047,Dawson,ss1025,Education and health services,668.916667,602.0,published
+31047,Dawson,ss1026,Leisure and hospitality,829.083333,841.5,published
+31047,Dawson,ss1027,Other services,235.083333,222.083333,published
+31047,Dawson,priv,All private jobs,9138.083333,8592.75,published
+31047,Dawson,gov,"Government (federal, state and local)",2296.916667,2447.666667,published
+31047,Dawson,total,All payroll jobs,11435.0,11040.416667,published
+31049,Deuel,ss1011,Natural resources and mining,,,withheld
+31049,Deuel,ss1012,Construction,,,withheld
+31049,Deuel,ss1021,"Trade, transportation and utilities",151.166667,164.166667,published
+31049,Deuel,ss1022,Information,,,withheld
+31049,Deuel,ss1023,Financial activities,18.833333,27.666667,published
+31049,Deuel,ss1024,Professional and business services,,,withheld
+31049,Deuel,ss1025,Education and health services,20.416667,22.0,published
+31049,Deuel,ss1026,Leisure and hospitality,44.916667,38.416667,published
+31049,Deuel,ss1027,Other services,,,withheld
+31049,Deuel,rest,Private sectors not disclosed (private jobs less published sectors),74.416667,69.416667,computed
+31049,Deuel,priv,All private jobs,309.75,321.666667,published
+31049,Deuel,gov,"Government (federal, state and local)",214.75,238.416667,published
+31049,Deuel,total,All payroll jobs,524.5,560.083333,published
+31051,Dixon,ss1011,Natural resources and mining,,,withheld
+31051,Dixon,ss1012,Construction,,,withheld
+31051,Dixon,ss1013,Manufacturing,,,withheld
+31051,Dixon,ss1021,"Trade, transportation and utilities",156.166667,143.0,published
+31051,Dixon,ss1022,Information,,,withheld
+31051,Dixon,ss1023,Financial activities,30.416667,36.916667,published
+31051,Dixon,ss1024,Professional and business services,,,withheld
+31051,Dixon,ss1025,Education and health services,71.416667,45.5,published
+31051,Dixon,ss1026,Leisure and hospitality,67.166667,55.0,published
+31051,Dixon,ss1027,Other services,,,withheld
+31051,Dixon,rest,Private sectors not disclosed (private jobs less published sectors),998.166667,983.5,computed
+31051,Dixon,priv,All private jobs,1323.333333,1263.916667,published
+31051,Dixon,gov,"Government (federal, state and local)",,,withheld
+31051,Dixon,total,All payroll jobs,1746.25,1693.833333,published
+31053,Dodge,ss1011,Natural resources and mining,176.5,362.0,published
+31053,Dodge,ss1012,Construction,840.583333,936.666667,published
+31053,Dodge,ss1013,Manufacturing,3857.75,4614.333333,published
+31053,Dodge,ss1021,"Trade, transportation and utilities",3869.166667,3940.833333,published
+31053,Dodge,ss1022,Information,116.166667,59.25,published
+31053,Dodge,ss1023,Financial activities,530.666667,906.583333,published
+31053,Dodge,ss1024,Professional and business services,942.916667,917.25,published
+31053,Dodge,ss1025,Education and health services,2751.0,2470.25,published
+31053,Dodge,ss1026,Leisure and hospitality,1515.75,1602.083333,published
+31053,Dodge,ss1027,Other services,591.333333,496.583333,published
+31053,Dodge,priv,All private jobs,15191.833333,16305.833333,published
+31053,Dodge,gov,"Government (federal, state and local)",2186.083333,2334.416667,published
+31053,Dodge,total,All payroll jobs,17377.916667,18640.25,published
+31055,Douglas,ss1011,Natural resources and mining,504.833333,368.833333,published
+31055,Douglas,ss1012,Construction,17413.25,19808.5,published
+31055,Douglas,ss1013,Manufacturing,22391.0,23217.25,published
+31055,Douglas,ss1021,"Trade, transportation and utilities",54874.416667,49326.666667,published
+31055,Douglas,ss1022,Information,8622.416667,7452.75,published
+31055,Douglas,ss1023,Financial activities,33573.416667,28237.5,published
+31055,Douglas,ss1024,Professional and business services,61102.916667,53707.333333,published
+31055,Douglas,ss1025,Education and health services,57437.75,66751.75,published
+31055,Douglas,ss1026,Leisure and hospitality,35928.5,39339.25,published
+31055,Douglas,ss1027,Other services,9271.916667,9946.75,published
+31055,Douglas,priv,All private jobs,301120.416667,298156.583333,published
+31055,Douglas,gov,"Government (federal, state and local)",40642.166667,43618.333333,published
+31055,Douglas,total,All payroll jobs,341762.583333,341774.916667,published
+31057,Dundy,ss1011,Natural resources and mining,57.583333,116.25,published
+31057,Dundy,ss1012,Construction,,,withheld
+31057,Dundy,ss1013,Manufacturing,,,withheld
+31057,Dundy,ss1021,"Trade, transportation and utilities",98.916667,92.166667,published
+31057,Dundy,ss1022,Information,,,withheld
+31057,Dundy,ss1023,Financial activities,,,withheld
+31057,Dundy,ss1024,Professional and business services,13.5,32.0,published
+31057,Dundy,ss1025,Education and health services,52.416667,59.583333,published
+31057,Dundy,ss1026,Leisure and hospitality,29.0,21.916667,published
+31057,Dundy,ss1027,Other services,,,withheld
+31057,Dundy,rest,Private sectors not disclosed (private jobs less published sectors),77.166667,74.75,computed
+31057,Dundy,priv,All private jobs,328.583333,396.666667,published
+31057,Dundy,gov,"Government (federal, state and local)",235.916667,255.5,published
+31057,Dundy,total,All payroll jobs,564.5,652.166667,published
+31059,Fillmore,ss1011,Natural resources and mining,105.166667,146.25,published
+31059,Fillmore,ss1012,Construction,189.5,219.5,published
+31059,Fillmore,ss1013,Manufacturing,170.333333,244.666667,published
+31059,Fillmore,ss1021,"Trade, transportation and utilities",464.5,458.666667,published
+31059,Fillmore,ss1022,Information,14.166667,6.166667,published
+31059,Fillmore,ss1023,Financial activities,135.166667,139.416667,published
+31059,Fillmore,ss1024,Professional and business services,44.5,35.25,published
+31059,Fillmore,ss1025,Education and health services,189.75,203.083333,published
+31059,Fillmore,ss1026,Leisure and hospitality,76.416667,131.666667,published
+31059,Fillmore,ss1027,Other services,60.083333,57.916667,published
+31059,Fillmore,priv,All private jobs,1449.583333,1642.583333,published
+31059,Fillmore,gov,"Government (federal, state and local)",736.166667,728.583333,published
+31059,Fillmore,total,All payroll jobs,2185.75,2371.166667,published
+31061,Franklin,ss1011,Natural resources and mining,81.083333,88.666667,published
+31061,Franklin,ss1012,Construction,,,withheld
+31061,Franklin,ss1013,Manufacturing,,,withheld
+31061,Franklin,ss1021,"Trade, transportation and utilities",131.583333,159.833333,published
+31061,Franklin,ss1022,Information,,,withheld
+31061,Franklin,ss1023,Financial activities,40.75,37.5,published
+31061,Franklin,ss1024,Professional and business services,30.75,40.833333,published
+31061,Franklin,ss1025,Education and health services,76.25,57.333333,published
+31061,Franklin,ss1026,Leisure and hospitality,,,withheld
+31061,Franklin,ss1027,Other services,,,withheld
+31061,Franklin,rest,Private sectors not disclosed (private jobs less published sectors),62.416667,115.666667,computed
+31061,Franklin,priv,All private jobs,422.833333,499.833333,published
+31061,Franklin,gov,"Government (federal, state and local)",312.583333,291.916667,published
+31061,Franklin,total,All payroll jobs,735.416667,791.75,published
+31063,Frontier,ss1011,Natural resources and mining,92.5,78.5,published
+31063,Frontier,ss1012,Construction,,,withheld
+31063,Frontier,ss1013,Manufacturing,,,withheld
+31063,Frontier,ss1021,"Trade, transportation and utilities",146.75,131.833333,published
+31063,Frontier,ss1022,Information,,,withheld
+31063,Frontier,ss1023,Financial activities,50.833333,35.083333,published
+31063,Frontier,ss1024,Professional and business services,23.166667,32.75,published
+31063,Frontier,ss1025,Education and health services,,,withheld
+31063,Frontier,ss1026,Leisure and hospitality,,,withheld
+31063,Frontier,ss1027,Other services,,,withheld
+31063,Frontier,rest,Private sectors not disclosed (private jobs less published sectors),248.416667,157.75,computed
+31063,Frontier,priv,All private jobs,561.666667,435.916667,published
+31063,Frontier,gov,"Government (federal, state and local)",,,withheld
+31063,Frontier,total,All payroll jobs,872.166667,747.583333,published
+31065,Furnas,ss1011,Natural resources and mining,216.75,163.916667,published
+31065,Furnas,ss1012,Construction,59.0,47.75,published
+31065,Furnas,ss1013,Manufacturing,122.166667,112.583333,published
+31065,Furnas,ss1021,"Trade, transportation and utilities",347.0,319.833333,published
+31065,Furnas,ss1022,Information,51.416667,80.083333,published
+31065,Furnas,ss1023,Financial activities,76.5,76.5,published
+31065,Furnas,ss1024,Professional and business services,133.166667,138.75,published
+31065,Furnas,ss1025,Education and health services,296.833333,254.25,published
+31065,Furnas,ss1026,Leisure and hospitality,89.416667,76.5,published
+31065,Furnas,ss1027,Other services,18.0,19.75,published
+31065,Furnas,priv,All private jobs,1410.25,1289.916667,published
+31065,Furnas,gov,"Government (federal, state and local)",506.833333,476.583333,published
+31065,Furnas,total,All payroll jobs,1917.083333,1766.5,published
+31067,Gage,ss1011,Natural resources and mining,190.333333,113.916667,published
+31067,Gage,ss1012,Construction,393.0,414.25,published
+31067,Gage,ss1013,Manufacturing,1510.833333,1540.416667,published
+31067,Gage,ss1021,"Trade, transportation and utilities",1602.166667,1845.083333,published
+31067,Gage,ss1022,Information,77.833333,66.333333,published
+31067,Gage,ss1023,Financial activities,236.333333,261.25,published
+31067,Gage,ss1024,Professional and business services,410.666667,259.0,published
+31067,Gage,ss1025,Education and health services,1721.083333,1620.333333,published
+31067,Gage,ss1026,Leisure and hospitality,733.5,708.916667,published
+31067,Gage,ss1027,Other services,238.666667,259.5,published
+31067,Gage,priv,All private jobs,7114.416667,7089.0,published
+31067,Gage,gov,"Government (federal, state and local)",,,withheld
+31067,Gage,total,All payroll jobs,8976.166667,8766.75,published
+31069,Garden,ss1011,Natural resources and mining,63.583333,100.083333,published
+31069,Garden,ss1012,Construction,,,withheld
+31069,Garden,ss1013,Manufacturing,,,withheld
+31069,Garden,ss1021,"Trade, transportation and utilities",101.083333,74.583333,published
+31069,Garden,ss1022,Information,,,withheld
+31069,Garden,ss1023,Financial activities,25.166667,22.166667,published
+31069,Garden,ss1024,Professional and business services,,,withheld
+31069,Garden,ss1025,Education and health services,,,withheld
+31069,Garden,ss1026,Leisure and hospitality,,,withheld
+31069,Garden,ss1027,Other services,,,withheld
+31069,Garden,rest,Private sectors not disclosed (private jobs less published sectors),146.333333,125.25,computed
+31069,Garden,priv,All private jobs,336.166667,322.083333,published
+31069,Garden,gov,"Government (federal, state and local)",163.5,169.666667,published
+31069,Garden,total,All payroll jobs,499.666667,491.75,published
+31071,Garfield,ss1011,Natural resources and mining,49.25,53.666667,published
+31071,Garfield,ss1012,Construction,,,withheld
+31071,Garfield,ss1013,Manufacturing,,,withheld
+31071,Garfield,ss1021,"Trade, transportation and utilities",147.833333,158.333333,published
+31071,Garfield,ss1022,Information,,,withheld
+31071,Garfield,ss1023,Financial activities,,,withheld
+31071,Garfield,ss1024,Professional and business services,,,withheld
+31071,Garfield,ss1025,Education and health services,134.666667,148.083333,published
+31071,Garfield,ss1026,Leisure and hospitality,75.833333,49.25,published
+31071,Garfield,ss1027,Other services,40.5,34.666667,published
+31071,Garfield,rest,Private sectors not disclosed (private jobs less published sectors),194.166667,170.0,computed
+31071,Garfield,priv,All private jobs,642.25,614.0,published
+31071,Garfield,gov,"Government (federal, state and local)",165.416667,162.833333,published
+31071,Garfield,total,All payroll jobs,807.666667,776.833333,published
+31073,Gosper,ss1011,Natural resources and mining,39.833333,52.083333,published
+31073,Gosper,ss1012,Construction,,,withheld
+31073,Gosper,ss1013,Manufacturing,,,withheld
+31073,Gosper,ss1021,"Trade, transportation and utilities",90.416667,80.666667,published
+31073,Gosper,ss1023,Financial activities,48.5,34.416667,published
+31073,Gosper,ss1024,Professional and business services,,,withheld
+31073,Gosper,ss1025,Education and health services,,,withheld
+31073,Gosper,ss1026,Leisure and hospitality,23.333333,34.0,published
+31073,Gosper,ss1027,Other services,,,withheld
+31073,Gosper,rest,Private sectors not disclosed (private jobs less published sectors),69.666667,65.0,computed
+31073,Gosper,priv,All private jobs,271.75,266.166667,published
+31073,Gosper,gov,"Government (federal, state and local)",145.666667,162.916667,published
+31073,Gosper,total,All payroll jobs,417.416667,429.083333,published
+31075,Grant,ss1011,Natural resources and mining,130.666667,131.666667,published
+31075,Grant,ss1012,Construction,11.166667,10.75,published
+31075,Grant,ss1021,"Trade, transportation and utilities",35.833333,44.166667,published
+31075,Grant,ss1022,Information,,,withheld
+31075,Grant,ss1023,Financial activities,,,withheld
+31075,Grant,ss1024,Professional and business services,,,withheld
+31075,Grant,ss1025,Education and health services,,,withheld
+31075,Grant,ss1026,Leisure and hospitality,,,withheld
+31075,Grant,ss1027,Other services,6.666667,5.5,published
+31075,Grant,rest,Private sectors not disclosed (private jobs less published sectors),27.25,12.833333,computed
+31075,Grant,priv,All private jobs,211.583333,204.916667,published
+31075,Grant,gov,"Government (federal, state and local)",,,withheld
+31075,Grant,total,All payroll jobs,287.166667,280.333333,published
+31077,Greeley,ss1011,Natural resources and mining,68.083333,87.75,published
+31077,Greeley,ss1012,Construction,27.916667,37.833333,published
+31077,Greeley,ss1013,Manufacturing,24.083333,22.083333,published
+31077,Greeley,ss1021,"Trade, transportation and utilities",141.916667,154.166667,published
+31077,Greeley,ss1022,Information,,,withheld
+31077,Greeley,ss1023,Financial activities,33.416667,34.0,published
+31077,Greeley,ss1024,Professional and business services,9.833333,33.833333,published
+31077,Greeley,ss1025,Education and health services,,,withheld
+31077,Greeley,ss1026,Leisure and hospitality,,,withheld
+31077,Greeley,ss1027,Other services,,,withheld
+31077,Greeley,rest,Private sectors not disclosed (private jobs less published sectors),55.833333,42.583333,computed
+31077,Greeley,priv,All private jobs,361.083333,412.25,published
+31077,Greeley,gov,"Government (federal, state and local)",,,withheld
+31077,Greeley,total,All payroll jobs,615.166667,631.583333,published
+31079,Hall,ss1011,Natural resources and mining,385.5,309.083333,published
+31079,Hall,ss1012,Construction,1747.833333,2094.833333,published
+31079,Hall,ss1013,Manufacturing,7401.0,7628.0,published
+31079,Hall,ss1021,"Trade, transportation and utilities",7649.25,7406.75,published
+31079,Hall,ss1022,Information,215.083333,201.0,published
+31079,Hall,ss1023,Financial activities,1626.583333,1664.583333,published
+31079,Hall,ss1024,Professional and business services,2658.916667,2358.333333,published
+31079,Hall,ss1025,Education and health services,3829.083333,4567.75,published
+31079,Hall,ss1026,Leisure and hospitality,3359.416667,3851.5,published
+31079,Hall,ss1027,Other services,923.583333,1089.666667,published
+31079,Hall,priv,All private jobs,29796.25,31171.5,published
+31079,Hall,gov,"Government (federal, state and local)",4924.583333,4785.583333,published
+31079,Hall,total,All payroll jobs,34720.833333,35957.083333,published
+31081,Hamilton,ss1011,Natural resources and mining,,,withheld
+31081,Hamilton,ss1012,Construction,,,withheld
+31081,Hamilton,ss1013,Manufacturing,461.583333,608.666667,published
+31081,Hamilton,ss1021,"Trade, transportation and utilities",1036.5,987.333333,published
+31081,Hamilton,ss1022,Information,,,withheld
+31081,Hamilton,ss1023,Financial activities,,,withheld
+31081,Hamilton,ss1024,Professional and business services,190.25,160.5,published
+31081,Hamilton,ss1025,Education and health services,432.416667,456.75,published
+31081,Hamilton,ss1026,Leisure and hospitality,229.75,324.416667,published
+31081,Hamilton,ss1027,Other services,,,withheld
+31081,Hamilton,rest,Private sectors not disclosed (private jobs less published sectors),623.583333,832.833333,computed
+31081,Hamilton,priv,All private jobs,2974.083333,3370.5,published
+31081,Hamilton,gov,"Government (federal, state and local)",584.75,545.916667,published
+31081,Hamilton,total,All payroll jobs,3558.833333,3916.416667,published
+31083,Harlan,ss1011,Natural resources and mining,70.666667,76.416667,published
+31083,Harlan,ss1012,Construction,,,withheld
+31083,Harlan,ss1013,Manufacturing,,,withheld
+31083,Harlan,ss1021,"Trade, transportation and utilities",143.166667,212.333333,published
+31083,Harlan,ss1022,Information,,,withheld
+31083,Harlan,ss1023,Financial activities,56.5,63.5,published
+31083,Harlan,ss1024,Professional and business services,43.0,23.75,published
+31083,Harlan,ss1025,Education and health services,100.833333,62.166667,published
+31083,Harlan,ss1026,Leisure and hospitality,74.0,53.583333,published
+31083,Harlan,ss1027,Other services,,,withheld
+31083,Harlan,rest,Private sectors not disclosed (private jobs less published sectors),55.25,73.416667,computed
+31083,Harlan,priv,All private jobs,543.416667,565.166667,published
+31083,Harlan,gov,"Government (federal, state and local)",310.166667,314.0,published
+31083,Harlan,total,All payroll jobs,853.583333,879.166667,published
+31085,Hayes,ss1011,Natural resources and mining,,,withheld
+31085,Hayes,ss1012,Construction,,,withheld
+31085,Hayes,ss1021,"Trade, transportation and utilities",29.75,27.75,published
+31085,Hayes,ss1022,Information,,,withheld
+31085,Hayes,ss1023,Financial activities,,,withheld
+31085,Hayes,ss1024,Professional and business services,,,withheld
+31085,Hayes,ss1025,Education and health services,,,withheld
+31085,Hayes,ss1026,Leisure and hospitality,,,withheld
+31085,Hayes,ss1027,Other services,,,withheld
+31085,Hayes,rest,Private sectors not disclosed (private jobs less published sectors),86.916667,85.25,computed
+31085,Hayes,priv,All private jobs,116.666667,113.0,published
+31085,Hayes,gov,"Government (federal, state and local)",,,withheld
+31085,Hayes,total,All payroll jobs,208.666667,199.25,published
+31087,Hitchcock,ss1011,Natural resources and mining,68.166667,79.666667,published
+31087,Hitchcock,ss1012,Construction,18.666667,24.833333,published
+31087,Hitchcock,ss1013,Manufacturing,64.083333,106.916667,published
+31087,Hitchcock,ss1021,"Trade, transportation and utilities",143.0,137.0,published
+31087,Hitchcock,ss1022,Information,,,withheld
+31087,Hitchcock,ss1023,Financial activities,9.083333,20.583333,published
+31087,Hitchcock,ss1024,Professional and business services,,,withheld
+31087,Hitchcock,ss1025,Education and health services,21.333333,20.166667,published
+31087,Hitchcock,ss1026,Leisure and hospitality,,,withheld
+31087,Hitchcock,ss1027,Other services,,,withheld
+31087,Hitchcock,rest,Private sectors not disclosed (private jobs less published sectors),44.5,26.333333,computed
+31087,Hitchcock,priv,All private jobs,368.833333,415.5,published
+31087,Hitchcock,gov,"Government (federal, state and local)",,,withheld
+31087,Hitchcock,total,All payroll jobs,658.75,646.25,published
+31089,Holt,ss1011,Natural resources and mining,494.75,414.25,published
+31089,Holt,ss1012,Construction,160.166667,200.666667,published
+31089,Holt,ss1013,Manufacturing,158.083333,127.916667,published
+31089,Holt,ss1021,"Trade, transportation and utilities",1172.5,1104.916667,published
+31089,Holt,ss1022,Information,58.083333,51.5,published
+31089,Holt,ss1023,Financial activities,182.25,206.333333,published
+31089,Holt,ss1024,Professional and business services,120.916667,194.583333,published
+31089,Holt,ss1025,Education and health services,804.25,738.833333,published
+31089,Holt,ss1026,Leisure and hospitality,351.083333,298.416667,published
+31089,Holt,ss1027,Other services,102.75,108.5,published
+31089,Holt,priv,All private jobs,3604.833333,3445.916667,published
+31089,Holt,gov,"Government (federal, state and local)",829.166667,893.5,published
+31089,Holt,total,All payroll jobs,4434.0,4339.416667,published
+31091,Hooker,ss1011,Natural resources and mining,,,withheld
+31091,Hooker,ss1012,Construction,,,withheld
+31091,Hooker,ss1013,Manufacturing,,,withheld
+31091,Hooker,ss1021,"Trade, transportation and utilities",28.583333,30.0,published
+31091,Hooker,ss1023,Financial activities,,,withheld
+31091,Hooker,ss1024,Professional and business services,,,withheld
+31091,Hooker,ss1025,Education and health services,,,withheld
+31091,Hooker,ss1026,Leisure and hospitality,,,withheld
+31091,Hooker,ss1027,Other services,,,withheld
+31091,Hooker,rest,Private sectors not disclosed (private jobs less published sectors),206.833333,117.333333,computed
+31091,Hooker,priv,All private jobs,235.416667,147.333333,published
+31091,Hooker,gov,"Government (federal, state and local)",,,withheld
+31091,Hooker,total,All payroll jobs,345.5,262.083333,published
+31093,Howard,ss1011,Natural resources and mining,82.583333,72.25,published
+31093,Howard,ss1012,Construction,,,withheld
+31093,Howard,ss1013,Manufacturing,,,withheld
+31093,Howard,ss1021,"Trade, transportation and utilities",319.916667,384.833333,published
+31093,Howard,ss1022,Information,,,withheld
+31093,Howard,ss1023,Financial activities,78.666667,75.75,published
+31093,Howard,ss1024,Professional and business services,,,withheld
+31093,Howard,ss1025,Education and health services,161.75,173.916667,published
+31093,Howard,ss1026,Leisure and hospitality,85.666667,127.416667,published
+31093,Howard,ss1027,Other services,,,withheld
+31093,Howard,rest,Private sectors not disclosed (private jobs less published sectors),221.25,182.25,computed
+31093,Howard,priv,All private jobs,949.833333,1016.416667,published
+31093,Howard,gov,"Government (federal, state and local)",611.083333,572.666667,published
+31093,Howard,total,All payroll jobs,1560.916667,1589.083333,published
+31095,Jefferson,ss1011,Natural resources and mining,263.25,313.5,published
+31095,Jefferson,ss1012,Construction,176.75,193.166667,published
+31095,Jefferson,ss1013,Manufacturing,619.666667,651.25,published
+31095,Jefferson,ss1021,"Trade, transportation and utilities",710.166667,673.583333,published
+31095,Jefferson,ss1022,Information,45.5,41.833333,published
+31095,Jefferson,ss1023,Financial activities,78.833333,57.5,published
+31095,Jefferson,ss1024,Professional and business services,109.666667,116.0,published
+31095,Jefferson,ss1025,Education and health services,458.583333,450.0,published
+31095,Jefferson,ss1026,Leisure and hospitality,156.166667,143.666667,published
+31095,Jefferson,ss1027,Other services,65.5,75.333333,published
+31095,Jefferson,priv,All private jobs,2684.083333,2715.833333,published
+31095,Jefferson,gov,"Government (federal, state and local)",601.5,689.0,published
+31095,Jefferson,total,All payroll jobs,3285.583333,3404.833333,published
+31097,Johnson,ss1011,Natural resources and mining,,,withheld
+31097,Johnson,ss1012,Construction,72.5,48.083333,published
+31097,Johnson,ss1013,Manufacturing,,,withheld
+31097,Johnson,ss1021,"Trade, transportation and utilities",228.416667,278.916667,published
+31097,Johnson,ss1022,Information,,,withheld
+31097,Johnson,ss1023,Financial activities,60.333333,37.583333,published
+31097,Johnson,ss1024,Professional and business services,26.75,48.083333,published
+31097,Johnson,ss1025,Education and health services,112.833333,35.416667,published
+31097,Johnson,ss1026,Leisure and hospitality,56.25,41.666667,published
+31097,Johnson,ss1027,Other services,,,withheld
+31097,Johnson,rest,Private sectors not disclosed (private jobs less published sectors),236.583333,242.333333,computed
+31097,Johnson,priv,All private jobs,793.666667,732.083333,published
+31097,Johnson,gov,"Government (federal, state and local)",,,withheld
+31097,Johnson,total,All payroll jobs,1507.583333,1510.916667,published
+31099,Kearney,ss1011,Natural resources and mining,187.333333,188.083333,published
+31099,Kearney,ss1012,Construction,80.166667,118.583333,published
+31099,Kearney,ss1013,Manufacturing,425.416667,354.5,published
+31099,Kearney,ss1021,"Trade, transportation and utilities",310.416667,310.5,published
+31099,Kearney,ss1022,Information,,,withheld
+31099,Kearney,ss1023,Financial activities,79.5,80.5,published
+31099,Kearney,ss1024,Professional and business services,,,withheld
+31099,Kearney,ss1025,Education and health services,368.333333,277.916667,published
+31099,Kearney,ss1026,Leisure and hospitality,135.75,115.166667,published
+31099,Kearney,ss1027,Other services,,,withheld
+31099,Kearney,rest,Private sectors not disclosed (private jobs less published sectors),168.25,139.583333,computed
+31099,Kearney,priv,All private jobs,1755.166667,1584.833333,published
+31099,Kearney,gov,"Government (federal, state and local)",463.666667,495.0,published
+31099,Kearney,total,All payroll jobs,2218.833333,2079.833333,published
+31101,Keith,ss1011,Natural resources and mining,,,withheld
+31101,Keith,ss1012,Construction,,,withheld
+31101,Keith,ss1013,Manufacturing,233.583333,212.333333,published
+31101,Keith,ss1021,"Trade, transportation and utilities",919.333333,935.916667,published
+31101,Keith,ss1022,Information,,,withheld
+31101,Keith,ss1023,Financial activities,152.166667,162.083333,published
+31101,Keith,ss1024,Professional and business services,201.5,197.333333,published
+31101,Keith,ss1025,Education and health services,302.5,295.166667,published
+31101,Keith,ss1026,Leisure and hospitality,590.333333,565.25,published
+31101,Keith,ss1027,Other services,,,withheld
+31101,Keith,rest,Private sectors not disclosed (private jobs less published sectors),358.416667,318.416667,computed
+31101,Keith,priv,All private jobs,2757.833333,2686.5,published
+31101,Keith,gov,"Government (federal, state and local)",526.416667,542.666667,published
+31101,Keith,total,All payroll jobs,3284.25,3229.166667,published
+31103,Keya Paha,ss1011,Natural resources and mining,31.75,31.416667,published
+31103,Keya Paha,ss1012,Construction,,,withheld
+31103,Keya Paha,ss1013,Manufacturing,,,withheld
+31103,Keya Paha,ss1021,"Trade, transportation and utilities",19.916667,19.083333,published
+31103,Keya Paha,ss1022,Information,,,withheld
+31103,Keya Paha,ss1023,Financial activities,,,withheld
+31103,Keya Paha,ss1024,Professional and business services,,,withheld
+31103,Keya Paha,ss1025,Education and health services,,,withheld
+31103,Keya Paha,ss1026,Leisure and hospitality,,,withheld
+31103,Keya Paha,ss1027,Other services,7.666667,7.5,published
+31103,Keya Paha,rest,Private sectors not disclosed (private jobs less published sectors),11.0,12.083333,computed
+31103,Keya Paha,priv,All private jobs,70.333333,70.083333,published
+31103,Keya Paha,gov,"Government (federal, state and local)",,,withheld
+31103,Keya Paha,total,All payroll jobs,136.25,138.416667,published
+31105,Kimball,ss1011,Natural resources and mining,,,withheld
+31105,Kimball,ss1012,Construction,,,withheld
+31105,Kimball,ss1013,Manufacturing,235.25,194.5,published
+31105,Kimball,ss1021,"Trade, transportation and utilities",201.416667,206.5,published
+31105,Kimball,ss1022,Information,,,withheld
+31105,Kimball,ss1023,Financial activities,49.75,33.833333,published
+31105,Kimball,ss1024,Professional and business services,,,withheld
+31105,Kimball,ss1025,Education and health services,28.083333,24.083333,published
+31105,Kimball,ss1026,Leisure and hospitality,92.25,75.666667,published
+31105,Kimball,ss1027,Other services,,,withheld
+31105,Kimball,rest,Private sectors not disclosed (private jobs less published sectors),388.666667,604.916667,computed
+31105,Kimball,priv,All private jobs,995.416667,1139.5,published
+31105,Kimball,gov,"Government (federal, state and local)",445.5,449.5,published
+31105,Kimball,total,All payroll jobs,1440.916667,1589.0,published
+31107,Knox,ss1011,Natural resources and mining,,,withheld
+31107,Knox,ss1012,Construction,,,withheld
+31107,Knox,ss1013,Manufacturing,170.083333,185.666667,published
+31107,Knox,ss1021,"Trade, transportation and utilities",527.0,494.5,published
+31107,Knox,ss1022,Information,,,withheld
+31107,Knox,ss1023,Financial activities,109.75,91.416667,published
+31107,Knox,ss1024,Professional and business services,,,withheld
+31107,Knox,ss1025,Education and health services,321.25,324.5,published
+31107,Knox,ss1026,Leisure and hospitality,183.916667,196.416667,published
+31107,Knox,ss1027,Other services,,,withheld
+31107,Knox,rest,Private sectors not disclosed (private jobs less published sectors),458.583333,427.0,computed
+31107,Knox,priv,All private jobs,1770.583333,1719.5,published
+31107,Knox,gov,"Government (federal, state and local)",1121.5,1172.833333,published
+31107,Knox,total,All payroll jobs,2892.083333,2892.333333,published
+31109,Lancaster,ss1011,Natural resources and mining,412.5,404.5,published
+31109,Lancaster,ss1012,Construction,8961.75,10562.5,published
+31109,Lancaster,ss1013,Manufacturing,12417.75,13786.166667,published
+31109,Lancaster,ss1021,"Trade, transportation and utilities",31140.75,30265.0,published
+31109,Lancaster,ss1022,Information,3340.583333,3748.333333,published
+31109,Lancaster,ss1023,Financial activities,11221.333333,9112.75,published
+31109,Lancaster,ss1024,Professional and business services,21951.916667,20201.0,published
+31109,Lancaster,ss1025,Education and health services,26176.0,29284.5,published
+31109,Lancaster,ss1026,Leisure and hospitality,18992.5,19224.916667,published
+31109,Lancaster,ss1027,Other services,4968.833333,5510.416667,published
+31109,Lancaster,priv,All private jobs,139583.916667,142100.083333,published
+31109,Lancaster,gov,"Government (federal, state and local)",33405.666667,34634.166667,published
+31109,Lancaster,total,All payroll jobs,172989.583333,176734.25,published
+31111,Lincoln,ss1011,Natural resources and mining,,,withheld
+31111,Lincoln,ss1012,Construction,684.666667,877.583333,published
+31111,Lincoln,ss1013,Manufacturing,,,withheld
+31111,Lincoln,ss1021,"Trade, transportation and utilities",3463.0,3630.083333,published
+31111,Lincoln,ss1022,Information,180.416667,128.666667,published
+31111,Lincoln,ss1023,Financial activities,624.416667,543.916667,published
+31111,Lincoln,ss1024,Professional and business services,628.583333,610.333333,published
+31111,Lincoln,ss1025,Education and health services,2915.666667,2979.166667,published
+31111,Lincoln,ss1026,Leisure and hospitality,1864.5,1990.25,published
+31111,Lincoln,ss1027,Other services,450.166667,407.5,published
+31111,Lincoln,rest,Private sectors not disclosed (private jobs less published sectors),683.75,1453.083333,computed
+31111,Lincoln,priv,All private jobs,11495.166667,12620.583333,published
+31111,Lincoln,gov,"Government (federal, state and local)",2844.75,2824.75,published
+31111,Lincoln,total,All payroll jobs,14339.916667,15445.333333,published
+31113,Logan,ss1011,Natural resources and mining,39.416667,22.25,published
+31113,Logan,ss1012,Construction,,,withheld
+31113,Logan,ss1013,Manufacturing,,,withheld
+31113,Logan,ss1021,"Trade, transportation and utilities",32.5,29.25,published
+31113,Logan,ss1022,Information,,,withheld
+31113,Logan,ss1023,Financial activities,,,withheld
+31113,Logan,ss1024,Professional and business services,,,withheld
+31113,Logan,ss1025,Education and health services,,,withheld
+31113,Logan,ss1027,Other services,,,withheld
+31113,Logan,rest,Private sectors not disclosed (private jobs less published sectors),37.416667,34.0,computed
+31113,Logan,priv,All private jobs,109.333333,85.5,published
+31113,Logan,gov,"Government (federal, state and local)",,,withheld
+31113,Logan,total,All payroll jobs,191.416667,164.833333,published
+31115,Loup,ss1011,Natural resources and mining,9.166667,20.916667,published
+31115,Loup,ss1021,"Trade, transportation and utilities",21.916667,12.083333,published
+31115,Loup,ss1023,Financial activities,,,withheld
+31115,Loup,ss1025,Education and health services,,,withheld
+31115,Loup,ss1026,Leisure and hospitality,,,withheld
+31115,Loup,ss1027,Other services,,,withheld
+31115,Loup,rest,Private sectors not disclosed (private jobs less published sectors),24.416667,13.75,computed
+31115,Loup,priv,All private jobs,55.5,46.75,published
+31115,Loup,gov,"Government (federal, state and local)",,,withheld
+31115,Loup,total,All payroll jobs,121.75,121.25,published
+31117,McPherson,ss1011,Natural resources and mining,,,withheld
+31117,McPherson,ss1013,Manufacturing,,,withheld
+31117,McPherson,ss1021,"Trade, transportation and utilities",,,withheld
+31117,McPherson,ss1022,Information,,,withheld
+31117,McPherson,ss1023,Financial activities,,,withheld
+31117,McPherson,ss1024,Professional and business services,,,withheld
+31117,McPherson,rest,Private sectors not disclosed (private jobs less published sectors),27.833333,17.666667,computed
+31117,McPherson,priv,All private jobs,27.833333,17.666667,published
+31117,McPherson,gov,"Government (federal, state and local)",,,withheld
+31117,McPherson,total,All payroll jobs,69.5,56.666667,published
+31119,Madison,ss1011,Natural resources and mining,130.0,137.75,published
+31119,Madison,ss1012,Construction,951.833333,1068.916667,published
+31119,Madison,ss1013,Manufacturing,3709.666667,3641.916667,published
+31119,Madison,ss1021,"Trade, transportation and utilities",4870.916667,4742.25,published
+31119,Madison,ss1022,Information,207.833333,215.166667,published
+31119,Madison,ss1023,Financial activities,920.583333,906.25,published
+31119,Madison,ss1024,Professional and business services,1480.083333,1208.0,published
+31119,Madison,ss1025,Education and health services,3497.916667,3791.416667,published
+31119,Madison,ss1026,Leisure and hospitality,1912.5,1911.083333,published
+31119,Madison,ss1027,Other services,687.0,600.583333,published
+31119,Madison,priv,All private jobs,18368.333333,18223.333333,published
+31119,Madison,gov,"Government (federal, state and local)",3713.75,3649.0,published
+31119,Madison,total,All payroll jobs,22082.083333,21872.333333,published
+31121,Merrick,ss1011,Natural resources and mining,134.5,133.75,published
+31121,Merrick,ss1012,Construction,204.166667,281.833333,published
+31121,Merrick,ss1013,Manufacturing,245.75,220.833333,published
+31121,Merrick,ss1021,"Trade, transportation and utilities",425.916667,430.083333,published
+31121,Merrick,ss1022,Information,27.416667,19.666667,published
+31121,Merrick,ss1023,Financial activities,117.5,109.416667,published
+31121,Merrick,ss1024,Professional and business services,100.083333,85.25,published
+31121,Merrick,ss1025,Education and health services,346.083333,403.166667,published
+31121,Merrick,ss1026,Leisure and hospitality,124.333333,147.416667,published
+31121,Merrick,ss1027,Other services,41.0,50.166667,published
+31121,Merrick,priv,All private jobs,1766.75,1881.583333,published
+31121,Merrick,gov,"Government (federal, state and local)",504.333333,487.75,published
+31121,Merrick,total,All payroll jobs,2271.083333,2369.333333,published
+31123,Morrill,ss1011,Natural resources and mining,190.916667,158.0,published
+31123,Morrill,ss1012,Construction,,,withheld
+31123,Morrill,ss1013,Manufacturing,,,withheld
+31123,Morrill,ss1021,"Trade, transportation and utilities",329.916667,310.75,published
+31123,Morrill,ss1022,Information,,,withheld
+31123,Morrill,ss1023,Financial activities,42.666667,65.666667,published
+31123,Morrill,ss1024,Professional and business services,,,withheld
+31123,Morrill,ss1025,Education and health services,110.583333,70.75,published
+31123,Morrill,ss1026,Leisure and hospitality,114.416667,127.166667,published
+31123,Morrill,ss1027,Other services,,,withheld
+31123,Morrill,rest,Private sectors not disclosed (private jobs less published sectors),112.083333,101.583333,computed
+31123,Morrill,priv,All private jobs,900.583333,833.916667,published
+31123,Morrill,gov,"Government (federal, state and local)",621.833333,654.166667,published
+31123,Morrill,total,All payroll jobs,1522.416667,1488.083333,published
+31125,Nance,ss1011,Natural resources and mining,115.5,89.916667,published
+31125,Nance,ss1012,Construction,,,withheld
+31125,Nance,ss1013,Manufacturing,,,withheld
+31125,Nance,ss1021,"Trade, transportation and utilities",208.166667,176.25,published
+31125,Nance,ss1022,Information,,,withheld
+31125,Nance,ss1023,Financial activities,54.583333,49.166667,published
+31125,Nance,ss1024,Professional and business services,,,withheld
+31125,Nance,ss1025,Education and health services,118.75,113.75,published
+31125,Nance,ss1026,Leisure and hospitality,34.083333,22.666667,published
+31125,Nance,ss1027,Other services,,,withheld
+31125,Nance,rest,Private sectors not disclosed (private jobs less published sectors),72.916667,73.416667,computed
+31125,Nance,priv,All private jobs,604.0,525.166667,published
+31125,Nance,gov,"Government (federal, state and local)",398.0,404.666667,published
+31125,Nance,total,All payroll jobs,1002.0,929.833333,published
+31127,Nemaha,ss1011,Natural resources and mining,,,withheld
+31127,Nemaha,ss1012,Construction,,,withheld
+31127,Nemaha,ss1013,Manufacturing,222.583333,181.666667,published
+31127,Nemaha,ss1021,"Trade, transportation and utilities",335.25,353.0,published
+31127,Nemaha,ss1022,Information,,,withheld
+31127,Nemaha,ss1023,Financial activities,93.75,89.25,published
+31127,Nemaha,ss1024,Professional and business services,,,withheld
+31127,Nemaha,ss1025,Education and health services,278.0,245.583333,published
+31127,Nemaha,ss1026,Leisure and hospitality,227.5,178.25,published
+31127,Nemaha,ss1027,Other services,67.416667,63.666667,published
+31127,Nemaha,rest,Private sectors not disclosed (private jobs less published sectors),166.5,167.916667,computed
+31127,Nemaha,priv,All private jobs,1391.0,1279.333333,published
+31127,Nemaha,gov,"Government (federal, state and local)",,,withheld
+31127,Nemaha,total,All payroll jobs,3016.0,2916.25,published
+31129,Nuckolls,ss1011,Natural resources and mining,,,withheld
+31129,Nuckolls,ss1012,Construction,,,withheld
+31129,Nuckolls,ss1013,Manufacturing,,,withheld
+31129,Nuckolls,ss1021,"Trade, transportation and utilities",310.833333,341.75,published
+31129,Nuckolls,ss1022,Information,,,withheld
+31129,Nuckolls,ss1023,Financial activities,79.166667,64.416667,published
+31129,Nuckolls,ss1024,Professional and business services,100.0,80.083333,published
+31129,Nuckolls,ss1025,Education and health services,376.333333,521.083333,published
+31129,Nuckolls,ss1026,Leisure and hospitality,107.5,117.333333,published
+31129,Nuckolls,ss1027,Other services,,,withheld
+31129,Nuckolls,rest,Private sectors not disclosed (private jobs less published sectors),125.916667,130.25,computed
+31129,Nuckolls,priv,All private jobs,1099.75,1254.916667,published
+31129,Nuckolls,gov,"Government (federal, state and local)",387.166667,389.166667,published
+31129,Nuckolls,total,All payroll jobs,1486.916667,1644.083333,published
+31131,Otoe,ss1011,Natural resources and mining,,,withheld
+31131,Otoe,ss1012,Construction,,,withheld
+31131,Otoe,ss1013,Manufacturing,1423.916667,1204.833333,published
+31131,Otoe,ss1021,"Trade, transportation and utilities",983.0,991.166667,published
+31131,Otoe,ss1022,Information,48.916667,34.833333,published
+31131,Otoe,ss1023,Financial activities,203.333333,210.166667,published
+31131,Otoe,ss1024,Professional and business services,176.583333,273.583333,published
+31131,Otoe,ss1025,Education and health services,662.333333,638.916667,published
+31131,Otoe,ss1026,Leisure and hospitality,776.166667,889.333333,published
+31131,Otoe,ss1027,Other services,150.0,83.5,published
+31131,Otoe,rest,Private sectors not disclosed (private jobs less published sectors),458.833333,463.916667,computed
+31131,Otoe,priv,All private jobs,4883.083333,4790.25,published
+31131,Otoe,gov,"Government (federal, state and local)",1385.166667,1470.75,published
+31131,Otoe,total,All payroll jobs,6268.25,6261.0,published
+31133,Pawnee,ss1011,Natural resources and mining,,,withheld
+31133,Pawnee,ss1012,Construction,,,withheld
+31133,Pawnee,ss1013,Manufacturing,172.666667,128.416667,published
+31133,Pawnee,ss1021,"Trade, transportation and utilities",87.166667,99.75,published
+31133,Pawnee,ss1022,Information,,,withheld
+31133,Pawnee,ss1023,Financial activities,43.833333,44.0,published
+31133,Pawnee,ss1024,Professional and business services,,,withheld
+31133,Pawnee,ss1025,Education and health services,62.333333,35.0,published
+31133,Pawnee,ss1026,Leisure and hospitality,24.083333,27.75,published
+31133,Pawnee,ss1027,Other services,,,withheld
+31133,Pawnee,rest,Private sectors not disclosed (private jobs less published sectors),75.416667,77.333333,computed
+31133,Pawnee,priv,All private jobs,465.5,412.25,published
+31133,Pawnee,gov,"Government (federal, state and local)",267.666667,275.083333,published
+31133,Pawnee,total,All payroll jobs,733.166667,687.333333,published
+31135,Perkins,ss1011,Natural resources and mining,,,withheld
+31135,Perkins,ss1012,Construction,,,withheld
+31135,Perkins,ss1013,Manufacturing,,,withheld
+31135,Perkins,ss1021,"Trade, transportation and utilities",288.833333,326.833333,published
+31135,Perkins,ss1022,Information,,,withheld
+31135,Perkins,ss1023,Financial activities,,,withheld
+31135,Perkins,ss1024,Professional and business services,47.583333,56.333333,published
+31135,Perkins,ss1025,Education and health services,59.666667,28.75,published
+31135,Perkins,ss1026,Leisure and hospitality,,,withheld
+31135,Perkins,ss1027,Other services,,,withheld
+31135,Perkins,rest,Private sectors not disclosed (private jobs less published sectors),324.083333,337.083333,computed
+31135,Perkins,priv,All private jobs,720.166667,749.0,published
+31135,Perkins,gov,"Government (federal, state and local)",425.916667,407.75,published
+31135,Perkins,total,All payroll jobs,1146.083333,1156.75,published
+31137,Phelps,ss1011,Natural resources and mining,376.5,427.333333,published
+31137,Phelps,ss1012,Construction,,,withheld
+31137,Phelps,ss1013,Manufacturing,,,withheld
+31137,Phelps,ss1021,"Trade, transportation and utilities",937.916667,1463.166667,published
+31137,Phelps,ss1022,Information,27.0,23.0,published
+31137,Phelps,ss1023,Financial activities,174.5,178.083333,published
+31137,Phelps,ss1024,Professional and business services,276.083333,189.5,published
+31137,Phelps,ss1025,Education and health services,667.083333,922.916667,published
+31137,Phelps,ss1026,Leisure and hospitality,404.083333,330.75,published
+31137,Phelps,ss1027,Other services,96.083333,125.666667,published
+31137,Phelps,rest,Private sectors not disclosed (private jobs less published sectors),1013.0,450.083333,computed
+31137,Phelps,priv,All private jobs,3972.25,4110.5,published
+31137,Phelps,gov,"Government (federal, state and local)",767.083333,755.416667,published
+31137,Phelps,total,All payroll jobs,4739.333333,4865.916667,published
+31139,Pierce,ss1011,Natural resources and mining,81.5,100.833333,published
+31139,Pierce,ss1012,Construction,182.083333,287.833333,published
+31139,Pierce,ss1013,Manufacturing,96.083333,85.25,published
+31139,Pierce,ss1021,"Trade, transportation and utilities",437.166667,407.083333,published
+31139,Pierce,ss1022,Information,41.333333,38.75,published
+31139,Pierce,ss1023,Financial activities,101.333333,98.333333,published
+31139,Pierce,ss1024,Professional and business services,121.416667,139.416667,published
+31139,Pierce,ss1025,Education and health services,283.083333,324.0,published
+31139,Pierce,ss1026,Leisure and hospitality,131.666667,135.166667,published
+31139,Pierce,ss1027,Other services,35.0,26.25,published
+31139,Pierce,priv,All private jobs,1510.666667,1642.916667,published
+31139,Pierce,gov,"Government (federal, state and local)",406.083333,410.916667,published
+31139,Pierce,total,All payroll jobs,1916.75,2053.833333,published
+31141,Platte,ss1011,Natural resources and mining,572.666667,612.083333,published
+31141,Platte,ss1012,Construction,1051.416667,1346.333333,published
+31141,Platte,ss1013,Manufacturing,6059.416667,5902.5,published
+31141,Platte,ss1021,"Trade, transportation and utilities",3284.916667,3222.166667,published
+31141,Platte,ss1022,Information,81.75,103.0,published
+31141,Platte,ss1023,Financial activities,626.416667,626.583333,published
+31141,Platte,ss1024,Professional and business services,964.75,790.75,published
+31141,Platte,ss1025,Education and health services,2002.583333,2104.916667,published
+31141,Platte,ss1026,Leisure and hospitality,1447.416667,1711.75,published
+31141,Platte,ss1027,Other services,387.666667,686.75,published
+31141,Platte,priv,All private jobs,16479.0,17106.833333,published
+31141,Platte,gov,"Government (federal, state and local)",2731.666667,2844.583333,published
+31141,Platte,total,All payroll jobs,19210.666667,19951.416667,published
+31143,Polk,ss1011,Natural resources and mining,165.666667,194.75,published
+31143,Polk,ss1012,Construction,,,withheld
+31143,Polk,ss1013,Manufacturing,,,withheld
+31143,Polk,ss1021,"Trade, transportation and utilities",338.083333,302.666667,published
+31143,Polk,ss1022,Information,,,withheld
+31143,Polk,ss1023,Financial activities,46.0,45.0,published
+31143,Polk,ss1024,Professional and business services,,,withheld
+31143,Polk,ss1025,Education and health services,191.083333,183.25,published
+31143,Polk,ss1026,Leisure and hospitality,,,withheld
+31143,Polk,ss1027,Other services,,,withheld
+31143,Polk,rest,Private sectors not disclosed (private jobs less published sectors),187.833333,159.166667,computed
+31143,Polk,priv,All private jobs,928.666667,884.833333,published
+31143,Polk,gov,"Government (federal, state and local)",544.75,527.416667,published
+31143,Polk,total,All payroll jobs,1473.416667,1412.25,published
+31145,Red Willow,ss1011,Natural resources and mining,220.75,193.0,published
+31145,Red Willow,ss1012,Construction,189.833333,216.583333,published
+31145,Red Willow,ss1013,Manufacturing,414.583333,350.083333,published
+31145,Red Willow,ss1021,"Trade, transportation and utilities",1121.083333,1150.25,published
+31145,Red Willow,ss1022,Information,74.166667,64.0,published
+31145,Red Willow,ss1023,Financial activities,215.75,213.583333,published
+31145,Red Willow,ss1024,Professional and business services,235.166667,206.5,published
+31145,Red Willow,ss1025,Education and health services,725.333333,733.0,published
+31145,Red Willow,ss1026,Leisure and hospitality,570.333333,554.583333,published
+31145,Red Willow,ss1027,Other services,128.916667,140.583333,published
+31145,Red Willow,priv,All private jobs,3895.916667,3822.166667,published
+31145,Red Willow,gov,"Government (federal, state and local)",1103.0,1060.166667,published
+31145,Red Willow,total,All payroll jobs,4998.916667,4882.333333,published
+31147,Richardson,ss1011,Natural resources and mining,32.083333,35.75,published
+31147,Richardson,ss1012,Construction,72.333333,77.833333,published
+31147,Richardson,ss1013,Manufacturing,272.0,169.166667,published
+31147,Richardson,ss1021,"Trade, transportation and utilities",466.0,431.25,published
+31147,Richardson,ss1022,Information,32.25,19.75,published
+31147,Richardson,ss1023,Financial activities,103.083333,89.833333,published
+31147,Richardson,ss1024,Professional and business services,103.5,124.333333,published
+31147,Richardson,ss1025,Education and health services,450.166667,454.25,published
+31147,Richardson,ss1026,Leisure and hospitality,198.666667,179.166667,published
+31147,Richardson,ss1027,Other services,75.0,67.75,published
+31147,Richardson,priv,All private jobs,1805.083333,1649.083333,published
+31147,Richardson,gov,"Government (federal, state and local)",657.416667,656.666667,published
+31147,Richardson,total,All payroll jobs,2462.5,2305.75,published
+31149,Rock,ss1011,Natural resources and mining,,,withheld
+31149,Rock,ss1012,Construction,,,withheld
+31149,Rock,ss1013,Manufacturing,,,withheld
+31149,Rock,ss1021,"Trade, transportation and utilities",119.916667,128.666667,published
+31149,Rock,ss1022,Information,,,withheld
+31149,Rock,ss1023,Financial activities,15.583333,15.416667,published
+31149,Rock,ss1024,Professional and business services,,,withheld
+31149,Rock,ss1025,Education and health services,,,withheld
+31149,Rock,ss1026,Leisure and hospitality,,,withheld
+31149,Rock,ss1027,Other services,,,withheld
+31149,Rock,rest,Private sectors not disclosed (private jobs less published sectors),87.25,99.25,computed
+31149,Rock,priv,All private jobs,222.75,243.333333,published
+31149,Rock,gov,"Government (federal, state and local)",236.666667,229.833333,published
+31149,Rock,total,All payroll jobs,459.416667,473.166667,published
+31151,Saline,ss1011,Natural resources and mining,67.583333,79.333333,published
+31151,Saline,ss1012,Construction,106.083333,145.75,published
+31151,Saline,ss1013,Manufacturing,2898.666667,2643.5,published
+31151,Saline,ss1021,"Trade, transportation and utilities",956.083333,906.833333,published
+31151,Saline,ss1022,Information,,,withheld
+31151,Saline,ss1023,Financial activities,167.666667,171.416667,published
+31151,Saline,ss1024,Professional and business services,202.416667,158.083333,published
+31151,Saline,ss1025,Education and health services,699.583333,637.166667,published
+31151,Saline,ss1026,Leisure and hospitality,308.416667,321.166667,published
+31151,Saline,ss1027,Other services,,,withheld
+31151,Saline,rest,Private sectors not disclosed (private jobs less published sectors),116.333333,113.0,computed
+31151,Saline,priv,All private jobs,5522.833333,5176.25,published
+31151,Saline,gov,"Government (federal, state and local)",1485.75,1403.833333,published
+31151,Saline,total,All payroll jobs,7008.583333,6580.083333,published
+31153,Sarpy,ss1011,Natural resources and mining,80.583333,126.083333,published
+31153,Sarpy,ss1012,Construction,7541.0,9655.166667,published
+31153,Sarpy,ss1013,Manufacturing,3353.166667,3670.333333,published
+31153,Sarpy,ss1021,"Trade, transportation and utilities",22051.666667,24943.0,published
+31153,Sarpy,ss1022,Information,1069.583333,993.083333,published
+31153,Sarpy,ss1023,Financial activities,5485.916667,3461.5,published
+31153,Sarpy,ss1024,Professional and business services,7715.583333,8908.166667,published
+31153,Sarpy,ss1025,Education and health services,7191.416667,9232.833333,published
+31153,Sarpy,ss1026,Leisure and hospitality,7081.333333,9620.0,published
+31153,Sarpy,ss1027,Other services,1483.666667,2169.166667,published
+31153,Sarpy,priv,All private jobs,63053.916667,72779.333333,published
+31153,Sarpy,gov,"Government (federal, state and local)",10129.083333,10992.25,published
+31153,Sarpy,total,All payroll jobs,73183.0,83771.583333,published
+31155,Saunders,ss1011,Natural resources and mining,168.083333,231.166667,published
+31155,Saunders,ss1012,Construction,601.666667,736.666667,published
+31155,Saunders,ss1013,Manufacturing,438.666667,384.583333,published
+31155,Saunders,ss1021,"Trade, transportation and utilities",1002.833333,1037.0,published
+31155,Saunders,ss1022,Information,74.0,54.166667,published
+31155,Saunders,ss1023,Financial activities,242.083333,262.5,published
+31155,Saunders,ss1024,Professional and business services,316.833333,405.833333,published
+31155,Saunders,ss1025,Education and health services,475.166667,534.5,published
+31155,Saunders,ss1026,Leisure and hospitality,460.0,655.333333,published
+31155,Saunders,ss1027,Other services,75.583333,135.25,published
+31155,Saunders,priv,All private jobs,3854.916667,4437.0,published
+31155,Saunders,gov,"Government (federal, state and local)",1647.416667,1619.083333,published
+31155,Saunders,total,All payroll jobs,5502.333333,6056.083333,published
+31157,Scotts Bluff,ss1011,Natural resources and mining,279.75,243.666667,published
+31157,Scotts Bluff,ss1012,Construction,876.166667,1242.0,published
+31157,Scotts Bluff,ss1013,Manufacturing,963.666667,1071.583333,published
+31157,Scotts Bluff,ss1021,"Trade, transportation and utilities",3458.833333,3479.75,published
+31157,Scotts Bluff,ss1022,Information,274.166667,203.166667,published
+31157,Scotts Bluff,ss1023,Financial activities,695.666667,538.75,published
+31157,Scotts Bluff,ss1024,Professional and business services,1366.583333,1031.0,published
+31157,Scotts Bluff,ss1025,Education and health services,2900.916667,2658.25,published
+31157,Scotts Bluff,ss1026,Leisure and hospitality,1772.583333,1639.666667,published
+31157,Scotts Bluff,ss1027,Other services,436.5,444.666667,published
+31157,Scotts Bluff,priv,All private jobs,13024.833333,12552.5,published
+31157,Scotts Bluff,gov,"Government (federal, state and local)",3261.75,3266.666667,published
+31157,Scotts Bluff,total,All payroll jobs,16286.583333,15819.166667,published
+31159,Seward,ss1011,Natural resources and mining,151.583333,296.0,published
+31159,Seward,ss1012,Construction,453.0,484.5,published
+31159,Seward,ss1013,Manufacturing,1069.333333,760.0,published
+31159,Seward,ss1021,"Trade, transportation and utilities",1128.25,1043.416667,published
+31159,Seward,ss1022,Information,46.166667,46.083333,published
+31159,Seward,ss1023,Financial activities,244.083333,238.833333,published
+31159,Seward,ss1024,Professional and business services,269.583333,250.333333,published
+31159,Seward,ss1025,Education and health services,992.166667,995.25,published
+31159,Seward,ss1026,Leisure and hospitality,457.5,524.166667,published
+31159,Seward,ss1027,Other services,135.333333,145.083333,published
+31159,Seward,priv,All private jobs,4947.0,4783.666667,published
+31159,Seward,gov,"Government (federal, state and local)",1136.166667,1250.416667,published
+31159,Seward,total,All payroll jobs,6083.166667,6034.083333,published
+31161,Sheridan,ss1011,Natural resources and mining,208.25,184.416667,published
+31161,Sheridan,ss1012,Construction,,,withheld
+31161,Sheridan,ss1013,Manufacturing,,,withheld
+31161,Sheridan,ss1021,"Trade, transportation and utilities",312.916667,367.583333,published
+31161,Sheridan,ss1022,Information,,,withheld
+31161,Sheridan,ss1023,Financial activities,106.583333,97.833333,published
+31161,Sheridan,ss1024,Professional and business services,,,withheld
+31161,Sheridan,ss1025,Education and health services,123.833333,95.75,published
+31161,Sheridan,ss1026,Leisure and hospitality,89.416667,103.5,published
+31161,Sheridan,ss1027,Other services,44.333333,47.333333,published
+31161,Sheridan,rest,Private sectors not disclosed (private jobs less published sectors),187.5,185.166667,computed
+31161,Sheridan,priv,All private jobs,1072.833333,1081.583333,published
+31161,Sheridan,gov,"Government (federal, state and local)",623.583333,640.5,published
+31161,Sheridan,total,All payroll jobs,1696.416667,1722.083333,published
+31163,Sherman,ss1011,Natural resources and mining,,,withheld
+31163,Sherman,ss1012,Construction,,,withheld
+31163,Sherman,ss1013,Manufacturing,,,withheld
+31163,Sherman,ss1021,"Trade, transportation and utilities",175.0,184.833333,published
+31163,Sherman,ss1022,Information,,,withheld
+31163,Sherman,ss1023,Financial activities,31.333333,27.916667,published
+31163,Sherman,ss1024,Professional and business services,,,withheld
+31163,Sherman,ss1025,Education and health services,139.916667,54.75,published
+31163,Sherman,ss1026,Leisure and hospitality,81.666667,86.0,published
+31163,Sherman,ss1027,Other services,,,withheld
+31163,Sherman,rest,Private sectors not disclosed (private jobs less published sectors),132.5,92.0,computed
+31163,Sherman,priv,All private jobs,560.416667,445.5,published
+31163,Sherman,gov,"Government (federal, state and local)",216.75,217.166667,published
+31163,Sherman,total,All payroll jobs,777.166667,662.666667,published
+31165,Sioux,ss1011,Natural resources and mining,39.916667,68.416667,published
+31165,Sioux,ss1021,"Trade, transportation and utilities",13.5,16.0,published
+31165,Sioux,ss1023,Financial activities,,,withheld
+31165,Sioux,ss1024,Professional and business services,,,withheld
+31165,Sioux,ss1025,Education and health services,,,withheld
+31165,Sioux,ss1026,Leisure and hospitality,,,withheld
+31165,Sioux,rest,Private sectors not disclosed (private jobs less published sectors),16.833333,17.0,computed
+31165,Sioux,priv,All private jobs,70.25,101.416667,published
+31165,Sioux,gov,"Government (federal, state and local)",,,withheld
+31165,Sioux,total,All payroll jobs,151.166667,176.333333,published
+31167,Stanton,ss1011,Natural resources and mining,157.333333,171.333333,published
+31167,Stanton,ss1012,Construction,,,withheld
+31167,Stanton,ss1013,Manufacturing,,,withheld
+31167,Stanton,ss1021,"Trade, transportation and utilities",132.083333,135.583333,published
+31167,Stanton,ss1022,Information,,,withheld
+31167,Stanton,ss1023,Financial activities,36.916667,34.583333,published
+31167,Stanton,ss1024,Professional and business services,,,withheld
+31167,Stanton,ss1025,Education and health services,,,withheld
+31167,Stanton,ss1026,Leisure and hospitality,39.333333,32.833333,published
+31167,Stanton,ss1027,Other services,21.916667,17.25,published
+31167,Stanton,rest,Private sectors not disclosed (private jobs less published sectors),629.083333,617.25,computed
+31167,Stanton,priv,All private jobs,1016.666667,1008.833333,published
+31167,Stanton,gov,"Government (federal, state and local)",288.583333,319.166667,published
+31167,Stanton,total,All payroll jobs,1305.25,1328.0,published
+31169,Thayer,ss1011,Natural resources and mining,125.0,131.083333,published
+31169,Thayer,ss1012,Construction,89.833333,87.666667,published
+31169,Thayer,ss1013,Manufacturing,514.083333,437.583333,published
+31169,Thayer,ss1021,"Trade, transportation and utilities",435.0,425.833333,published
+31169,Thayer,ss1022,Information,11.25,7.333333,published
+31169,Thayer,ss1023,Financial activities,134.5,122.5,published
+31169,Thayer,ss1024,Professional and business services,21.166667,21.25,published
+31169,Thayer,ss1025,Education and health services,155.916667,134.416667,published
+31169,Thayer,ss1026,Leisure and hospitality,88.5,113.333333,published
+31169,Thayer,ss1027,Other services,51.25,53.916667,published
+31169,Thayer,priv,All private jobs,1626.5,1534.916667,published
+31169,Thayer,gov,"Government (federal, state and local)",660.666667,663.916667,published
+31169,Thayer,total,All payroll jobs,2287.166667,2198.833333,published
+31171,Thomas,ss1011,Natural resources and mining,,,withheld
+31171,Thomas,ss1012,Construction,,,withheld
+31171,Thomas,ss1013,Manufacturing,,,withheld
+31171,Thomas,ss1021,"Trade, transportation and utilities",44.583333,47.583333,published
+31171,Thomas,ss1023,Financial activities,,,withheld
+31171,Thomas,ss1024,Professional and business services,,,withheld
+31171,Thomas,ss1025,Education and health services,,,withheld
+31171,Thomas,ss1026,Leisure and hospitality,,,withheld
+31171,Thomas,ss1027,Other services,,,withheld
+31171,Thomas,rest,Private sectors not disclosed (private jobs less published sectors),104.5,99.5,computed
+31171,Thomas,priv,All private jobs,149.083333,147.083333,published
+31171,Thomas,gov,"Government (federal, state and local)",,,withheld
+31171,Thomas,total,All payroll jobs,246.666667,228.0,published
+31173,Thurston,ss1011,Natural resources and mining,,,withheld
+31173,Thurston,ss1012,Construction,,,withheld
+31173,Thurston,ss1013,Manufacturing,180.083333,144.916667,published
+31173,Thurston,ss1021,"Trade, transportation and utilities",273.833333,278.25,published
+31173,Thurston,ss1022,Information,,,withheld
+31173,Thurston,ss1023,Financial activities,80.5,69.916667,published
+31173,Thurston,ss1024,Professional and business services,112.0,182.416667,published
+31173,Thurston,ss1025,Education and health services,295.666667,99.083333,published
+31173,Thurston,ss1026,Leisure and hospitality,,,withheld
+31173,Thurston,ss1027,Other services,,,withheld
+31173,Thurston,rest,Private sectors not disclosed (private jobs less published sectors),174.5,218.083333,computed
+31173,Thurston,priv,All private jobs,1116.583333,992.666667,published
+31173,Thurston,gov,"Government (federal, state and local)",,,withheld
+31173,Thurston,total,All payroll jobs,3035.916667,3330.25,published
+31175,Valley,ss1011,Natural resources and mining,150.75,154.583333,published
+31175,Valley,ss1012,Construction,97.25,104.0,published
+31175,Valley,ss1013,Manufacturing,106.333333,103.333333,published
+31175,Valley,ss1021,"Trade, transportation and utilities",424.416667,438.666667,published
+31175,Valley,ss1022,Information,,,withheld
+31175,Valley,ss1023,Financial activities,71.583333,75.583333,published
+31175,Valley,ss1024,Professional and business services,79.0,68.0,published
+31175,Valley,ss1025,Education and health services,157.083333,128.666667,published
+31175,Valley,ss1026,Leisure and hospitality,,,withheld
+31175,Valley,ss1027,Other services,,,withheld
+31175,Valley,rest,Private sectors not disclosed (private jobs less published sectors),146.416667,113.083333,computed
+31175,Valley,priv,All private jobs,1232.833333,1185.916667,published
+31175,Valley,gov,"Government (federal, state and local)",592.583333,580.416667,published
+31175,Valley,total,All payroll jobs,1825.416667,1766.333333,published
+31177,Washington,ss1011,Natural resources and mining,278.75,264.916667,published
+31177,Washington,ss1012,Construction,804.0,973.083333,published
+31177,Washington,ss1013,Manufacturing,1285.833333,1361.25,published
+31177,Washington,ss1021,"Trade, transportation and utilities",1446.5,2057.083333,published
+31177,Washington,ss1022,Information,247.25,100.0,published
+31177,Washington,ss1023,Financial activities,324.583333,198.0,published
+31177,Washington,ss1024,Professional and business services,773.416667,842.833333,published
+31177,Washington,ss1025,Education and health services,634.333333,728.083333,published
+31177,Washington,ss1026,Leisure and hospitality,518.583333,578.833333,published
+31177,Washington,ss1027,Other services,197.333333,245.666667,published
+31177,Washington,priv,All private jobs,6510.583333,7349.75,published
+31177,Washington,gov,"Government (federal, state and local)",1210.166667,1074.75,published
+31177,Washington,total,All payroll jobs,7720.75,8424.5,published
+31179,Wayne,ss1011,Natural resources and mining,142.416667,154.666667,published
+31179,Wayne,ss1012,Construction,74.75,110.166667,published
+31179,Wayne,ss1013,Manufacturing,886.5,651.5,published
+31179,Wayne,ss1021,"Trade, transportation and utilities",839.083333,652.083333,published
+31179,Wayne,ss1022,Information,36.0,31.0,published
+31179,Wayne,ss1023,Financial activities,328.916667,145.75,published
+31179,Wayne,ss1024,Professional and business services,90.583333,135.0,published
+31179,Wayne,ss1025,Education and health services,458.166667,475.333333,published
+31179,Wayne,ss1026,Leisure and hospitality,326.75,354.833333,published
+31179,Wayne,ss1027,Other services,50.75,38.25,published
+31179,Wayne,priv,All private jobs,3233.916667,2748.583333,published
+31179,Wayne,gov,"Government (federal, state and local)",,,withheld
+31179,Wayne,total,All payroll jobs,4294.75,4014.416667,published
+31181,Webster,ss1011,Natural resources and mining,115.333333,117.0,published
+31181,Webster,ss1012,Construction,,,withheld
+31181,Webster,ss1013,Manufacturing,,,withheld
+31181,Webster,ss1021,"Trade, transportation and utilities",242.75,263.916667,published
+31181,Webster,ss1022,Information,,,withheld
+31181,Webster,ss1023,Financial activities,32.666667,31.416667,published
+31181,Webster,ss1024,Professional and business services,,,withheld
+31181,Webster,ss1025,Education and health services,145.166667,111.0,published
+31181,Webster,ss1026,Leisure and hospitality,57.916667,46.916667,published
+31181,Webster,ss1027,Other services,,,withheld
+31181,Webster,rest,Private sectors not disclosed (private jobs less published sectors),128.333333,123.25,computed
+31181,Webster,priv,All private jobs,722.166667,693.5,published
+31181,Webster,gov,"Government (federal, state and local)",,,withheld
+31181,Webster,total,All payroll jobs,1047.583333,1055.083333,published
+31183,Wheeler,ss1011,Natural resources and mining,,,withheld
+31183,Wheeler,ss1012,Construction,,,withheld
+31183,Wheeler,ss1013,Manufacturing,,,withheld
+31183,Wheeler,ss1021,"Trade, transportation and utilities",58.416667,45.25,published
+31183,Wheeler,ss1023,Financial activities,,,withheld
+31183,Wheeler,ss1024,Professional and business services,,,withheld
+31183,Wheeler,ss1025,Education and health services,,,withheld
+31183,Wheeler,ss1026,Leisure and hospitality,,,withheld
+31183,Wheeler,ss1027,Other services,,,withheld
+31183,Wheeler,rest,Private sectors not disclosed (private jobs less published sectors),172.166667,180.416667,computed
+31183,Wheeler,priv,All private jobs,230.583333,225.666667,published
+31183,Wheeler,gov,"Government (federal, state and local)",,,withheld
+31183,Wheeler,total,All payroll jobs,302.25,300.166667,published
+31185,York,ss1011,Natural resources and mining,461.583333,377.833333,published
+31185,York,ss1012,Construction,299.0,308.333333,published
+31185,York,ss1013,Manufacturing,960.416667,1044.666667,published
+31185,York,ss1021,"Trade, transportation and utilities",1420.916667,1486.666667,published
+31185,York,ss1022,Information,74.833333,63.333333,published
+31185,York,ss1023,Financial activities,417.416667,387.5,published
+31185,York,ss1024,Professional and business services,554.916667,578.416667,published
+31185,York,ss1025,Education and health services,1175.833333,1182.916667,published
+31185,York,ss1026,Leisure and hospitality,862.666667,796.416667,published
+31185,York,ss1027,Other services,297.0,298.416667,published
+31185,York,priv,All private jobs,6524.583333,6524.5,published
+31185,York,gov,"Government (federal, state and local)",1125.833333,1200.5,published
+31185,York,total,All payroll jobs,7650.416667,7725.0,published

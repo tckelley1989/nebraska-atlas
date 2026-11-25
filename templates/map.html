@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block hero %}
+<section class="hero"><div class="wrap">
+<p class="crumb">{{ count }} {{ noun }} · key indicators</p>
+<h1 class="wide">{{ heading|upper }}</h1>
+</div></section>
+{% endblock %}
+{% block main %}
+<div class="mapgrid">
+<nav class="picker" aria-label="Key indicators">
+<p class="label">Key indicators</p>
+{% for ind in indicators %}<button type="button" data-k="{{ ind.key }}"{% if loop.first %} aria-pressed="true"{% else %} aria-pressed="false"{% endif %}>{{ ind.short }}</button>{% endfor %}
+</nav>
+<div class="mapcol">
+{% for ind in indicators %}
+<section class="ind" data-k="{{ ind.key }}"{% if not loop.first %} hidden{% endif %}>
+<h2 class="sect">{{ ind.label }}</h2>
+<p class="quiet">{{ ind.note }}</p>
+<div class="legend" aria-label="Legend">{% for l in ind.legend %}<div><span class="sw {{ l.cls }}"></span><span>{{ l.label }}</span><span class="quiet">{{ l.count }}</span></div>{% endfor %}{% if ind.missing %}<div><span class="sw na"></span><span>{{ ind.missing_label or 'Not available' }}</span><span class="quiet">{{ ind.missing }}</span></div>{% endif %}</div>
+</section>
+{% endfor %}
+<svg class="map" viewBox="{{ view_box }}" role="img" aria-label="{{ heading }} map">
+{% for p in paths %}<a href="{{ root }}{{ p.href }}"><path id="p{{ p.id }}" class="{{ p.cls }}" d="{{ p.d }}"><title>{{ p.name }}</title></path></a>
+{% endfor %}</svg>
+{% for ind in indicators %}
+<div class="ranks" data-k="{{ ind.key }}"{% if not loop.first %} hidden{% endif %}>
+<p class="quiet">{{ ind.period }} · Source: {{ ind.source }}{% if ind.median %} · Median {{ ind.median }}{% endif %}</p>
+{% if ind.top %}
+<div class="two">
+<div><h3 class="label">Highest five</h3><ol>{% for r in ind.top %}<li><a href="{{ root }}{{ r.href }}">{{ r.name }}</a> <b class="{{ r.tone }}">{{ r.value }}</b></li>{% endfor %}</ol></div>
+<div><h3 class="label">Lowest five</h3><ol>{% for r in ind.bottom %}<li><a href="{{ root }}{{ r.href }}">{{ r.name }}</a> <b class="{{ r.tone }}">{{ r.value }}</b></li>{% endfor %}</ol></div>
+</div>
+{% endif %}
+</div>
+{% endfor %}
+</div>
+</div>
+<script>
+(function () {
+  var C = {{ classes_json|safe }}, ids = [{% for p in paths %}"p{{ p.id }}"{% if not loop.last %},{% endif %}{% endfor %}];
+  var els = ids.map(function (i) { return document.getElementById(i); });
+  document.querySelectorAll(".picker button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var k = b.getAttribute("data-k");
+      document.querySelectorAll(".picker button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      document.querySelectorAll(".ind, .ranks").forEach(function (s) { s.hidden = s.getAttribute("data-k") !== k; });
+      els.forEach(function (e, i) { e.setAttribute("class", C[k][i]); });
+    });
+  });
+})();
+</script>
+{% endblock %}

@@ -84,6 +84,7 @@ Labeled estimates, with their tested error, published on the About page and reco
 2. Every map uses exactly one ramp, shows its legend on screen, and labels the selected place with the charcoal-and-card outline.
 3. Every change number carries a + or − sign in text, tiles and tables.
 4. Bin count equals the registry `breaks` count plus one, and must match the ramp's step count. The test gate checks this.
+5. A percent change of +200% or more (three times the base) is shown as the multiple, "12.4 times", in tiles, tables and text. From a small base a percent that large misleads: a system that got $84 per student in 2019-20 and $3,306 now is "39.3 times", not "+3,835.7%". Downloads keep the raw percent, and map colors are unchanged, since those values already fall in the top bin. Declines are bounded at −100% and always show as percents. Source: `fmt.pct_change()`.
 
 ## 9. School receipts and the state share
 
@@ -95,5 +96,7 @@ Labeled estimates, with their tested error, published on the About page and reco
 
 ## Open items for v2
 
-- The percent-change floor for small bases beyond the four `small_base` measures was set by hand in November in published page code and was never written back to the pipeline. Write the rule here before Phase 2.
-- Confirm the tier medians shown beside tier totals in Findings follow rule 1.1 and the "median county" note on the About page.
+None. Closed November 25, 2026:
+
+- The percent-change floor is rule 8.5.
+- Tier figures in Findings follow rule 1.1: every tier change it quotes equals its counties' summed levels (`test_tier_changes_sum_counts_first`), and none matches the median county. v2 shows no median county in Findings, so v1's "median county" note has no counterpart. Medians appear only on profile tiles, labeled "Median".

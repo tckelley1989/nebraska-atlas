@@ -99,7 +99,7 @@ def system_page(a, code: str) -> dict:
         ]
         for label, x0, x1, f_ in pairs:
             ch = (x1 / x0 - 1) * 100 if x0 else None
-            since.append({"label": label, "base": f_(x0), "now": f_(x1), "change": fmt.signed(ch, 1, "%") if ch is not None else "n/a",
+            since.append({"label": label, "base": f_(x0), "now": f_(x1), "change": fmt.pct_change(ch) if ch is not None else "n/a",
                           "tone": "" if ch is None or round(ch, 1) == 0 else ("up" if ch > 0 else "down")})
     return {
         "code": code, "name": xw["display_name"], "counties": xw["counties"], "towns": xw["towns"].split("|") if xw["towns"] else [],

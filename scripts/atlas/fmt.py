@@ -9,6 +9,14 @@ def signed(x: float, digits: int = 1, suffix: str = "") -> str:
     return ("+" if x > 0 else MINUS) + s
 
 
+def pct_change(x: float, digits: int = 1) -> str:
+    """A percent change. At three times the base or more (+200%), the multiple: a percent that large misleads
+    from a small base (methods spec 8.5)."""
+    if x >= 200:
+        return f"{1 + x / 100:,.1f} times"
+    return signed(x, digits, "%")
+
+
 def money(x: float, digits: int = 0) -> str:
     s = f"${abs(x):,.{digits}f}"
     return (MINUS + s) if x < 0 else s
@@ -29,7 +37,7 @@ def value(v, row: dict, fallback: str | None = None) -> str:
         return fallback or row.get("missing_label") or "Not available"
     diverging = row["scale"] == "diverging"
     if f == "pct_change":
-        return signed(v, 1, "%")
+        return pct_change(v)
     if f in ("pct", "rate"):
         return signed(v, 1, "%") if diverging else f"{v:,.1f}%"
     if f == "dollars":

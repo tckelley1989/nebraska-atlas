@@ -102,11 +102,6 @@ def build(a) -> dict:
                 cc[int(r["tax_year"])] = float(r["taxes_levied"])
     cc_last = max(cc)
     f["cc_tax0"], f["cc_tax1"], f["cc_year1"] = money_m(cc[2019]), money_m(cc[cc_last]), cc_last
-    for key, subj in (("ela", "nscas_ela"), ("math", "nscas_math")):
-        for x in ("poverty_ps", "ppc_adm", "aid_ps"):
-            r, n = _corr(a, subj, x)
-            f[f"r_{key}_{x}"] = fmt.signed(r, 2) if round(r, 2) != 0 else "0.00"
-            f[f"n_{key}"] = n
     return f
 
 

@@ -16,7 +16,7 @@ s03,system,ppc_adm|ppc_real_change,Spending level and its change share one serie
 s04,system,ppc_adm|need_ps|transportation_ps|special_receipts_ps,Need components are built from spending
 s05,system,lc2_gf_levy|lc2_unused_share,Levy and unused authority come from the same LC-2
 s06,system,val_ps|val_real_change|ag_share,"Valuation level, change and ag share share one base"
-s07,system,nscas_ela|nscas_math|nscas_scale_rel|nscas_vs_expected,Proficiency and scale-score measures share the same tests
+s07,system,nscas_ela|nscas_math|nscas_scale_rel,Proficiency and scale-score measures share the same tests
 s08,system,grad_rate|grad_rate_5yr,Four- and five-year rates share the same cohorts
 s09,system,act_benchmark|act_composite,ACT benchmark and composite share the same test
 s10,system,teacher_exp|teacher_inexp,Average experience and inexperienced share describe the same staff

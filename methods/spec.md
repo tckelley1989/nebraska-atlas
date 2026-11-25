@@ -33,26 +33,23 @@ Each rule below is a registry column, so the build applies it without page code.
 | Small base | `small_base_field`, `small_base_min` | Payroll job and wage change (under 1,000 payroll jobs); population change and net migration (under 1,000 residents) | Value shown with the `small_n_note` caution |
 | Survey margin of error | `acs_cv_over_30_greyed` | ACS income, poverty, education, broadband | Greyed and marked unreliable when the coefficient of variation is over 30%. ACS changes compare 2015-2019 with 2020-2024 and are called significant only at 90% confidence. ACS medians and percents get no tier or all-county value |
 | Minimum system size | `min_1000_formula_students` | Matched-cohort growth | Shown only for systems of 1,000 or more formula students. Below that, year-to-year rank correlation is 0.09 at 500+, 0.24 at 1,000+, 0.46 at 3,000+ (`indicators_nep.py`) |
-| Shrinkage | `shrunk_by_reliability` | Scores against similar systems | See section 4 |
 | Agency suppression | `nde_suppression_kept_blank` | NDE outcome and teacher measures | Blank with the missing label |
 
 Values an agency withholds are never estimated and never shown as zero.
 
-## 4. Scores against systems with similar students
+## 4. NSCAS results from grade rows
 
-Source: `expected_model()` in `pipeline/indicators_nep.py`.
+Source: `_grade_sum()` and `_totals()` in `pipeline/indicators_nep.py`; the audit sums the same cells independently in `audit/transforms/40_schools.sql`.
 
-1. Outcome: the grade-mix-adjusted NSCAS scale score against the state (ELA and math averaged).
-2. Weighted least squares, weighted by students tested, on child poverty (Census SAIPE, ages 5 to 17), English learner percent (0 with a withheld marker where NDE withholds it), special education percent, and log formula students and its square.
-3. The gap is actual minus fitted.
-4. Shrinkage: regress the squared gap on 1 / n, where n is students tested. The intercept is τ² (real difference) and the slope is k (sampling noise). Each system's reliability is
+NDE stopped publishing all-grades NSCAS rows with its 2025-26 Education Profile release (November 25, 2026). Every year is now built the same way:
 
-```latex
-\text{reliability} = \frac{\tau^2}{\tau^2 + k / n}
-```
+1. On track, advanced and tested counts are summed over grades 3 to 8, for all students and for each subgroup (free or reduced-price lunch, special education, English learners).
+2. A grade NDE marks "NA" had no students and is skipped. A grade NDE withholds ("*") blanks the total, because the rest would undercount.
+3. Grade 11, the alternate assessment, is left out. NDE withholds it for nearly every system.
+4. Percents are computed from the counts. NDE's own percent columns are not read.
+5. The scale score against the state uses the same cells: for grades 3 to 8, the system's grade average less the state's, weighted by the system's tested counts. Any withheld grade blanks it.
 
-5. Shown value = gap × reliability. Small systems are pulled toward zero; the fewer students tested, the more.
-6. The model runs only with 30 or more complete systems.
+NDE withholds most small grades, so these measures are blank for most systems: in 2025-26, English language arts for 211 of 244 systems and mathematics for 229. The earlier "scores against systems with similar students" model needed most systems and was dropped.
 
 ## 5. Relationship finder
 

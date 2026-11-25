@@ -49,3 +49,14 @@ def test_change_numbers_carry_signs():
     for p in list((SITE / "county").glob("*.html"))[:20]:
         for v in re.findall(r'<p class="big (?:up|down)">([^<]+)</p>', p.read_text(encoding="utf-8")):
             assert v[0] in "+−", (p.name, v)
+
+
+def test_key_eight_cover_most_places():
+    """A key measure that goes mostly blank (as NSCAS did with NDE's 2025-26 release) fails the build."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from atlas.data import Atlas
+    a = Atlas()
+    for level, n in (("system", 244), ("county", 93)):
+        for r in a.key_eight(level):
+            have = sum(1 for p in a.places(level) if a.value(level, p, r["key"]) is not None)
+            assert have >= 0.8 * n, (level, r["key"], have)

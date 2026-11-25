@@ -1,8 +1,8 @@
 {
-  "built_utc": "2026-11-25T16:13:16+00:00",
+  "built_utc": "2026-11-25T17:19:34+00:00",
   "source_repo": "nebraska-economy",
-  "source_commit": "a827840cf498d3dece145c9ebb507e880a8d4d53",
-  "note": "Seeded by hand from a local pipeline build for Phase 2 development; the pipeline replaces it on its first run.",
+  "source_commit": "095db57c97805264323cc6ceb977db6a6b80caa6",
+  "note": "Built locally from nebraska-economy fix-statsmodels with NDE's Nov 25 release; the pipeline replaces it on its next run.",
   "files": {
     "counties.csv": {
       "bytes": 50166,
@@ -25,8 +25,8 @@
       "sha256": "beee59c0213a03acbb79668dd6bdf350de042ce5830411473a1ae3de3ad6ac58"
     },
     "data_sd.js": {
-      "bytes": 1372998,
-      "sha256": "08fbb6ec0932f6ed6e5585440d0c5ee0995ea04ece5a97a2da85dc4845c16b5e"
+      "bytes": 1335905,
+      "sha256": "aa00b66fd6909f0451de5f41d70807ce1b08f32501774550a50dfc1c7a574cf8"
     },
     "deflators.csv": {
       "bytes": 687,
@@ -69,8 +69,8 @@
       "sha256": "678eb412e72bb8940e70a01f8d107d35d66147c52e49a78f109a2c924d12d58c"
     },
     "school_outcomes.csv": {
-      "bytes": 72723,
-      "sha256": "853350c3480af1d093e9efdd93b3ed71c0d225aa2bbdbf012c07cd36c7b7d8b4"
+      "bytes": 54227,
+      "sha256": "b7c4bce178e7720d54e13741820c052861a5ee8d3a0e9ba8874c60b0b6379439"
     },
     "school_revenue.csv": {
       "bytes": 407541,

@@ -115,6 +115,40 @@ def test_levy_relationships_lead_with_their_explanation():
     assert "A board&#39;s levy does not change its aid" in t or "A board's levy does not change its aid" in t
 
 
+def test_why_lines_cover_every_holding_result_and_claim_no_mechanism_without_arithmetic(atlas):
+    """Methods 5.9: every result that holds is explained; a direction word agrees with the sign beside it; a mechanism is
+    stated only where arithmetic links the pair (the TEEOSA formula, the levy's denominator, the property tax factors)."""
+    from atlas import dive
+    ptax = dive.Ptax(atlas)
+    VAL, LEVY = {"tv_ps", "val_ps"}, {"lc2_limit_levy", "lc2_gf_levy"}
+    for r in atlas.registry:
+        if r["format"] == "category":
+            continue
+        d = dive.Dive(atlas, r["level"], r["key"])
+        rel = d.relationships()
+        text = " ".join(t for _, t in dive.whys(d, rel, ptax))
+        low = text.lower()
+        holds = {x["key"] for x in rel["holds"]}
+        for x in rel["holds"]:
+            assert x["name"].lower() in low, (r["key"], x["name"])
+        for word, sign in re.findall(r"goes (with|against) [^()]*?\(([+−])", text):
+            assert (word == "with") == (sign == "+"), (r["key"], word, sign)
+        assert "runs through it, not between them" not in text, r["key"]
+        if "because the formula" in text:
+            assert ("aid_ps" in holds | {r["key"]}) and (VAL & (holds | {r["key"]})), r["key"]
+        if "divided by taxable valuation" in text:
+            assert r["key"] in LEVY or holds & LEVY, r["key"]
+        if "factors in step 3" in text:
+            assert r["level"] == "county" and "c07" in d.fam, r["key"]
+        if "does not change its aid" in text:
+            assert r["key"] == "aid_ps", r["key"]
+
+
+def test_no_empty_test_counts():
+    for p in (SITE / "dive").rglob("*.html"):
+        assert "0 of 0" not in p.read_text(encoding="utf-8"), p.name
+
+
 def test_landing_page(atlas):
     """The landing page's worked examples add to the certified total, its links resolve, and it carries no hard-coded
     figure the bundle does not produce (spot checks against the data)."""

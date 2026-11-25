@@ -77,7 +77,7 @@ def map_page(a, level: str) -> dict:
         bottom = [{"name": names[i], "href": f"{href}/{i}.html", "value": fmt.value(v, row), "tone": tone(row, v)} for v, i in ranked[:5]]
         st = a.stats(level, row["key"])
         indicators.append({
-            "key": row["key"], "label": row["label"], "short": row["short"], "note": row["note"], "period": row["period"],
+            "key": row["key"], "format": row["format"], "label": row["label"], "short": row["short"], "note": row["note"], "period": row["period"],
             "source": row["source"], "legend": legend, "missing": missing, "missing_label": row["missing_label"],
             "median": fmt.value(st["median"], row) if st["median"] is not None and row["format"] != "category" else None,
             "top": top, "bottom": bottom if row["format"] != "category" else [],

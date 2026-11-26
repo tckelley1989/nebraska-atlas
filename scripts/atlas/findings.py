@@ -76,6 +76,9 @@ def load(f: dict) -> list:
         m = re.match(r"---\n(.*?)\n---\n(.*)", text, re.S)
         meta = dict(line.split(": ", 1) for line in m.group(1).splitlines())
         body = env.from_string(m.group(2)).render(f=f)
+        lead, _, more = body.partition("<!-- more -->")
+        see = [dict(zip(("label", "href"), x.split("=", 1))) for x in meta["see"].split("|")] if meta.get("see") else []
         out.append({"n": f"{i:02d}", "slug": p.stem[3:], "headline": meta["headline"], "synthesis": meta.get("synthesis") == "true",
-                    "html": Markup(markdown.markdown(body)), "chart": Markup(chart(meta.get("chart", ""), f))})
+                    "html": Markup(markdown.markdown(lead)), "more": Markup(markdown.markdown(more)) if more.strip() else "",
+                    "source": meta.get("source", ""), "see": see, "chart": Markup(chart(meta.get("chart", ""), f))})
     return out

@@ -261,3 +261,6 @@ svg.map[hidden]{display:none}
 .swcard .axis{margin:10px 0 2px;font-size:13px}
 .swcard table.data th[scope=row]{font-weight:700;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink);border:0;padding:9px 8px;border-top:1px solid var(--rule)}
 @media (max-width:760px){.swcard{padding:14px 12px}}
+.fmore{margin-top:14px;border-top:1px solid var(--rule);padding-top:8px}
+.fmore summary{font-weight:700;cursor:pointer;padding:6px 0}
+.fmore .see{margin:10px 0 6px;line-height:1.7}

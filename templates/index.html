@@ -16,6 +16,11 @@
 <h2>{{ x.headline }}</h2>
 <div class="fbody">{{ x.html }}</div>
 {{ x.chart }}
+{% if x.more or x.see or x.source %}<details class="more fmore"><summary>More detail</summary>
+{% if x.more %}<div class="fbody">{{ x.more }}</div>{% endif %}
+{% if x.see %}<p class="see"><b>See it:</b> {% for l in x.see %}<a href="{{ root }}{{ l.href }}">{{ l.label }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>{% endif %}
+{% if x.source %}<p class="quiet">Source: {{ x.source }}</p>{% endif %}
+</details>{% endif %}
 </article>
 {% endfor %}
 {% endblock %}

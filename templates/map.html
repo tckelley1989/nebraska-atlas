@@ -186,6 +186,8 @@
       img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(txt);
     });
   });
+  var want = new URLSearchParams(location.search).get("ind"), wb = want && document.querySelector('.picker button[data-k="' + want + '"]');
+  if (wb) wb.click();
   if (location.hash === "#table") setView("table");
 })();
 </script>

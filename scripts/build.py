@@ -13,7 +13,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import json
-from atlas import pages, maps, facts, findings, about, dive, landing  # noqa: E402
+from atlas import statewide, pages, maps, facts, findings, about, dive, landing  # noqa: E402
 from atlas.data import Atlas  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -78,6 +78,8 @@ def main():
         (OUT / "county" / f"{fips}.csv").write_text(about.profile_csv(a, "county", fips, ctx["name"]), encoding="utf-8")
     for level, page, section in (("system", "schools.html", "schools"), ("county", "counties.html", "counties")):
         ctx = maps.map_page(a, level)
+        if level == "system":
+            ctx.update(statewide.build(a))
         write(page, "map.html", section=section, **ctx)
 
     # Deeper dive: one page per measure (design doc "Deeper Dive: Design")

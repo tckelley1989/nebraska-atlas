@@ -177,3 +177,22 @@ def test_map_pages_offer_png_and_svg_with_source_lines():
         periods = json.loads("{" + re.search(r"periods = \{(.*?)\};", t, re.S).group(1) + "}")
         keys = re.findall(r'<section class="ind" data-k="([^"]+)"', t)
         assert set(periods) == set(keys) and all("Source: " in v and len(v) > 12 for v in periods.values()), page
+
+
+def test_statewide_picture():
+    """Four sections, each with a lead, a desktop and a phone chart and a table; the formula need change bars add up."""
+    import html as h
+    t = (SITE / "schools.html").read_text(encoding="utf-8")
+    sw = t[t.index('<section class="statewide"'):]
+    ids = re.findall(r'<section class="swcard" id="([^"]+)"', sw)
+    assert ids == ["spending", "who-pays", "need", "request-cap"]
+    assert sw.count('<div class="w-desk">') == sw.count('<div class="w-phone">') == 4
+    assert sw.count("<table") == 4 and "—" not in sw
+    need = sw[sw.index('id="need"'):sw.index('id="request-cap"')]
+    svg = need[need.index("<svg"):need.index("</svg>")]
+    vals = [float(v.replace("−", "-").replace("+", "").replace("$", "").replace(",", "")) for v in re.findall(r'font-weight="700" fill="[^"]+">([+−]\$[\d,]+)<', svg)]
+    *parts, total = vals
+    assert abs(sum(parts) - total) <= len(parts), vals  # whole-dollar rounding
+    lead = h.unescape(re.search(r'<p class="dlead">(.*?)</p>', sw[sw.index('id="who-pays"'):], re.S).group(1))
+    a, b = map(float, re.search(r"So ([\d.]+) of the ([\d.]+)-point rise", lead).groups())
+    assert 0 <= a <= b

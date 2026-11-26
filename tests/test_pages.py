@@ -184,6 +184,7 @@ def test_statewide_picture():
     import html as h
     t = (SITE / "schools.html").read_text(encoding="utf-8")
     sw = t[t.index('<section class="statewide"'):]
+    sw = sw[:sw.index("<script>")]
     ids = re.findall(r'<section class="swcard" id="([^"]+)"', sw)
     assert ids == ["spending", "who-pays", "need", "request-cap"]
     assert sw.count('<div class="w-desk">') == sw.count('<div class="w-phone">') == 4

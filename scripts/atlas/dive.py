@@ -63,6 +63,16 @@ def tw(s, fs) -> float:  # text width estimate (Archivo)
     return len(str(s)) * fs * 0.55
 
 
+def wrap_words(text: str, fs: float, width: float) -> list:
+    lines, cur = [], ""
+    for w_ in text.split():
+        if cur and tw(cur + " " + w_, fs) > width:
+            lines.append(cur); cur = w_
+        else:
+            cur = (cur + " " + w_).strip()
+    return lines + [cur] if cur else lines
+
+
 def jit(code: str, span: float) -> float:
     return (int(hashlib.md5(code.encode()).hexdigest()[:6], 16) / 0xFFFFFF - 0.5) * span
 
@@ -330,7 +340,8 @@ def scatter(d: Dive, key: str, W: int) -> str:
     n = len(sc); mx = sum(xs) / n; my = sum(y for _, _, y in sc) / n
     sxx = sum((x - mx) ** 2 for x in xs) or 1
     b = sum((x - mx) * (y - my) for _, x, y in sc) / sxx; a0 = my - b * mx
-    s = svg_open(W, Bt + 46, f"{d.row['short']} against {prow['short']}, every {d.noun}", "scatter")
+    xl = wrap_words(f"{prow['short']}, {prow['period']}", 11.5, R - 4)  # the x title wraps when it is wider than the chart
+    s = svg_open(W, Bt + 46 + 15 * (len(xl) - 1), f"{d.row['short']} against {prow['short']}, every {d.noun}", "scatter")
     lab = Labels(W, Bt)
     s.append(f'<text x="0" y="13" font-size="12" fill="{SUB}">{esc(d.row["short"])}</text>'); lab.block((0, 0, tw(d.row["short"], 12) + 8, 18))
     for t in d.ticks(4 if phone else 6):
@@ -343,7 +354,8 @@ def scatter(d: Dive, key: str, W: int) -> str:
         s.append(f'<line x1="{SX(t):.1f}" x2="{SX(t):.1f}" y1="{T}" y2="{Bt}" stroke="{RULE}"/>'
                  f'<text x="{SX(t):.1f}" y="{Bt + 17}" font-size="11.5" fill="{SUB}" text-anchor="middle">{esc(tick_label(t, prow))}</text>')
         t += step
-    s.append(f'<text x="{R}" y="{Bt + 36}" font-size="11.5" fill="{SUB}" text-anchor="end">{esc(prow["short"])}, {esc(prow["period"])}</text>')
+    for i, line in enumerate(xl):
+        s.append(f'<text x="{R}" y="{Bt + 36 + 15 * i}" font-size="11.5" fill="{SUB}" text-anchor="end">{esc(line)}</text>')
     xa, xb = xlo, xhi
     if d.floor and b:
         bound = (ylo - a0) / b
@@ -613,6 +625,34 @@ def shared_names(a, level: str) -> dict:
     return {c: (r["display_name"] if level == "system" else r["name"] + " County") for c, r in xw.items()}
 
 
+def map_preview(a, level: str, key: str, ptax=None) -> dict:
+    """The map page's look at one indicator: the dive's all-places chart (written as separate files the page fetches)
+    and the measures that go with it more strongly than chance, strongest first."""
+    d = Dive(a, level, key)
+    rel = d.relationships()
+    holds = [r for r in rel["tested"] if r["holds"]]
+    top = [{"key": r["key"], "name": r["name"], "rho_f": sg(r["rho"]), "word": word(r["rho"])} for r in holds[:4]]
+    return {"desk": strip(d, DESK), "phone": strip(d, PHONE), "top": top, "n_holds": len(holds), "m": len(rel["tested"]),
+            "gname": "size band" if level == "system" else "tier", "noun": d.noun, "nouns": d.nouns}
+
+
+def shared_values(a, level: str) -> str:
+    """Every number measure's value for every place at one level, for scatters drawn in the browser (step 5 and the
+    map pages). Values keep 6 significant digits; the formats needed for axis labels come with them."""
+    codes = sorted(a.places(level))
+    meta, vals = {}, {}
+    for r in a.registry:
+        if r["level"] != level or r["format"] == "category":
+            continue
+        v = [a.value(level, c, r["key"]) for c in codes]
+        if not any(isinstance(x, (int, float)) for x in v):
+            continue
+        row = a.ind[(r["key"], level)]
+        meta[r["key"]] = {"short": row["short"], "period": row["period"], "format": row["format"], "scale": row["scale"]}
+        vals[r["key"]] = [float(f"{x:.6g}") if isinstance(x, (int, float)) else None for x in v]
+    return "window.DIVE_VALUES=" + json.dumps({"codes": codes, "meta": meta, "v": vals}, ensure_ascii=False, separators=(",", ":")) + ";"
+
+
 def shared_places(a, level: str, ptax) -> dict:
     """Place facts that do not change from one dive page to the next, one file each, cached by the browser once instead of
     inlined on every page: names for every page; the formula (systems) or the property tax arithmetic (counties) only for
@@ -705,7 +745,7 @@ def page(a, level: str, key: str, ptax=None) -> dict:
               f"half of all {nouns}, so a result from a few {nouns} never sits beside one from all of them.")
     ctx["s4_lead"] = s4
     ctx["whys"] = whys(d, rel, ptax)
-    ctx["tested"] = [dict(r, rho_f=sg(r["rho"]), word=word(r["rho"]), bar=corr_bar(r["rho"]), within_f=sg(r["within"])) for r in rel["tested"][:8]]
+    ctx["tested"] = [dict(r, rho_f=sg(r["rho"]), word=word(r["rho"]), bar=corr_bar(r["rho"]), within_f=sg(r["within"])) for r in rel["tested"]]
     ctx["m"] = m; ctx["min_n"] = rel["min_n"]; ctx["few"] = rel["few"]
     ctx["within_all"] = bool(holds) and not any(r["between"] for r in holds)
     ctx["holds_within"] = ", ".join(f'{r["name"]} ({sg(r["within"])})' for r in holds)
@@ -726,7 +766,15 @@ def page(a, level: str, key: str, ptax=None) -> dict:
              "pm": d.fv(pmed), "pn": len(peers), "pr": 1 + sum(1 for x in peers if d.v[x] > v),
              "pd": (f"{'equalized' if eqs[c] else 'not equalized'}, {grp.lower()} formula students" if level == "system" else grp.lower())}
         pl[c] = p
-    ctx["place_json"] = json.dumps({"level": level, "key": key, "noun": noun, "nouns": nouns, "chart": chart, "places": pl,
+    # step 5 for any measure: dive.js draws the scatter from the shared values file, with this page's y axis
+    drawn = {r["key"] for r in picks}
+    ctx["others"] = [dict(r, rho_f=sg(r["rho"]), word=word(r["rho"])) for r in rel["tested"] if r["key"] not in drawn]
+    ctx["others_few"] = [dict(r, rho_f=sg(r["rho"])) for r in rel["few"]]
+    rels = {r["key"]: {"rho": sg(r["rho"]), "word": word(r["rho"]), "holds": r["holds"], "name": r["name"]} for r in rel["tested"]}
+    rels.update({r["key"]: {"rho": sg(r["rho"]), "word": word(r["rho"]), "holds": False, "few": True, "name": r["name"]} for r in rel["few"]})
+    ax = {"lo": d.lo, "hi": d.hi, "clip": d.clip, "floor": d.floor, "short": row["short"],
+          "t6": [[t, tick_label(t, row)] for t in d.ticks(6)], "t4": [[t, tick_label(t, row)] for t in d.ticks(4)]}
+    ctx["place_json"] = json.dumps({"level": level, "key": key, "noun": noun, "nouns": nouns, "chart": chart, "places": pl, "rels": rels, "ax": ax,
                                     "y0": getattr(ptax, "y0", ""), "y1": getattr(ptax, "y1", ""),
                                     "d0": getattr(ptax, "d0", 0), "d1": getattr(ptax, "d1", 0), "aid_year": a.aid_year}, separators=(",", ":"))
     names = shared_names(a, level)

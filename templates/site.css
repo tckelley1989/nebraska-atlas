@@ -249,3 +249,6 @@ path.dd.on{stroke:var(--ink);stroke-width:2px}
 .maptable th.num{white-space:normal}
 svg.map[hidden]{display:none}
 .tablemode .legend,.tablemode .ranks .two{display:none}
+.dlrow{margin:12px 0 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.dlbtn{font:inherit;font-weight:700;font-size:14px;padding:6px 14px;min-height:36px;background:var(--card);color:var(--ink);border:1.5px solid var(--ink);cursor:pointer}
+.dlbtn:hover,.dlbtn:focus{background:var(--ink);color:var(--card)}

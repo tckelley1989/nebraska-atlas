@@ -19,6 +19,7 @@
 <div class="legend" aria-label="Legend">{% for l in ind.legend %}<div><span class="sw {{ l.cls }}"></span><span>{{ l.label }}</span><span class="quiet">{{ l.count }}</span></div>{% endfor %}{% if ind.missing %}<div><span class="sw na"></span><span>{{ ind.missing_label or 'Not available' }}</span><span class="quiet">{{ ind.missing }}</span></div>{% endif %}</div>
 </section>
 {% endfor %}
+<p class="dlrow"><span class="quiet">Download this map:</span> <button type="button" class="dlbtn" data-f="png">PNG</button> <button type="button" class="dlbtn" data-f="svg">SVG</button></p>
 <div class="viewtog" role="group" aria-label="View"><button type="button" data-v="map" aria-pressed="true">Map</button><button type="button" data-v="table" aria-pressed="false">Table</button></div>
 <div id="tableview" hidden>
 <p class="tfilter"><label for="tf">Find a {{ 'system' if level == 'system' else 'county' }}</label> <input id="tf" type="search" autocomplete="off"></p>
@@ -101,6 +102,69 @@
       document.querySelectorAll(".ind, .ranks").forEach(function (s) { s.hidden = s.getAttribute("data-k") !== k; });
       els.forEach(function (e, i) { e.setAttribute("class", C[k][i]); });
       cur = k; if (view === "table") draw();
+    });
+  });
+  // Downloads: a standalone picture of the map as shown, with its title, legend, period and source drawn in,
+  // colors resolved from the stylesheet so the file needs nothing else.
+  var NS = "http://www.w3.org/2000/svg", periods = { {% for ind in indicators %}"{{ ind.key }}": {{ (ind.period ~ " · Source: " ~ ind.source)|tojson }}{% if not loop.last %},{% endif %}{% endfor %} };
+  function mk(tag, at, txt) { var e = document.createElementNS(NS, tag); for (var k in at) e.setAttribute(k, at[k]); if (txt != null) e.textContent = txt; return e; }
+  function wrap(text, max) {
+    var words = String(text).split(" "), lines = [], line = "";
+    words.forEach(function (w) { if ((line + " " + w).trim().length > max) { lines.push(line.trim()); line = w; } else line += " " + w; });
+    if (line.trim()) lines.push(line.trim());
+    return lines;
+  }
+  function picture() {
+    var cs = getComputedStyle(document.body), font = cs.fontFamily, ink = cs.color, card = getComputedStyle(svg).backgroundColor;
+    var sub = getComputedStyle(document.querySelector(".quiet")).color, vb = svg.viewBox.baseVal, W = vb.width, P = 24;
+    var sec = document.querySelector('.ind[data-k="' + cur + '"]'), title = sec.querySelector("h2").textContent;
+    var tl = wrap(title, 70), top = P + tl.length * 30 + 6;
+    var items = [].slice.call(sec.querySelectorAll(".legend > div")).map(function (d) {
+      var sw = d.querySelector(".sw"), sp = d.querySelectorAll("span");
+      return { na: sw.classList.contains("na"), color: getComputedStyle(sw).backgroundColor, label: sp[1].textContent, n: sp[2] ? sp[2].textContent : "" };
+    });
+    var cols = 3, rowH = 26, legTop = top + vb.height + 18, legH = Math.ceil(items.length / cols) * rowH;
+    var foot = wrap(periods[cur], 130), H = legTop + legH + 12 + foot.length * 18 + P;
+    var out = mk("svg", { xmlns: NS, width: W + 2 * P, height: H, viewBox: "0 0 " + (W + 2 * P) + " " + H, "font-family": font });
+    var defs = mk("defs", {}), pat = mk("pattern", { id: "hatch", width: 6, height: 6, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" });
+    pat.appendChild(mk("rect", { width: 6, height: 6, fill: card })); pat.appendChild(mk("rect", { width: 2, height: 6, fill: sub, "fill-opacity": 0.45 }));
+    defs.appendChild(pat); out.appendChild(defs);
+    out.appendChild(mk("rect", { width: W + 2 * P, height: H, fill: card }));
+    tl.forEach(function (l, i) { out.appendChild(mk("text", { x: P, y: P + 22 + i * 30, "font-size": 24, "font-weight": 800, fill: ink }, l)); });
+    var g = mk("g", { transform: "translate(" + P + "," + top + ")" });
+    svg.querySelectorAll("path").forEach(function (p) {
+      var pc = getComputedStyle(p), na = p.getAttribute("class") === "na";
+      var q = mk("path", { d: p.getAttribute("d"), fill: na ? "url(#hatch)" : pc.fill, stroke: card, "stroke-width": 0.6 });
+      q.appendChild(mk("title", {}, p.querySelector("title") ? p.querySelector("title").textContent : ""));
+      g.appendChild(q);
+    });
+    out.appendChild(g);
+    var colW = W / cols;
+    items.forEach(function (it, i) {
+      var x = P + (i % cols) * colW, y = legTop + Math.floor(i / cols) * rowH;
+      out.appendChild(mk("rect", { x: x, y: y, width: 22, height: 16, fill: it.na ? "url(#hatch)" : it.color, stroke: sub, "stroke-opacity": 0.5 }));
+      var lt = mk("text", { x: x + 30, y: y + 13, "font-size": 15, fill: ink }, it.label);
+      if (it.n) lt.appendChild(mk("tspan", { fill: sub, dx: 8 }, it.n + " " + (it.n === "1" ? "{{ 'system' if level == 'system' else 'county' }}" : "{{ noun }}")));
+      out.appendChild(lt);
+    });
+    foot.forEach(function (l, i) { out.appendChild(mk("text", { x: P, y: legTop + legH + 12 + 13 + i * 18, "font-size": 13, fill: sub }, l)); });
+    return { svg: out, w: W + 2 * P, h: H };
+  }
+  function save(blob, name) {
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  document.querySelectorAll(".dlbtn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var pic = picture(), txt = new XMLSerializer().serializeToString(pic.svg), name = "{{ level }}-" + cur;
+      if (b.getAttribute("data-f") === "svg") return save(new Blob([txt], { type: "image/svg+xml" }), name + ".svg");
+      var img = new Image(), scale = 2;
+      img.onload = function () {
+        var c = document.createElement("canvas"); c.width = pic.w * scale; c.height = pic.h * scale;
+        var x = c.getContext("2d"); x.scale(scale, scale); x.drawImage(img, 0, 0);
+        c.toBlob(function (bl) { save(bl, name + ".png"); }, "image/png");
+      };
+      img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(txt);
     });
   });
   if (location.hash === "#table") setView("table");

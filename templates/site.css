@@ -264,3 +264,4 @@ svg.map[hidden]{display:none}
 .fmore{margin-top:14px;border-top:1px solid var(--rule);padding-top:8px}
 .fmore summary{font-weight:700;cursor:pointer;padding:6px 0}
 .fmore .see{margin:10px 0 6px;line-height:1.7}
+code{overflow-wrap:anywhere}

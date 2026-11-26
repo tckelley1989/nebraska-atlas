@@ -92,6 +92,8 @@ Labeled estimates, with their tested error, published on the About page and reco
 3. Every change number carries a + or − sign in text, tiles and tables.
 4. Bin count equals the registry `breaks` count plus one, and must match the ramp's step count. The test gate checks this.
 5. A percent change of +200% or more (three times the base) is shown as the multiple, "12.4 times", in tiles, tables and text. From a small base a percent that large misleads: a system that got $84 per student in 2019-20 and $3,306 now is "39.3 times", not "+3,835.7%". Downloads keep the raw percent, and map colors are unchanged, since those values already fall in the top bin. Declines are bounded at −100% and always show as percents. Source: `fmt.pct_change()`.
+6. Each map has a table view with the same values: every place, ranked and sortable, blanks last. Its values must equal the map's, place for place (`test_map_table_has_every_place_and_matches_the_map`).
+7. A map download (PNG or SVG) draws the title, legend with counts, the not-available hatch, period and source into the file, so it stands on its own outside the site.
 
 ## 9. School receipts and the state share
 
@@ -101,6 +103,7 @@ Labeled estimates, with their tested error, published on the About page and reco
 4. The LB 1107 income tax credit claimed against school taxes, booked by districts as local taxes, is moved to state, split by each district's property tax receipts outside the bond fund (an estimate).
 5. Federal money is shown but kept out of the state share.
 6. Tax year 2023 is LB 34's missing year. Its school taxes were paid in 2024 and claimed in income tax year 2024, when the credit covers community college taxes only. The School District Property Tax Relief Credit starts with tax year 2024 statements. So school taxes levied in 2023 and paid after Jan. 2, 2024 got neither credit, and the LB 1107 school credit for 2023-24 is $0 by rule, not missing data. It is not zero school relief, since the Property Tax Credit Act credit still applied. 2023 taxes paid by Jan. 2, 2024 could claim the old credit in income tax year 2023, and they are counted with tax year 2022.
+7. The Statewide picture splits the rise in the reported state share into credits, homestead reimbursement and all other state money. General Fund homestead reimbursement is not published on its own (the bundle's homestead figure covers all funds), so it is the gap between the two shares, in dollars, less credits. The three parts add to the rise (`test_statewide_picture`).
 
 ## Open items for v2
 

@@ -100,9 +100,9 @@ def nice_step(span: float, n: int) -> float:
 def tick_label(v: float, row: dict) -> str:
     f = row["format"]
     if f == "dollars":
-        return f"${v / 1e6:,.1f}M" if abs(v) >= 1e6 else f"${v:,.0f}"
+        return (fmt.MINUS if v < 0 else "") + (f"${abs(v) / 1e6:,.1f}M" if abs(v) >= 1e6 else f"${abs(v):,.0f}")
     if f == "cents":
-        return f"${v:.2f}"
+        return (fmt.MINUS if v < 0 else "") + f"${abs(v):.2f}"
     if f in ("pct", "rate", "pct_change"):
         return (fmt.signed(v, 0, "%") if row["scale"] == "diverging" or f == "pct_change" else f"{v:,.0f}%")
     return fmt.signed(v, 0) if row["scale"] == "diverging" else f"{v:,.4g}"

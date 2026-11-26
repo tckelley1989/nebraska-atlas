@@ -60,7 +60,7 @@ def map_page(a, level: str) -> dict:
     names = {i: (a.systems_xw[i]["display_name"] if level == "system" else a.counties_xw[i]["name"] + " County") for i in ids}
     href = "system" if level == "system" else "county"
     paths = [{"id": i, "d": simplify(geo["paths"][i]), "name": names[i], "href": f"{href}/{i}.html"} for i in ids]
-    indicators, cls = [], {}
+    indicators, cls, tab = [], {}, {}
     for row in a.key_eight(level):
         c = classes_for(a, level, row, ids)
         cls[row["key"]] = c
@@ -73,6 +73,13 @@ def map_page(a, level: str) -> dict:
         missing = c.count("na")
         vals = [(a.value(level, i, row["key"]), i) for i in ids]
         ranked = sorted((v, i) for v, i in vals if isinstance(v, (int, float)))
+        # table view: raw value (for sorting), shown value and tone, aligned with ids; None where blank
+        if row["format"] == "category":
+            labels = row["legend"].split("|")
+            names_c = CATEGORY_CLASSES[row["key"]]
+            tab[row["key"]] = [[None, labels[names_c.index(x)], ""] if x in names_c else None for x in c]
+        else:
+            tab[row["key"]] = [[round(v, 6), fmt.value(v, row), tone(row, v)] if isinstance(v, (int, float)) else None for v, _ in vals]
         top = [{"name": names[i], "href": f"{href}/{i}.html", "value": fmt.value(v, row), "tone": tone(row, v)} for v, i in reversed(ranked[-5:])]
         bottom = [{"name": names[i], "href": f"{href}/{i}.html", "value": fmt.value(v, row), "tone": tone(row, v)} for v, i in ranked[:5]]
         st = a.stats(level, row["key"])
@@ -91,4 +98,6 @@ def map_page(a, level: str) -> dict:
         "count": len(ids), "noun": "systems" if level == "system" else "counties",
         "view_box": geo["viewBox"], "paths": paths, "indicators": indicators,
         "classes_json": json.dumps({k: v for k, v in cls.items()}, separators=(",", ":")),
+        "table_json": json.dumps({"names": [names[i] for i in ids], "href": f"{href}/", "ids": ids, "vals": tab},
+                                 ensure_ascii=False, separators=(",", ":")),
     }

@@ -19,6 +19,16 @@
 <div class="legend" aria-label="Legend">{% for l in ind.legend %}<div><span class="sw {{ l.cls }}"></span><span>{{ l.label }}</span><span class="quiet">{{ l.count }}</span></div>{% endfor %}{% if ind.missing %}<div><span class="sw na"></span><span>{{ ind.missing_label or 'Not available' }}</span><span class="quiet">{{ ind.missing }}</span></div>{% endif %}</div>
 </section>
 {% endfor %}
+<div class="viewtog" role="group" aria-label="View"><button type="button" data-v="map" aria-pressed="true">Map</button><button type="button" data-v="table" aria-pressed="false">Table</button></div>
+<div id="tableview" hidden>
+<p class="tfilter"><label for="tf">Find a {{ 'system' if level == 'system' else 'county' }}</label> <input id="tf" type="search" autocomplete="off"></p>
+<div class="scroll"><table class="data maptable"><thead><tr>
+<th scope="col" class="num"><button type="button" data-s="rank">Rank</button></th>
+<th scope="col"><button type="button" data-s="name">{{ 'System' if level == 'system' else 'County' }}</button></th>
+<th scope="col" class="num"><button type="button" data-s="val" id="tv-h">Value</button></th>
+</tr></thead><tbody id="tb"></tbody></table></div>
+<p class="quiet" id="tcount"></p>
+</div>
 <svg class="map" viewBox="{{ view_box }}" role="img" aria-label="{{ heading }} map">
 {% for p in paths %}<a href="{{ root }}{{ p.href }}"><path id="p{{ p.id }}" class="{{ p.cls }}" d="{{ p.d }}"><title>{{ p.name }}</title></path></a>
 {% endfor %}</svg>
@@ -38,6 +48,50 @@
 </div>
 <script>
 (function () {
+  var T = {{ table_json|safe }}, cur = "{{ indicators[0].key }}", sortBy = "val", dir = -1, view = "map";
+  var root = "{{ root }}", shorts = { {% for ind in indicators %}"{{ ind.key }}": {{ ind.short|tojson }}{% if not loop.last %},{% endif %}{% endfor %} };
+  var tb = document.getElementById("tb"), tf = document.getElementById("tf"), svg = document.querySelector("svg.map"), tv = document.getElementById("tableview");
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function draw() {
+    var v = T.vals[cur], rows = [], q = (tf.value || "").toLowerCase();
+    T.ids.forEach(function (id, i) { rows.push({ i: i, name: T.names[i], x: v[i] }); });
+    var vals = rows.filter(function (r) { return r.x && r.x[0] !== null; });
+    vals.forEach(function (r) { r.rank = 1 + vals.filter(function (o) { return o.x[0] > r.x[0]; }).length; });
+    rows.sort(function (a, b) {
+      if (!a.x !== !b.x) return a.x ? -1 : 1;  // blanks always last
+      if (sortBy === "name") return dir * a.name.localeCompare(b.name);
+      var av = a.x && a.x[0], bv = b.x && b.x[0];
+      if (av === null || bv === null || av === undefined) return a.x && b.x ? a.x[1].localeCompare(b.x[1]) || a.name.localeCompare(b.name) : 0;
+      return sortBy === "rank" ? -dir * (bv - av) || a.name.localeCompare(b.name) : dir * (av - bv) || a.name.localeCompare(b.name);
+    });
+    var shown = rows.filter(function (r) { return !q || r.name.toLowerCase().indexOf(q) >= 0; });
+    tb.innerHTML = shown.map(function (r) {
+      return "<tr><td class='num'>" + (r.rank ? r.rank : "") + "</td><td><a href='" + root + T.href + T.ids[r.i] + ".html'>" + esc(r.name) + "</a></td><td class='num'>" +
+        (r.x ? "<b class='" + r.x[2] + "'>" + esc(r.x[1]) + "</b>" : "<span class='quiet'>Not available</span>") + "</td></tr>";
+    }).join("");
+    document.getElementById("tv-h").textContent = shorts[cur];
+    document.querySelectorAll(".maptable th").forEach(function (th) {
+      var s = th.querySelector("button").getAttribute("data-s");
+      th.setAttribute("aria-sort", s === sortBy ? (dir > 0 ? "ascending" : "descending") : "none");
+    });
+    document.getElementById("tcount").textContent = (q ? shown.length + " of " : "") + rows.length + " {{ noun }}; " + vals.length + " with a value. Click a column to sort.";
+  }
+  document.querySelectorAll(".maptable th button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var s = b.getAttribute("data-s");
+      if (s === sortBy) dir = -dir; else { sortBy = s; dir = s === "name" ? 1 : s === "rank" ? 1 : -1; }
+      draw();
+    });
+  });
+  tf.addEventListener("input", draw);
+  function setView(v) {
+    view = v; tv.hidden = v !== "table"; document.querySelector(".mapcol").classList.toggle("tablemode", v === "table");
+    if (v === "map") svg.removeAttribute("hidden"); else svg.setAttribute("hidden", "");
+    document.querySelectorAll(".viewtog button").forEach(function (x) { x.setAttribute("aria-pressed", x.getAttribute("data-v") === v ? "true" : "false"); });
+    if (v === "table") draw();
+    try { history.replaceState(null, "", v === "table" ? "#table" : location.pathname + location.search); } catch (e) {}
+  }
+  document.querySelectorAll(".viewtog button").forEach(function (b) { b.addEventListener("click", function () { setView(b.getAttribute("data-v")); }); });
   var C = {{ classes_json|safe }}, ids = [{% for p in paths %}"p{{ p.id }}"{% if not loop.last %},{% endif %}{% endfor %}];
   var els = ids.map(function (i) { return document.getElementById(i); });
   document.querySelectorAll(".picker button").forEach(function (b) {
@@ -46,8 +100,10 @@
       document.querySelectorAll(".picker button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
       document.querySelectorAll(".ind, .ranks").forEach(function (s) { s.hidden = s.getAttribute("data-k") !== k; });
       els.forEach(function (e, i) { e.setAttribute("class", C[k][i]); });
+      cur = k; if (view === "table") draw();
     });
   });
+  if (location.hash === "#table") setView("table");
 })();
 </script>
 {% endblock %}

@@ -252,3 +252,12 @@ svg.map[hidden]{display:none}
 .dlrow{margin:12px 0 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .dlbtn{font:inherit;font-weight:700;font-size:14px;padding:6px 14px;min-height:36px;background:var(--card);color:var(--ink);border:1.5px solid var(--ink);cursor:pointer}
 .dlbtn:hover,.dlbtn:focus{background:var(--ink);color:var(--card)}
+/* statewide picture (school systems page) */
+.statewide{margin-top:40px;border-top:2px solid var(--ink);padding-top:12px}
+.sect.big{font-size:28px}
+.swnav{display:flex;flex-wrap:wrap;gap:6px 16px;margin:4px 0 18px;font-weight:700}
+.swcard{background:var(--card);border-radius:4px;padding:18px 20px;margin:0 0 18px}
+.swcard h3{margin:0 0 8px;font-size:21px}
+.swcard .axis{margin:10px 0 2px;font-size:13px}
+.swcard table.data th[scope=row]{font-weight:700;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink);border:0;padding:9px 8px;border-top:1px solid var(--rule)}
+@media (max-width:760px){.swcard{padding:14px 12px}}

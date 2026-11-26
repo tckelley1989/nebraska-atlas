@@ -47,6 +47,25 @@
 {% endfor %}
 </div>
 </div>
+{% if statewide %}
+<section class="statewide" id="statewide">
+<h2 class="sect big">Statewide picture</h2>
+<nav class="swnav" aria-label="Statewide sections">{% for s in statewide %}<a href="#{{ s.id }}">{{ s.title }}</a>{% endfor %}</nav>
+{% for s in statewide %}
+<section class="swcard" id="{{ s.id }}">
+<h3>{{ s.title }}</h3>
+<p class="dlead">{{ s.lead }}</p>
+<p class="quiet axis">{{ s.axis }}</p>
+<div class="w-desk">{{ s.desk }}</div><div class="w-phone">{{ s.phone }}</div>
+<details class="more"><summary>Table and notes</summary>
+<div class="scroll"><table class="data"><thead><tr>{% for h in s.head %}<th scope="col"{% if not loop.first %} class="num"{% endif %}>{{ h }}</th>{% endfor %}</tr></thead>
+<tbody>{% for r in s.rows %}<tr{% if s.total_last and loop.last %} class="bold"{% endif %}>{% for c in r %}{% if loop.first %}<th scope="row">{{ c }}</th>{% else %}<td class="num">{{ c }}</td>{% endif %}{% endfor %}</tr>{% endfor %}</tbody></table></div>
+<p class="quiet">{{ s.note }}</p>
+</details>
+</section>
+{% endfor %}
+</section>
+{% endif %}
 <script>
 (function () {
   var T = {{ table_json|safe }}, cur = "{{ indicators[0].key }}", sortBy = "val", dir = -1, view = "map";

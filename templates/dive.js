@@ -41,6 +41,17 @@
       var t = el("text", { "class": "sel-lab", x: right ? bb.x + bb.width + 8 : bb.x - 8, y: e.classList.contains("db") ? Math.min(bb.y + bb.height + 14, vb.height - 4) : bb.y - 4,
         "font-size": 12.5, "font-weight": 700, fill: INK, "text-anchor": right ? "start" : "end", stroke: CARD, "stroke-width": 4, "paint-order": "stroke" }, label);
       svgEl.appendChild(t);
+      // drop a fixed place label the selected place's label would sit on (positions from attributes: hidden SVGs have no boxes)
+      var tx = +t.getAttribute("x"), ty = +t.getAttribute("y"), w = label.length * 12.5 * 0.55, x0 = right ? tx : tx - w;
+      svgEl.querySelectorAll("text[data-l]").forEach(function (o) {
+        var ox = +o.getAttribute("x"), oy = +o.getAttribute("y"), ow = o.textContent.length * 12 * 0.55, a = o.getAttribute("text-anchor");
+        var o0 = a === "end" ? ox - ow : ox;
+        if (o0 < x0 + w && o0 + ow > x0 && oy - 12 < ty + 2 && oy + 2 > ty - 13) {
+          o.style.display = "none";
+          var c = o.getAttribute("data-l");
+          svgEl.querySelectorAll('line[data-l="' + c + '"]').forEach(function (l) { l.style.display = "none"; });
+        }
+      });
     });
   }
 
@@ -173,10 +184,117 @@
     if (pick.value) u.searchParams.set("sel", pick.value); else u.searchParams.delete("sel");
     history.replaceState(null, "", u); apply(pick.value);
   });
-  var vs = document.getElementById("vs");
-  if (vs) vs.addEventListener("change", function () {
-    document.querySelectorAll(".sc").forEach(function (d) { d.hidden = d.getAttribute("data-i") !== vs.value; });
+  // Step 5 for any measure: drawn here from the shared values file with this page's y axis, by the same rules as the
+  // scatters drawn at build (dive.scatter): p99 clip as triangles, fitted line, the five places furthest from it labeled.
+  var V = window.DIVE_VALUES, MINUS = "\u2212";
+  function niceStep(span, n) {
+    var raw = span / Math.max(n, 1), mag = raw > 0 ? Math.pow(10, Math.floor(Math.log10(raw))) : 1;
+    var ms = [1, 2, 2.5, 5, 10]; for (var i = 0; i < ms.length; i++) if (raw <= ms[i] * mag) return ms[i] * mag;
+    return 10 * mag;
+  }
+  function comma(v, d) { return Math.abs(v).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function signed(v, d, suf) { var s = comma(v, d) + (suf || ""); return +v.toFixed(d) === 0 ? s : (v > 0 ? "+" : MINUS) + s; }
+  function tickLabel(v, m) {
+    var f = m.format, neg = v < 0 ? MINUS : "";
+    if (f === "dollars") return neg + (Math.abs(v) >= 1e6 ? "$" + comma(v / 1e6, 1) + "M" : "$" + comma(v, 0));
+    if (f === "cents") return neg + "$" + Math.abs(v).toFixed(2);
+    if (f === "pct" || f === "rate" || f === "pct_change") return m.scale === "diverging" || f === "pct_change" ? signed(v, 0, "%") : comma(v, 0) + "%";
+    if (m.scale === "diverging") return signed(v, 0);
+    return String(+v.toPrecision(4)).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  function tw(s, fs) { return String(s).length * fs * 0.55; }
+  function Labels(W, H) { this.b = []; this.W = W; this.H = H; }
+  Labels.prototype.block = function (box) { this.b.push(box); };
+  Labels.prototype.place = function (x, y, text, fs, tries) {
+    var w = tw(text, fs), h = fs * 1.15;
+    for (var i = 0; i < tries.length; i++) {
+      var t = tries[i], x0 = x + t[0] - (t[2] === "end" ? w : 0), y0 = y + t[1] - h * 0.85, bx = [x0, y0, x0 + w, y0 + h];
+      if (bx[0] < 0 || bx[2] > this.W || bx[1] < 0 || bx[3] > this.H) continue;
+      if (this.b.some(function (b) { return !(bx[2] < b[0] || bx[0] > b[2] || bx[3] < b[1] || bx[1] > b[3]); })) continue;
+      this.b.push(bx); return [x + t[0], y + t[1], t[2]];
+    }
+    return null;
+  }
+  function drawScatter(key, W) {
+    var A = D.ax, phone = W < 600, xm = V.meta[key], ym = { short: A.short };
+    var idx = {}; V.codes.forEach(function (c, i) { idx[c] = i; });
+    var yv = V.v[D.key], xv = V.v[key], sc = [];
+    Object.keys(P).forEach(function (c) { var i = idx[c]; if (i != null && xv[i] != null && yv[i] != null) sc.push([c, xv[i], yv[i]]); });
+    if (sc.length < 3) return '<p class="note">Fewer than three ' + D.nouns + " have both measures, so there is nothing to plot.</p>";
+    var xs = sc.map(function (t) { return t[1]; }), xlo = Math.min.apply(null, xs), xhi = Math.max.apply(null, xs), pad = (xhi - xlo) * 0.04 || 1;
+    xlo -= pad; xhi += pad;
+    var ylo = A.lo, yhi = A.hi, L = phone ? 52 : 72, R = W - 10, T = 30, Bt = phone ? 316 : 400;
+    var xl = [], cur = "";
+    (xm.short + ", " + xm.period).split(" ").forEach(function (w_) {
+      if (cur && tw(cur + " " + w_, 11.5) > R - 4) { xl.push(cur); cur = w_; } else cur = (cur + " " + w_).trim();
+    });
+    if (cur) xl.push(cur);
+    var H = Bt + 46 + 15 * (xl.length - 1);
+    var SX = function (v) { return L + (v - xlo) / (xhi - xlo) * (R - L); };
+    var SY = function (v) { return T + (yhi - Math.max(ylo, Math.min(v, yhi))) / (yhi - ylo) * (Bt - T); };
+    var n = sc.length, mx = xs.reduce(function (a, b) { return a + b; }, 0) / n, my = sc.reduce(function (a, t) { return a + t[2]; }, 0) / n;
+    var sxx = sc.reduce(function (a, t) { return a + (t[1] - mx) * (t[1] - mx); }, 0) || 1;
+    var b = sc.reduce(function (a, t) { return a + (t[1] - mx) * (t[2] - my); }, 0) / sxx, a0 = my - b * mx;
+    var o = ['<svg class="dchart scatter" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(A.short + " against " + xm.short + ", every " + D.noun) + '">'];
+    var lab = new Labels(W, Bt);
+    o.push('<text x="0" y="13" font-size="12" fill="' + SUB + '">' + esc(A.short) + "</text>"); lab.block([0, 0, tw(A.short, 12) + 8, 18]);
+    (phone ? A.t4 : A.t6).forEach(function (t) {
+      o.push('<line x1="' + L + '" x2="' + R + '" y1="' + SY(t[0]).toFixed(1) + '" y2="' + SY(t[0]).toFixed(1) + '" stroke="' + (t[0] === 0 && A.lo < 0 ? INK : RULE) + '"/>' +
+        '<text x="' + (L - 6) + '" y="' + (SY(t[0]) + 4).toFixed(1) + '" font-size="11.5" fill="' + SUB + '" text-anchor="end">' + esc(t[1]) + "</text>");
+    });
+    if (A.floor) o.push('<path d="M' + (L - 2) + " " + (Bt + 6) + 'l4 -4l-8 -4l8 -4l-4 -4" fill="none" stroke="' + INK + '" stroke-width="1.2"/>');
+    var step = niceStep(xhi - xlo, phone ? 4 : 7), t = Math.ceil(xlo / step) * step;
+    for (; t <= xhi; t += step) {
+      var tt = Math.round(t * 1e10) / 1e10;
+      o.push('<line x1="' + SX(tt).toFixed(1) + '" x2="' + SX(tt).toFixed(1) + '" y1="' + T + '" y2="' + Bt + '" stroke="' + RULE + '"/>' +
+        '<text x="' + SX(tt).toFixed(1) + '" y="' + (Bt + 17) + '" font-size="11.5" fill="' + SUB + '" text-anchor="middle">' + esc(tickLabel(tt, xm)) + "</text>");
+    }
+    xl.forEach(function (t_, i) { o.push('<text x="' + R + '" y="' + (Bt + 36 + 15 * i) + '" font-size="11.5" fill="' + SUB + '" text-anchor="end">' + esc(t_) + "</text>"); });
+    var xa = xlo, xb = xhi;
+    if (A.floor && b) { var bound = (ylo - a0) / b; if (b > 0) xa = Math.max(xlo, bound); else xb = Math.min(xhi, bound); }
+    o.push('<line x1="' + SX(xa).toFixed(1) + '" y1="' + SY(a0 + b * xa).toFixed(1) + '" x2="' + SX(xb).toFixed(1) + '" y2="' + SY(a0 + b * xb).toFixed(1) + '" stroke="' + INK + '" stroke-dasharray="5 4" stroke-width="1.25"/>');
+    sc.forEach(function (p) {
+      var x = SX(p[1]), y = SY(p[2]);
+      if (A.clip != null && p[2] > A.clip) { o.push('<path class="dd" data-c="' + p[0] + '" d="M' + (x - 5).toFixed(1) + " " + (y + 7).toFixed(1) + 'l5 -8l5 8z"/>'); lab.block([x - 6, y - 2, x + 6, y + 8]); }
+      else o.push('<circle class="dd" data-c="' + p[0] + '" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + (phone ? 2.8 : 3.4) + '"/>');
+    });
+    var tries = [[9, -8, "start"], [-9, -8, "end"], [9, 15, "start"], [-9, 15, "end"], [-9, 28, "end"], [9, 28, "start"], [-9, 41, "end"], [9, 41, "start"]];
+    sc.slice().sort(function (p, q) { return Math.abs(q[2] - (a0 + b * q[1])) - Math.abs(p[2] - (a0 + b * p[1])); }).slice(0, 5).forEach(function (p) {
+      var nm = P[p[0]].s + (A.clip != null && p[2] > A.clip ? " (" + P[p[0]].v + ")" : ""), x = SX(p[1]), y = SY(p[2]);
+      var at = lab.place(x, y, nm, 12, tries);
+      if (!at) return;
+      if (Math.abs(at[1] - y) > 16) o.push('<line data-l="' + p[0] + '" x1="' + x.toFixed(1) + '" y1="' + (y + 4).toFixed(1) + '" x2="' + at[0].toFixed(1) + '" y2="' + (at[1] - 10).toFixed(1) + '" stroke="' + SUB + '" stroke-width="0.8"/>');
+      o.push('<text data-l="' + p[0] + '" stroke="' + CARD + '" stroke-width="4" paint-order="stroke" x="' + at[0].toFixed(1) + '" y="' + at[1].toFixed(1) + '" font-size="12" fill="' + INK + '" text-anchor="' + at[2] + '">' + esc(nm) + "</text>");
+    });
+    return o.join("") + "</svg>";
+  }
+  var vs = document.getElementById("vs"), jsKey = null;
+  function showScatter(v) {
+    if (v.indexOf("k:") === 0) {
+      jsKey = v.slice(2);
+      var r = (D.rels || {})[jsKey] || {}, box = document.getElementById("sc-js");
+      document.getElementById("sc-js-lead").textContent = r.few
+        ? r.name + ": too few " + D.nouns + " to test, so read any pattern as untested."
+        : r.name + ": " + r.word + " (rank correlation " + r.rho + ")" + (r.holds ? ", stronger than chance." : ", which could be chance.");
+      box.innerHTML = '<div class="w-desk">' + drawScatter(jsKey, 1040) + '</div><div class="w-phone">' + drawScatter(jsKey, 350) + "</div>";
+      v = "js";
+    }
+    document.querySelectorAll(".sc").forEach(function (d) { d.hidden = d.getAttribute("data-i") !== v; });
     mark(pick.value);
+  }
+  if (vs) vs.addEventListener("change", function () { if (vs.value) showScatter(vs.value); });
+  // Step 4 rows plot their measure in step 5.
+  document.querySelectorAll(".plotlink").forEach(function (a) {
+    a.addEventListener("click", function () {
+      var k = a.getAttribute("data-x"), opt = vs && (vs.querySelector('option[data-k="' + k + '"]') || vs.querySelector('option[value="k:' + k + '"]'));
+      if (opt) { vs.value = opt.value; showScatter(opt.value); }
+    });
   });
+  // ?vs=<measure> opens step 5 on that measure (links from the map pages)
+  var wantVs = new URLSearchParams(location.search).get("vs");
+  if (wantVs && vs) {
+    var ov = vs.querySelector('option[data-k="' + wantVs + '"]') || vs.querySelector('option[value="k:' + wantVs + '"]');
+    if (ov) { vs.value = ov.value; showScatter(ov.value); }
+  }
   apply(sel);
 })();

@@ -75,7 +75,7 @@ def map_page(a, level: str) -> dict:
     names = {i: (a.systems_xw[i]["display_name"] if level == "system" else a.counties_xw[i]["name"] + " County") for i in ids}
     href = "system" if level == "system" else "county"
     paths = [{"id": i, "d": simplify(geo["paths"][i]), "name": names[i], "href": f"{href}/{i}.html"} for i in ids]
-    indicators, cls, tab = [], {}, {}
+    indicators, cls, tab, strips = [], {}, {}, {}
     for row in a.key_eight(level):
         c = classes_for(a, level, row, ids)
         cls[row["key"]] = c
@@ -98,11 +98,17 @@ def map_page(a, level: str) -> dict:
         top = [{"name": names[i], "href": f"{href}/{i}.html", "value": fmt.value(v, row), "tone": tone(row, v)} for v, i in reversed(ranked[-5:])]
         bottom = [{"name": names[i], "href": f"{href}/{i}.html", "value": fmt.value(v, row), "tone": tone(row, v)} for v, i in ranked[:5]]
         st = a.stats(level, row["key"])
+        prev = None
+        if row["format"] != "category":
+            from . import dive
+            pv = dive.map_preview(a, level, row["key"])
+            prev = {k: pv[k] for k in ("top", "n_holds", "m", "gname")}
+            strips[row["key"]] = (pv["desk"], pv["phone"])
         indicators.append({
             "key": row["key"], "format": row["format"], "label": row["label"], "short": row["short"], "note": row["note"], "period": row["period"],
             "source": row["source"], "legend": legend, "missing": missing, "missing_label": row["missing_label"],
             "median": fmt.value(st["median"], row) if st["median"] is not None and row["format"] != "category" else None,
-            "top": top, "bottom": bottom if row["format"] != "category" else [],
+            "top": top, "bottom": bottom if row["format"] != "category" else [], "preview": prev,
         })
     first = indicators[0]["key"]
     for p, c in zip(paths, cls[first]):
@@ -112,6 +118,7 @@ def map_page(a, level: str) -> dict:
         "heading": "School systems" if level == "system" else "Counties",
         "count": len(ids), "noun": "systems" if level == "system" else "counties",
         "view_box": geo["viewBox"], "paths": paths, "indicators": indicators,
+        "strips": strips,
         "classes_json": json.dumps({k: v for k, v in cls.items()}, separators=(",", ":")),
         "table_json": json.dumps({"names": [names[i] for i in ids], "href": f"{href}/", "ids": ids, "vals": tab},
                                  ensure_ascii=False, separators=(",", ":")),

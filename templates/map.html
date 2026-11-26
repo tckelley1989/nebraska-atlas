@@ -43,6 +43,16 @@
 <div><h3 class="label">Lowest five</h3><ol>{% for r in ind.bottom %}<li><a href="{{ root }}{{ r.href }}">{{ r.name }}</a> <b class="{{ r.tone }}">{{ r.value }}</b></li>{% endfor %}</ol></div>
 </div>
 {% endif %}
+{% if ind.preview %}<div class="mprev">
+<h3 class="label">Every {{ 'system' if level == 'system' else 'county' }}, by {{ ind.preview.gname }}</h3>
+<div class="mstrip" data-k="{{ ind.key }}"><p class="quiet">Loading the chart…</p></div>
+<p class="quiet">Each dot is one {{ 'system' if level == 'system' else 'county' }}; the shaded box is the middle half of its {{ ind.preview.gname }} and the dark bar its median.</p>
+<h3 class="label">What goes with it</h3>
+{% if ind.preview.top %}<p>{{ ind.preview.n_holds }} of {{ ind.preview.m }} other measures go with it more strongly than chance would explain. The strongest:</p>
+<ul class="mrel">{% for r in ind.preview.top %}<li><a href="{{ root }}dive/{{ level }}/{{ ind.key }}.html?vs={{ r.key }}#s5">{{ r.name }}</a> <b>{{ r.rho_f }}</b> <span class="quiet">{{ r.word }}</span></li>{% endfor %}</ul>
+{% else %}<p>None of the {{ ind.preview.m }} other measures goes with it more strongly than chance would explain.</p>{% endif %}
+<p><a href="{{ root }}dive/{{ level }}/{{ ind.key }}.html#s4">All {{ ind.preview.m }} measures, tested, and a chart against any of them</a></p>
+</div>{% endif %}
 </div>
 {% endfor %}
 </div>
@@ -104,6 +114,18 @@
     });
   });
   tf.addEventListener("input", draw);
+  // The all-places chart for the shown indicator: the same picture as the deeper dive's step 2, fetched when needed.
+  var stripCache = {};
+  function loadStrip(k) {
+    var box = document.querySelector('.mstrip[data-k="' + k + '"]');
+    if (!box || box.getAttribute("data-done")) return;
+    box.setAttribute("data-done", "1");
+    Promise.all(["desk", "phone"].map(function (w) {
+      var u = root + "assets/strips/{{ level }}-" + k + "-" + w + ".svg";
+      return stripCache[u] || (stripCache[u] = fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }));
+    })).then(function (s) { box.innerHTML = '<div class="w-desk">' + s[0] + '</div><div class="w-phone">' + s[1] + "</div>"; })
+      .catch(function () { box.innerHTML = '<p class="quiet">The chart did not load. It is on the deeper dive page.</p>'; });
+  }
   function setView(v) {
     view = v; tv.hidden = v !== "table"; document.querySelector(".mapcol").classList.toggle("tablemode", v === "table");
     if (v === "map") svg.removeAttribute("hidden"); else svg.setAttribute("hidden", "");
@@ -120,7 +142,7 @@
       document.querySelectorAll(".picker button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
       document.querySelectorAll(".ind, .ranks").forEach(function (s) { s.hidden = s.getAttribute("data-k") !== k; });
       els.forEach(function (e, i) { e.setAttribute("class", C[k][i]); });
-      cur = k; if (view === "table") draw();
+      cur = k; if (view === "table") draw(); loadStrip(k);
     });
   });
   // Downloads: a standalone picture of the map as shown, with its title, legend, period and source drawn in,
@@ -187,7 +209,7 @@
     });
   });
   var want = new URLSearchParams(location.search).get("ind"), wb = want && document.querySelector('.picker button[data-k="' + want + '"]');
-  if (wb) wb.click();
+  if (wb) wb.click(); else loadStrip(cur);
   if (location.hash === "#table") setView("table");
 })();
 </script>

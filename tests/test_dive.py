@@ -181,3 +181,39 @@ def test_landing_page(atlas):
     assert n_listed == sum(1 for r in atlas.registry if r["format"] != "category") - 0 or n_listed > 80
     assert ctx["aid_total"] in t and ctx["unused"] in t and str(ctx["votes"]) in t
     assert "Deeper dive" in (SITE / "index.html").read_text(encoding="utf-8")  # in the site nav
+
+
+def test_every_tested_measure_is_listed_and_plottable(atlas):
+    """Step 4 lists all tested measures; step 5 offers every tested measure and every one too thin to test."""
+    from atlas import dive
+    for r in atlas.registry:
+        if r["format"] == "category":
+            continue
+        rel = dive.Dive(atlas, r["level"], r["key"]).relationships()
+        t = (SITE / "dive" / r["level"] / f"{r['key']}.html").read_text(encoding="utf-8")
+        assert len(re.findall(r'<tr data-x="', t)) == len(rel["tested"]), r["key"]
+        offered = set(re.findall(r'<option value="\d+" data-k="([^"]+)"', t)) | set(re.findall(r'<option value="k:([^"]+)"', t))
+        assert offered == {x["key"] for x in rel["tested"]} | {x["key"] for x in rel["few"]}, r["key"]
+
+
+def test_shared_values_match_the_bundle(atlas):
+    body = (SITE / "assets" / "dive-values-system.js").read_text(encoding="utf-8")
+    V = json.loads(body[body.index("=") + 1:-1])
+    for k in ("aid_ps", "nscas_scale_rel", "lc2_limit_levy"):
+        for i, c in enumerate(V["codes"]):
+            a, b = V["v"][k][i], atlas.value("system", c, k)
+            assert (a is None) == (not isinstance(b, (int, float))), (k, c)
+            if a is not None:
+                assert abs(a - b) <= 1e-5 * max(1, abs(b)), (k, c)
+
+
+def test_map_previews_load_and_link(atlas):
+    for page, level in (("schools.html", "system"), ("counties.html", "county")):
+        t = (SITE / page).read_text(encoding="utf-8")
+        for k in re.findall(r'<div class="mstrip" data-k="([^"]+)"', t):
+            for w in ("desk", "phone"):
+                svg = (SITE / "assets" / "strips" / f"{level}-{k}-{w}.svg").read_text(encoding="utf-8")
+                assert svg.startswith("<svg") and svg.count('class="dd"') >= 10, (k, w)
+        for key, vs in re.findall(r'href="dive/' + level + r'/([a-z0-9_]+)\.html\?vs=([a-z0-9_]+)#s5"', t):
+            d = (SITE / "dive" / level / f"{key}.html").read_text(encoding="utf-8")
+            assert f'data-k="{vs}"' in d or f'value="k:{vs}"' in d, (key, vs)

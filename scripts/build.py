@@ -78,6 +78,10 @@ def main():
         (OUT / "county" / f"{fips}.csv").write_text(about.profile_csv(a, "county", fips, ctx["name"]), encoding="utf-8")
     for level, page, section in (("system", "schools.html", "schools"), ("county", "counties.html", "counties")):
         ctx = maps.map_page(a, level)
+        (OUT / "assets" / "strips").mkdir(exist_ok=True)
+        for k, (desk, phone) in ctx.pop("strips").items():
+            for w, svg in (("desk", desk), ("phone", phone)):
+                (OUT / "assets" / "strips" / f"{level}-{k}-{w}.svg").write_text(svg, encoding="utf-8")
         if level == "system":
             ctx.update(statewide.build(a))
         write(page, "map.html", section=section, **ctx)
@@ -87,6 +91,7 @@ def main():
     for lvl in ("system", "county"):
         for fn, body in dive.shared_places(a, lvl, ptax).items():
             (OUT / "assets" / fn).write_text(body, encoding="utf-8")
+        (OUT / "assets" / f"dive-values-{lvl}.js").write_text(dive.shared_values(a, lvl), encoding="utf-8")
     for r in a.registry:
         if r["format"] == "category":
             continue

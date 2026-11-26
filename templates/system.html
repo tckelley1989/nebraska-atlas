@@ -25,15 +25,74 @@
 {% if notes %}<ul class="fnotes">{% for n in notes %}<li>{{ n }}</li>{% endfor %}</ul>{% endif %}
 <p class="note">Source: Nebraska Department of Education, TEEOSA state aid certification. Every build checks that resources add to the certified total and that equalization aid equals need minus resources.</p>
 </section>
-{% if since %}
-<section class="block">
+{% if since2 %}
+<section class="block" id="since">
 <h2 class="sect">Since 2019-20</h2>
+{% if since2.none %}<p class="note">{{ since2.none }}</p>{% else %}
 <div class="scroll"><table class="data">
-<thead><tr><th></th><th class="num">2019-20</th><th class="num">{{ aid_year }}</th><th class="num">Change</th></tr></thead>
-<tbody>{% for r in since %}<tr><td>{{ r.label }}</td><td class="num">{{ r.base }}</td><td class="num">{{ r.now }}</td><td class="num {{ r.tone }}">{{ r.change }}</td></tr>{% endfor %}</tbody>
+<thead><tr><th></th><th class="num">{{ since2.y0 }}</th><th class="num">{{ since2.y1 }}</th><th class="num">Change</th><th class="num">All systems</th></tr></thead>
+<tbody>{% for r in since2.rows %}<tr><td>{{ r.label }}</td><td class="num">{{ r.base }}</td><td class="num">{{ r.now }}</td><td class="num"><b class="{{ r.tone }}">{{ r.change }}</b> <span class="quiet">{{ r.raw }}</span></td><td class="num">{{ r.all }}</td></tr>{% endfor %}</tbody>
 </table></div>
-<p class="note">2019 dollars with the Midwest CPI-U: school-year averages for need and aid, and the calendar year of the school adjusted valuation for that measure.</p>
+<p class="note">2019 dollars with the Midwest CPI-U: school-year averages for need and aid, and the calendar year of the school adjusted valuation for that measure. All systems: the change for every system certified in each year, taken together.</p>{% endif %}
 </section>
+{% endif %}
+{% if money %}
+<details class="psec" id="money"><summary><h2 class="sect">Where the money comes from</h2><span class="psum">{{ money.lead }}</span></summary>
+<div class="scroll"><table class="data">
+<thead><tr><th>Per student (ADM), 2019 dollars</th>{% if money.y0 %}<th class="num">{{ money.y0 }}</th>{% endif %}<th class="num">{{ money.y1 }}</th>{% if money.y0 %}<th class="num">Change</th>{% endif %}<th class="num">All systems, {{ money.y1 }}</th></tr></thead>
+<tbody>{% for r in money.rows %}<tr{% if r.total %} class="bold"{% endif %}><td>{{ r.label }}</td>{% if money.y0 %}<td class="num">{{ r.v0 }}</td>{% endif %}<td class="num">{{ r.v1 }}</td>{% if money.y0 %}<td class="num">{{ r.ch }}</td>{% endif %}<td class="num">{{ r.all }}</td></tr>{% endfor %}</tbody>
+</table></div>
+{% if money.flag %}<p class="note warn">This system's report shows far less of the state's property tax credit than its local taxes imply; it most likely recorded part of the credit as local taxes, so its state share is understated. Figures are shown as reported.</p>{% endif %}
+<p class="note">What districts received, from NDE's Annual Financial Reports (general, depreciation, employee benefit, contingency, bond, special building, qualified capital purpose and cooperative funds), per student of the same school year counted as NDE counts them for per pupil cost (average daily membership, ADM), in 2019 dollars. ADM counts students where they attend. Property tax credits paid by the state include the LB 1107 income tax credit claimed against school taxes (2019-20 to 2022-23), which districts booked as local taxes; it is moved to state, split by each district's property tax receipts outside the bond fund, an estimate. The state share row is NDE's standard: state sources over the four General Fund receipt totals as reported, with LB 1107 left in local.</p>
+</details>
+{% endif %}
+{% if taxes %}
+<details class="psec" id="taxes"><summary><h2 class="sect">Property taxes</h2><span class="psum">{{ taxes.lead }}</span></summary>
+{% if taxes.per %}<div class="scroll"><table class="data">
+<thead><tr><th>Per student (ADM), 2019 dollars</th>{% for y in taxes.years %}<th class="num">{{ y }}</th>{% endfor %}{% if taxes.years|length == 2 %}<th class="num">Change</th>{% endif %}</tr></thead>
+<tbody>{% for r in taxes.per %}<tr{% if r.total %} class="bold"{% endif %}><td>{{ r.label }}</td>{% for v in r.vals %}<td class="num">{{ v }}</td>{% endfor %}{% if r.ch %}<td class="num">{{ r.ch }}</td>{% endif %}</tr>{% endfor %}</tbody>
+</table></div>{% endif %}
+{% if taxes.lc2 %}<h3 class="sub">The property tax request cap (LB 243), from the LC-2 budget form</h3>
+<div class="scroll"><table class="data">
+<thead><tr><th>Budget year</th>{% for y in taxes.lc2_years %}<th class="num">{{ y }}</th>{% endfor %}</tr></thead>
+<tbody>{% for r in taxes.lc2 %}<tr{% if r.total %} class="bold"{% endif %}><td>{{ r.label }}</td>{% for v in r.vals %}<td class="num">{{ v }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+</table></div>{% endif %}
+<p class="note">The first table is from the district's Annual Financial Reports and covers property taxes only (account 01100), so it differs from local taxes in the money table, which also include motor vehicle and other local taxes. Taxes received plus the state's payment of credits on them is the first row; the LB 1107 credit (2019-20 to 2022-23, an estimate) counts as paid by the state. The request cap is from NDE's LC-2 budget form: LB 243 (2023) limits growth in each district's property tax request from 2023-24 to 3% plus allowances for enrollment and for poverty and English learner students. A vote of at least 70% of the school board can add 4 to 7 percentage points, more for smaller districts, and voters can approve more by a 60% majority. Bond levies are outside the cap and not in the request.</p>
+</details>
+{% endif %}
+{% if need_parts %}
+<details class="psec" id="need-parts"><summary><h2 class="sect">What makes up formula need</h2><span class="psum">Formula need per formula student by component, in 2019 dollars.</span></summary>
+<div class="scroll"><table class="data">
+<thead><tr><th>Per formula student, 2019 dollars</th>{% if need_parts.y0 %}<th class="num">{{ need_parts.y0 }} aid</th>{% endif %}<th class="num">{{ need_parts.y1 }} aid</th>{% if need_parts.y0 %}<th class="num">Change</th>{% endif %}</tr></thead>
+<tbody>{% for r in need_parts.rows %}<tr{% if r.total %} class="bold"{% endif %}><td>{{ r.label }}</td>{% if need_parts.y0 %}<td class="num">{{ r.v0 }}</td>{% endif %}<td class="num">{{ r.v1 }}</td>{% if need_parts.y0 %}<td class="num">{{ r.ch }}</td>{% endif %}</tr>{% endfor %}</tbody>
+</table></div>
+<p class="note">TEEOSA formula need from NDE's certification workbooks, divided by formula students and converted to 2019 dollars with the Midwest CPI-U. Corrections are folded into the allowance they correct; the components add exactly to formula need.</p>
+</details>
+{% endif %}
+{% if taxbase %}
+<details class="psec" id="taxbase"><summary><h2 class="sect">Property tax base</h2><span class="psum">Taxable valuation by class of property and by county.</span></summary>
+<div class="scroll"><table class="data"><thead><tr><th>Share of taxable valuation, October {{ taxbase.october }}</th><th class="num"></th></tr></thead>
+<tbody>{% for lbl, v in taxbase.shares %}<tr><td>{{ lbl }}</td><td class="num">{{ v }}</td></tr>{% endfor %}
+{% if taxbase.change %}<tr><td>Taxable valuation, October 2019 to October {{ taxbase.october }}</td><td class="num">{{ taxbase.change }}</td></tr>{% endif %}</tbody></table></div>
+<p class="note">Taxable valuation is what levies apply to (the unadjusted values in Revenue's School Adjusted Value report). School adjusted valuation appears only in the formula table, where it sets local effort.</p>
+{% if taxbase.counties %}<div class="scroll"><table class="data"><thead><tr><th>County</th><th class="num">Taxable valuation, October {{ taxbase.october }}</th><th class="num">Share of district children 5-17, 2020</th><th class="num">Share of district land</th></tr></thead>
+<tbody>{% for c in taxbase.counties %}<tr><td><a href="{{ root }}county/{{ c.fips }}.html">{{ c.name }}</a></td><td class="num">{{ c.value }}</td><td class="num">{{ c.kids }}</td><td class="num">{{ c.land }}</td></tr>{% endfor %}</tbody></table></div>
+<p class="note">Taxable valuation by county is Revenue's certified split. Children and land are from 2020 Census blocks inside the current boundary; children are the weight used to split students and aid in county profiles.</p>{% endif %}
+</details>
+{% endif %}
+{% if outcomes %}
+<details class="psec" id="outcomes"><summary><h2 class="sect">Student outcomes and teachers</h2><span class="psum">{{ outcomes.lead }}</span></summary>
+<div class="scroll"><table class="data"><thead><tr><th>{{ outcomes.year }} school year</th><th class="num">This system</th><th class="num">Statewide</th></tr></thead>
+<tbody>{% for r in outcomes.rows %}<tr><td>{{ r.label }}</td><td class="num">{{ r.v }}</td><td class="num">{{ r.state }}</td></tr>{% endfor %}</tbody></table></div>
+<p class="note">Nebraska Education Profile. NSCAS proficiency is from NDE's all-grades totals for the latest year it published them; teacher quality shares are of teacher FTE (inexperienced means the first three years). NDE withholds small groups; withheld values are never estimated. Results track poverty closely, so compare systems with similar students.</p>
+</details>
+{% endif %}
+{% if history %}
+<details class="psec" id="history"><summary><h2 class="sect">History</h2><span class="psum">Students, school adjusted valuation, need and aid by aid year, in 2019 dollars.</span></summary>
+<div class="scroll"><table class="data"><thead><tr><th>Aid year</th><th class="num">Formula students</th><th class="num">School adjusted valuation, 2019 $</th><th class="num">Need per student, 2019 $</th><th class="num">Equalization aid</th><th class="num">Aid per student, 2019 $</th><th class="num">All systems, aid per student, 2019 $</th></tr></thead>
+<tbody>{% for r in history.rows %}<tr>{% for c in r %}{% if loop.first %}<td>{{ c }}</td>{% else %}<td class="num">{{ c }}</td>{% endif %}{% endfor %}</tr>{% endfor %}</tbody></table></div>
+<p class="note">Aid years as certified, labeled by the fall they start, deflated by the Midwest CPI-U.</p>
+</details>
 {% endif %}
 {% for g in groups %}
 <section class="block">

@@ -115,6 +115,8 @@ def system_page(a, code: str) -> dict:
         if kind == "res" and x == 0 and k in ("option_funding", "cap_aid"):
             continue
         n += 1
+        if k == "local_effort" and x:
+            label += f" ({fmt.money(x * 100)})"
         table.append({"n": n, "label": label, "dollars": fmt.money(x), "ps": ps(x), "all": allv, "bold": kind in ("need", "total")})
     need = f["formula_need"] or 0
     segs = []

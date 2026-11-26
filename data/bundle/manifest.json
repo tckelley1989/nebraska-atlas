@@ -1,7 +1,7 @@
 {
-  "built_utc": "2026-11-26T01:00:11+00:00",
+  "built_utc": "2026-11-26T17:54:59+00:00",
   "source_repo": "nebraska-economy",
-  "source_commit": "d959774a795cd94fd910c70e3f738452baa55c1d",
+  "source_commit": "96f3d5ab61fde12c4e444fa58a726ce611387b97",
   "files": {
     "counties.csv": {
       "bytes": 50167,
@@ -32,8 +32,8 @@
       "sha256": "29cdc5d4406f5a252db1afdbea32927247d86fc8f57cf4710407edb6dcfcf19a"
     },
     "district_county_weights.csv": {
-      "bytes": 28874,
-      "sha256": "ab8a2066878dbea8d1562578e3033b00c6eb559ed75aedf3afe922fe2d28b751"
+      "bytes": 40902,
+      "sha256": "df4e5d143bb54ec8000873fd023d47385705223c76f9b7580bdcc976f7613f06"
     },
     "geo.js": {
       "bytes": 121356,
@@ -75,6 +75,10 @@
       "bytes": 62432,
       "sha256": "de23be5ff65ae84775baf978c33b5534046af862fdda014961d1fa93ba2b0a45"
     },
+    "school_property_taxes.csv": {
+      "bytes": 158466,
+      "sha256": "c1edec3e0d62736361747b308b45688d1345e8d3332407e3f99d0131c15610ca"
+    },
     "school_revenue.csv": {
       "bytes": 407458,
       "sha256": "8157a43ca8d2285b214c78054ddfafa10d60a5be640337dd7840e3e3d105fde6"
@@ -82,6 +86,10 @@
     "school_systems.csv": {
       "bytes": 191125,
       "sha256": "735ea822f84aac3be85d8a6166c8b8661b368ef4da142a8258af6bd8ecfefc3a"
+    },
+    "school_tax_base.csv": {
+      "bytes": 113075,
+      "sha256": "72aaa4af23c4574cf4838277f5f0bc23ead1fa10df83c28a8eae15d377b451fe"
     },
     "statewide.csv": {
       "bytes": 15062,

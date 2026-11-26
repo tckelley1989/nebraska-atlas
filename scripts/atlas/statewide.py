@@ -161,25 +161,33 @@ def build(a) -> dict:
     m = lambda k: S[("school_money", k)]
     ys = sorted(m("state_share"))
     y0, y1 = (2019 if 2019 in ys else ys[0]), ys[-1]
+    # General Fund homestead reimbursement is not published on its own: it is the gap between the two shares, in dollars,
+    # less credits (the bundle's homestead figure covers all funds).
+    gap = lambda y: (m("state_share")[y] - m("state_share_xc")[y]) / 100 * m("gf_total")[y]
+    hs_gf = {y: gap(y) - m("gf_credits")[y] for y in ys}
+    share = lambda v, y: 100 * v / m("gf_total")[y]
+    rise = m("state_share")[y1] - m("state_share")[y0]
+    cr = share(m("gf_credits")[y1], y1) - share(m("gf_credits")[y0], y0)
+    hs = share(hs_gf[y1], y1) - share(hs_gf[y0], y0)
     lead = (f"State sources were {pct(m('state_share')[y1])} of districts' General Fund receipts in {sy(y1)}, up from "
-            f"{pct(m('state_share')[y0])} in {sy(y0)}. Counting property tax credits as local money, since they pay part of a tax "
-            f"the school board levies, the state share was {pct(m('state_share_xc')[y1])}, against {pct(m('state_share_xc')[y0])}. "
-            f"So {(m('state_share')[y1] - m('state_share')[y0]) - (m('state_share_xc')[y1] - m('state_share_xc')[y0]):.1f} of the "
-            f"{m('state_share')[y1] - m('state_share')[y0]:.1f}-point rise is credits, which LB 34 moved onto tax statements in {sy(y1)}. TEEOSA aid was "
+            f"{pct(m('state_share')[y0])} in {sy(y0)}. Counting property tax credits and homestead exemption reimbursement as local "
+            f"money, since both pay part of a tax the school board levies, the state share was {pct(m('state_share_xc')[y1])}, against "
+            f"{pct(m('state_share_xc')[y0])}. Of the {rise:.1f}-point rise, credits account for {cr:.1f} points, after LB 34 moved them onto "
+            f"tax statements in {sy(y1)}, homestead reimbursement for {hs:.1f} and all other state money for {rise - cr - hs:.1f}. TEEOSA aid was "
             f"{pct(m('teeosa_share')[y1])} of receipts, against {pct(m('teeosa_share')[y0])}.")
     series = [("State, as reported", [m("state_share")[y] for y in ys], False),
-              ("State, credits as local", [m("state_share_xc")[y] for y in ys], True)]
+              ("State, credits and homestead as local", [m("state_share_xc")[y] for y in ys], True)]
     rows = [[sy(y), pct(m("local_share")[y] + m("county_esu_share")[y]), pct(m("federal_share")[y]), pct(m("teeosa_share")[y]),
-             pct(m("state_share_xc")[y]), pct(m("state_share")[y]), mil(m("gf_total")[y]), mil(m("gf_credits")[y])] for y in ys]
+             pct(m("state_share_xc")[y]), pct(m("state_share")[y]), mil(m("gf_total")[y]), mil(m("gf_credits")[y]), mil(hs_gf[y])] for y in ys]
     secs.append({"id": "who-pays", "title": "Who pays for schools", "lead": lead,
                  "desk": Markup(line_chart([sy(y) for y in ys], series, DESK, lambda v: f"{v:.0f}%", "State share of General Fund receipts")),
                  "phone": Markup(line_chart([sy(y) for y in ys], series, PHONE, lambda v: f"{v:.0f}%", "State share of General Fund receipts")),
                  "axis": "State share of districts' General Fund receipts",
-                 "head": ["School year", "Local, county and ESU", "Federal", "TEEOSA aid", "State, credits as local", "State",
-                          "General Fund receipts", "of which credits"], "rows": rows,
+                 "head": ["School year", "Local, county and ESU", "Federal", "TEEOSA aid", "State, credits and homestead as local", "State",
+                          "General Fund receipts", "Credits (03131)", "Homestead (03130), General Fund"], "rows": rows,
                  "note": "General Fund receipts as districts report them in NDE's Annual Financial Reports: local sources (01000), county "
                          "and ESU (02000), state sources (03000) and federal sources (04000), each over their sum. Credits are account "
-                         "03131. The LB 1107 income tax credit went to taxpayers, so districts booked it as local taxes, and it stays local "
+                         "03131 and homestead exemption reimbursement 03130. The LB 1107 income tax credit went to taxpayers, so districts booked it as local taxes, and it stays local "
                          "here. Source: Nebraska Department of Education, Annual Financial Reports."})
 
     # 3. what moved formula need, per formula student, 2019 dollars

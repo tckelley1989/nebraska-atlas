@@ -194,5 +194,20 @@ def test_statewide_picture():
     *parts, total = vals
     assert abs(sum(parts) - total) <= len(parts), vals  # whole-dollar rounding
     lead = h.unescape(re.search(r'<p class="dlead">(.*?)</p>', sw[sw.index('id="who-pays"'):], re.S).group(1))
-    a, b = map(float, re.search(r"So ([\d.]+) of the ([\d.]+)-point rise", lead).groups())
-    assert 0 <= a <= b
+    rise, cr, hs, other = map(float, re.search(r"Of the ([\d.]+)-point rise, credits account for ([\d.]+) points.*?homestead reimbursement for (-?\d+\.\d) and all other state money for (-?\d+\.\d)", lead.replace("−", "-")).groups())
+    assert abs(cr + hs + other - rise) <= 0.15  # each part rounded to 0.1
+
+
+def test_relative_map_paths_keep_every_vertex():
+    """Map paths are written as relative steps between rounded points; walking them back gives the same vertices."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from atlas import maps
+    pts = [(10.04, 20.0), (12.5, 19.96), (110.55, 0.04), (9.95, 300.0)]
+    d = maps._rel(pts)
+    x, y = (round(float(v) * 10) for v in d[1:d.index("l")].split(","))
+    walked = [(x, y)]
+    nums = [round(float(v) * 10) for v in re.findall(r"-?\d*\.?\d+", d[d.index("l") + 1:-1])]
+    for i in range(0, len(nums), 2):
+        x, y = x + nums[i], y + nums[i + 1]
+        walked.append((x, y))
+    assert walked == [(round(px * 10), round(py * 10)) for px, py in pts]

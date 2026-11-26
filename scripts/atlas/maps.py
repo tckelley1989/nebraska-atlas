@@ -25,12 +25,27 @@ def simplify(path: str, tol: float = 1.2, min_area: float = 3.0) -> str:
         for p in pts[1:]:
             if math.hypot(p[0] - keep[-1][0], p[1] - keep[-1][1]) >= tol:
                 keep.append(p)
-        d = "M" + "L".join(f"{x:.1f},{y:.1f}" for x, y in keep) + "Z"
+        d = _rel(keep)
         if best is None or area > best[0]:
             best = (area, d)
         if area >= min_area and len(keep) >= 3:
             out.append(d)
     return "".join(out) or (best[1] if best else "")
+
+
+def _rel(pts: list) -> str:
+    """A closed ring as one absolute move and relative steps, in tenths of a unit. Steps are taken between the rounded
+    points, so rounding never accumulates: every vertex lands where the absolute path put it."""
+    r = [(round(x * 10), round(y * 10)) for x, y in pts]
+    def num(v: int) -> str:
+        t = f"{abs(v) / 10:.1f}".rstrip("0").rstrip(".")
+        t = t[1:] if t.startswith("0.") else t  # 0.5 -> .5
+        return ("-" if v < 0 else "") + t if v else "0"
+    out = [f"M{r[0][0] / 10:.1f},{r[0][1] / 10:.1f}l"]
+    for (x0, y0), (x1, y1) in zip(r, r[1:]):
+        a, b = num(x1 - x0), num(y1 - y0)
+        out.append(a + ("" if b.startswith("-") else ",") + b + " ")
+    return "".join(out).rstrip() + "z"
 
 
 def bin_index(v, breaks: list) -> int:

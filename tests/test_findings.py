@@ -51,3 +51,23 @@ def test_findings_wording_rules(findings):
     text = " ".join(str(x["html"]) + str(x["chart"]) + x["headline"] for x in findings)
     for banned in ("property wealth", "which follows need", "took the place of", "rose +", "rose −"):
         assert banned not in text, banned
+
+
+def test_more_detail_links_resolve():
+    """Every "See it" link opens a page that exists, a map indicator the page offers or a section it has."""
+    import re
+    from pathlib import Path
+    site = Path(__file__).resolve().parents[1] / "_site"
+    t = (site / "index.html").read_text(encoding="utf-8")
+    blocks = re.findall(r'<details class="more fmore">(.*?)</details>', t, re.S)
+    assert len(blocks) >= 9
+    links = [h for b in blocks for h in re.findall(r'href="([^"]+)"', b)]
+    assert len(links) >= 20
+    for h in links:
+        path, _, frag = h.partition("#")
+        path, _, q = path.partition("?")
+        page = (site / path).read_text(encoding="utf-8")
+        if q.startswith("ind="):
+            assert f'<button type="button" data-k="{q[4:]}"' in page, h
+        if frag:
+            assert f'id="{frag}"' in page, h

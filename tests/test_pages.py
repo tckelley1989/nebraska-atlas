@@ -166,3 +166,14 @@ def test_map_table_has_every_place_and_matches_the_map():
                 top = max(nums, key=lambda v: v[0])[1]
                 sect = re.search(rf'<div class="ranks" data-k="{k}".*?Highest five</h3><ol><li><a[^>]*>[^<]*</a> <b[^>]*>([^<]*)</b>', t, re.S)
                 assert sect and sect.group(1) == top, (page, k)
+
+
+def test_map_pages_offer_png_and_svg_with_source_lines():
+    """Downloads draw the title, legend, period and source into the file, so every indicator needs a period line."""
+    import json
+    for page in ("schools.html", "counties.html"):
+        t = (SITE / page).read_text(encoding="utf-8")
+        assert 'class="dlbtn" data-f="png"' in t and 'class="dlbtn" data-f="svg"' in t, page
+        periods = json.loads("{" + re.search(r"periods = \{(.*?)\};", t, re.S).group(1) + "}")
+        keys = re.findall(r'<section class="ind" data-k="([^"]+)"', t)
+        assert set(periods) == set(keys) and all("Source: " in v and len(v) > 12 for v in periods.values()), page

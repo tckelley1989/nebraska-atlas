@@ -232,3 +232,20 @@ path.dd.on{stroke:var(--ink);stroke-width:2px}
 .ex .label{margin:14px 0 6px}
 @media (max-width:640px){.head nav{flex-wrap:wrap;gap:8px 16px;font-size:15px}}
 .scroll{position:relative}
+
+/* map page: map or table view */
+.viewtog{display:inline-flex;border:1.5px solid var(--ink);margin:10px 0 12px}
+.viewtog button{font:inherit;font-weight:700;font-size:14px;padding:6px 16px;background:var(--card);color:var(--ink);border:0;cursor:pointer}
+.viewtog button+button{border-left:1.5px solid var(--ink)}
+.viewtog button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+.tfilter{margin:0 0 10px}
+.tfilter label{font-weight:700;margin-right:6px}
+.tfilter input{font:inherit;padding:6px 8px;border:1.5px solid var(--rule);min-width:220px;max-width:100%}
+.maptable th button{font:inherit;text-transform:inherit;letter-spacing:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.maptable th[aria-sort="ascending"] button::after{content:" \2191"}
+.maptable th[aria-sort="descending"] button::after{content:" \2193"}
+.maptable td:first-child{color:var(--sub);width:4em}
+.mapcol{min-width:0}
+.maptable th.num{white-space:normal}
+svg.map[hidden]{display:none}
+.tablemode .legend,.tablemode .ranks .two{display:none}

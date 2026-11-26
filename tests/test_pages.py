@@ -147,3 +147,22 @@ def test_periods_follow_the_bundle():
     t = (SITE / "system" / "28-0001.html").read_text(encoding="utf-8")
     lc2 = a.system_js["indicators"]["lc2_limit_levy"]["period"]
     assert lc2 in t
+
+
+def test_map_table_has_every_place_and_matches_the_map():
+    """Table view (map pages): one row per mapped place, a value wherever the map has a color, blank where it shows
+    the not-available class, and the top value equals the page's highest-five list."""
+    import json
+    for page, n in (("schools.html", 244), ("counties.html", 93)):
+        t = (SITE / page).read_text(encoding="utf-8")
+        tab = json.loads(re.search(r"var T = (\{.*?\}), cur =", t, re.S).group(1))
+        cls = json.loads(re.search(r"var C = (\{.*?\}), ids", t, re.S).group(1))
+        assert len(tab["ids"]) == len(tab["names"]) == n, page
+        for k, vals in tab["vals"].items():
+            assert len(vals) == n, (page, k)
+            assert all((v is None) == (c == "na") for v, c in zip(vals, cls[k])), (page, k)
+            nums = [v for v in vals if v and v[0] is not None]
+            if nums:
+                top = max(nums, key=lambda v: v[0])[1]
+                sect = re.search(rf'<div class="ranks" data-k="{k}".*?Highest five</h3><ol><li><a[^>]*>[^<]*</a> <b[^>]*>([^<]*)</b>', t, re.S)
+                assert sect and sect.group(1) == top, (page, k)

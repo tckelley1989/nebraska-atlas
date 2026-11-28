@@ -54,7 +54,7 @@ def test_findings_wording_rules(findings):
 
 
 def test_more_detail_links_resolve():
-    """Every "See it" link opens a page that exists, a map indicator the page offers or a section it has."""
+    """Every "See it" link opens a page that exists, a tab the page offers or a section it has."""
     import re
     from pathlib import Path
     site = Path(__file__).resolve().parents[1] / "_site"
@@ -67,7 +67,8 @@ def test_more_detail_links_resolve():
         path, _, frag = h.partition("#")
         path, _, q = path.partition("?")
         page = (site / path).read_text(encoding="utf-8")
-        if q.startswith("ind="):
-            assert f'<button type="button" data-k="{q[4:]}"' in page, h
-        if frag:
+        assert "?ind=" not in h, h  # old map address: link the measure page
+        if frag in ("map", "table", "relationships"):
+            assert f'data-t="{frag}"' in page, h
+        elif frag:
             assert f'id="{frag}"' in page, h

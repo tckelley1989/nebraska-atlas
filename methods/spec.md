@@ -51,20 +51,20 @@ NDE stopped publishing all-grades NSCAS rows with its 2025-26 Education Profile 
 
 Coverage with NDE's 2024-25 totals: mathematics 221 of 244 systems, English language arts 235, science 121.
 
-## 5. Deeper dive
+## 5. Measure pages
 
-Source: `scripts/atlas/dive.py` (computed and drawn at build) and `templates/dive.js` (the selected place). One page per measure, `dive/<level>/<key>.html`, in five steps: what's normal, kind of place, why by design, what else goes with it, up close.
+Source: `scripts/atlas/dive.py` and `scripts/atlas/maps.py` (computed and drawn at build), `templates/measure.js` and `templates/dive.js` (tabs, the map and the selected place). One page per measure, `schools/<key>.html` or `counties/<key>.html`, in three tabs. Map holds the map, the highest and lowest five, what's normal and kind of place. Table lists every place, sortable. Relationships holds why by design, what else goes with it and up close. A profile row links to its measure page with that place selected, and the selection and the open tab carry over when the reader switches measures. The section fronts, `schools.html` and `counties.html`, show the first key measure with the index of every measure; the schools front adds the Statewide picture. Old addresses (`dive/<level>/<key>.html`, `?ind=`) redirect and keep `?sel=`, `?vs=` and the step anchor.
 
 1. Every pair of measures is ranked by Spearman rank correlation.
 2. Significance: Fisher z with the Spearman variance correction, 1.06 / (n − 3), two-sided normal p.
 3. Holm correction at 5% across every measure tested against the one on the page. A result that survives is "stronger than chance"; the rest "could be chance".
 4. Within-group check: ranks are demeaned inside each tier (counties) or size band (systems: under 200, 200 to 499, 500 to 999, 1,000 to 4,999, 5,000+). If the within-group correlation falls below half the overall one, the page says the pattern is mostly a gap between groups.
-5. Pairs in the same family (`registry/families.csv`, the source of truth) are not tested. They are listed under step 3, because they move together by arithmetic.
-6. Mechanism before correlation: step 3 states the arithmetic from `registry/mechanisms.csv`. The TEEOSA formula (family s01) and the property tax identity (family c07) get a chart; other families get their one-line reason.
+5. Pairs in the same family (`registry/families.csv`, the source of truth) are not tested. They are listed under why by design, because they move together by arithmetic.
+6. Mechanism before correlation: why by design states the arithmetic from `registry/mechanisms.csv`. The TEEOSA formula (family s01) and the property tax identity (family c07) get a chart; other families get their one-line reason.
 7. Sort order: results that hold come first, strongest first, then the rest. A result that does not hold never sits above one that does.
 8. Minimum count: a pair needs at least half the places (122 systems or 47 counties). Pairs below it are listed as too few to test.
 9. Every result that holds gets a why line. A mechanism is stated only where arithmetic links the pair: the TEEOSA formula (aid against school adjusted or taxable valuation per student, only when the sign is negative as the formula predicts), the levy (the request divided by taxable valuation, so a levy page states each partner's own rank correlation with taxable valuation per student and counts a link only at 0.3 or more in size), and the three property tax factors for county tax measures. Every other result reads "No formula link" with its own correlation and is called an association. "A board's levy does not change its aid" appears only on TEEOSA aid per student. Levies are tagged "Board sets" and unused authority "Board choice". A test of these rules runs on every page: each holding result is named, each with/against agrees with the sign beside it, and each mechanism line has its arithmetic link. A measure reported by fewer than half the places says so in place of a test count.
-10. Step 5 opens on the strongest result that holds; up to four scatters are drawn. The five places furthest from the line are labeled, labels never overlap, and the selected place is always labeled.
+10. Up close opens on the strongest result that holds; up to four scatters are drawn. The five places furthest from the line are labeled, labels never overlap, and the selected place is always labeled.
 11. Axes: a measure with a long upper tail is cut at its 99th percentile, with the places above drawn as arrows at the edge. A measure whose values all sit far above zero starts at a round number below its minimum, with a break mark.
 12. Strength words: under 0.1 negligible, 0.1 to 0.3 weak, 0.3 to 0.5 moderate, 0.5 or more strong.
 13. The selected place's formula lines (need, resources, equalization, total aid) are generated from certification fields and tested against the certified total for every system; the property tax identity is tested against the published measure for every county.

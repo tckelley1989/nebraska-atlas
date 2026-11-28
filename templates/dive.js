@@ -1,4 +1,4 @@
-/* Deeper dive place mode: ?sel=<code> marks one place in every chart and draws its own step 3.
+/* Measure page place mode: ?sel=<code> marks one place in every chart and draws its own step 3.
    Every number comes from the page's embedded data, written at build. Without a selection the page is the state view. */
 (function () {
   var D = JSON.parse(document.getElementById("dive-data").textContent), P = D.places, S = window.DIVE_PLACES || {}, X = window.DIVE_EXTRA || {};
@@ -166,6 +166,7 @@
     if (code && !p) code = "";
     var line = document.getElementById("sel-line"), peer = document.getElementById("peer-line"), prof = document.getElementById("sel-profile");
     document.querySelectorAll(".gtable tr, .glist .gi").forEach(function (tr) { tr.classList.toggle("on", !!p && tr.getAttribute("data-g") === p.g); });
+    document.dispatchEvent(new CustomEvent("ledger:sel", { detail: p ? code : "" }));
     if (!p) { line.hidden = true; peer.hidden = true; prof.hidden = true; mark(""); placeMech(""); return; }
     line.innerHTML = "<b>" + esc(p.n) + "</b>: <b class='big'>" + esc(p.v) + "</b>, " + esc(p.r) + (p.why ? ", " + esc(p.why) : "") +
       ". Median of its " + p.pn + " peers (" + esc(p.pd) + "): " + esc(p.pm) + ".";
@@ -173,7 +174,7 @@
     peer.innerHTML = "<b>" + esc(p.s) + "'s peers</b>: the " + p.pn + " " + D.nouns + " that share its " + (D.level === "system" ? "size band and equalization status" : "tier") +
       ". Their median is <b>" + esc(p.pm) + "</b>; " + esc(p.s) + " is " + p.pr + (p.pr % 10 === 1 && p.pr !== 11 ? "st" : p.pr % 10 === 2 && p.pr !== 12 ? "nd" : p.pr % 10 === 3 && p.pr !== 13 ? "rd" : "th") + " highest of " + p.pn + ".";
     peer.hidden = false;
-    prof.href = "../../" + D.level + "/" + code + ".html"; prof.hidden = false;
+    prof.href = prof.getAttribute("data-base") + code + ".html"; prof.hidden = false;
     mark(code); placeMech(code);
   }
 
@@ -290,7 +291,7 @@
       if (opt) { vs.value = opt.value; showScatter(opt.value); }
     });
   });
-  // ?vs=<measure> opens step 5 on that measure (links from the map pages)
+  // ?vs=<measure> opens the scatter on that measure (links from Findings and old map pages)
   var wantVs = new URLSearchParams(location.search).get("vs");
   if (wantVs && vs) {
     var ov = vs.querySelector('option[data-k="' + wantVs + '"]') || vs.querySelector('option[value="k:' + wantVs + '"]');

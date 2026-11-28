@@ -17,7 +17,41 @@
 <tbody>{% for t in g['items'] %}<tr><td>{{ term(t, t.label) }}</td><td class="num {{ t.tone }}">{{ t.value }}</td><td class="num">{{ t.tier }}</td><td class="num">{{ t.state }}</td><td>{{ t.rank }}</td><td class="quiet">{{ t.period }}</td><td>{% if not t.categorical %}<a class="dlink" href="{{ root }}dive/county/{{ t.key }}.html?sel={{ fips }}">Dive</a>{% endif %}</td></tr>{% endfor %}</tbody></table></div>
 </section>
 {% endfor %}
-{% if systems %}
+{% macro cmp(c) %}<div class="scroll"><table class="data cmp"><thead><tr><th>{{ c.head }}</th>{% for h in c.cols %}<th class="num">{{ h }}</th>{% endfor %}</tr></thead>
+<tbody>{% for r in c.rows %}<tr><td>{{ r.label }}{% if r.per %}<span class="per">{{ r.per }}</span>{% endif %}</td>{% for x in r.cells %}<td class="num">{% if loop.first %}<b>{{ x.v }}</b>{% else %}{{ x.v }}{% endif %}{% if x.raw %}<span class="per">{{ x.raw }}</span>{% endif %}</td>{% endfor %}</tr>{% endfor %}</tbody></table></div>{% endmacro %}
+{% macro tbl(t) %}<div class="scroll"><table class="data"><thead><tr>{% for h in t.head %}<th{% if not loop.first %} class="num"{% endif %}>{{ h }}</th>{% endfor %}</tr></thead>
+<tbody>{% for r in t.rows %}{% if r is mapping %}<tr{% if r.total %} class="bold"{% endif %}><td>{% if r.code %}<a href="{{ root }}system/{{ r.code }}.html">{{ r.name }}</a>{% else %}{{ r.label }}{% endif %}</td>{% for v in r.v %}<td class="num">{{ v }}</td>{% endfor %}</tr>{% else %}<tr>{% for v in r %}{% if loop.first %}<td>{{ v }}</td>{% else %}<td class="num">{{ v }}</td>{% endif %}{% endfor %}</tr>{% endif %}{% endfor %}</tbody></table></div>{% if t.note %}<p class="note">{{ t.note }}</p>{% endif %}{% endmacro %}
+{% macro fig(f) %}<details class="more"><summary>{{ f[0] }}</summary>{{ tbl(f[1]) }}<p class="note">{{ f[2] }}</p></details>{% endmacro %}
+{% for sec in csecs %}
+<details class="psec" id="{{ sec.id }}"><summary><h2 class="sect">{{ sec.title }}</h2><span class="psum">{{ sec.sum }}</span></summary>
+{% set b = sec.body %}
+{% if sec.kind == "economy" %}
+{{ cmp(b.cmp[0]) }}{% if b.small %}<p class="note">Fewer than 1,000 payroll jobs: a change of a few jobs moves the job and wage percentages a lot, so read them with the counts.</p>{% endif %}
+{% if b.industry %}<h3 class="sub">Private jobs by industry</h3>{% if b.industry.none %}<p class="note">{{ b.industry.none }}</p>{% else %}<p class="note">{{ b.industry.lead }}</p>
+{{ tbl({"head": ["Payroll jobs by industry", "2019", "Latest 4 quarters", "Change", "Share of private, 2019", "Share now"], "rows": b.industry.rows}) }}{% endif %}{% endif %}
+<h3 class="sub">Levels now</h3>{{ cmp(b.cmp[1]) }}
+{% for f in b.figs %}{{ fig(f) }}{% endfor %}
+<p class="note">Sources: BLS QCEW and LAUS, BEA, Nebraska Department of Revenue.</p>
+{% elif sec.kind == "people" %}
+{{ cmp(b.cmp[0]) }}{{ cmp(b.cmp[1]) }}{% for f in b.figs %}{{ fig(f) }}{% endfor %}
+{% elif sec.kind == "farms" %}
+{% for t in b.tables %}{{ tbl(t) }}{% endfor %}{{ cmp(b.cmp[0]) }}
+{% for m in b.more %}<details class="more"><summary>{{ m.title }}</summary>{% if m.lead %}<p class="note">{{ m.lead }}</p>{% endif %}{% for t in m.tables %}{{ tbl(t) }}{% endfor %}<p class="note">{{ m.note }}</p></details>{% endfor %}
+{% elif sec.kind == "schools" %}
+{% for t in b.tables %}{{ tbl(t) }}{% endfor %}
+{% if b.money %}<h3 class="sub">Where school money comes from, students living here (estimate)</h3>{{ tbl(b.money) }}{% endif %}
+{% if b.systems %}<h3 class="sub">School systems serving the county</h3>{{ tbl({"head": ["School system", "Share of county taxable valuation", "Share of county students (estimate)", "TEEOSA aid per formula student", "Equalization aid"], "rows": b.systems}) }}{% endif %}
+<p class="note">{{ b.note }}</p>
+{% elif sec.kind == "taxes" %}
+{% if b.steps %}<p>{{ b.steps.why }}</p>{{ tbl(b.steps.table) }}{% endif %}
+{{ tbl(b.auth) }}<details class="more"><summary>Shares by property class, rates and taxes per resident</summary>{{ tbl(b.classes) }}{{ tbl(b.lines) }}</details>
+<p class="note">{{ b.note }}</p>
+{% else %}
+{% for t in b.tables %}{{ tbl(t) }}{% endfor %}<p class="note">{{ b.note }}</p>
+{% endif %}
+</details>
+{% endfor %}
+{% if systems and not csecs %}
 <section class="block"><h2 class="sect">School systems serving the county</h2>
 <ul class="links">{% for s in systems %}<li><a href="{{ root }}system/{{ s.code }}.html">{{ s.name }}</a></li>{% endfor %}</ul></section>
 {% endif %}

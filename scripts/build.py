@@ -13,7 +13,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import json
-from atlas import profile_detail, statewide, pages, maps, facts, findings, about, dive, landing  # noqa: E402
+from atlas import county_detail, profile_detail, statewide, pages, maps, facts, findings, about, dive, landing  # noqa: E402
 from atlas.data import Atlas  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -67,6 +67,7 @@ def main():
           hero_lead=hero_lead, state_tiles=state_tiles)
 
     detail = profile_detail.Detail(a)
+    cdetail = county_detail.Detail(a)
     for code in a.formula:
         ctx = pages.system_page(a, code)
         ctx.update(detail.system(code))
@@ -75,6 +76,7 @@ def main():
         (OUT / "system" / f"{code}.csv").write_text(about.profile_csv(a, "system", code, ctx["name"]), encoding="utf-8")
     for fips in a.counties_xw:
         ctx = pages.county_page(a, fips)
+        ctx.update(cdetail.county(fips))
         write(f"county/{fips}.html", "county.html", title=ctx["name"], section="counties",
               description=ctx["desc"][:300], **ctx)
         (OUT / "county" / f"{fips}.csv").write_text(about.profile_csv(a, "county", fips, ctx["name"]), encoding="utf-8")

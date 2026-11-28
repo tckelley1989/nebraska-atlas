@@ -281,3 +281,6 @@ details.psec[open]>summary h2::after{content:" \2212"}
 details.psec .psum{display:block;margin-top:6px;color:var(--sub);font-size:15px;line-height:1.5;max-width:860px}
 details.psec h3.sub{margin:18px 0 6px;font-size:16px}
 .note.warn{color:var(--rust)}
+.cmp td .per,.data td .per{display:block;font-size:12px;color:var(--sub);font-weight:400}
+details.more>summary{cursor:pointer;font-weight:700;padding:10px 0}
+.psec .scroll+.scroll,.psec .scroll+p+.scroll,.psec .note+.scroll{margin-top:20px}

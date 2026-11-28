@@ -586,7 +586,7 @@ def whys(d: Dive, rel: dict, ptax) -> list:
                 continue
             rs = [r for r, _ in sub]; vals = [v for _, v in sub]
             rng = f"rank correlation {sg(vals[0])}" if len(vals) == 1 else f"rank correlations {sg(min(vals, key=abs))} to {sg(max(vals, key=abs))}"
-            text = f'{cap(lst(rs))}: {"each is" if len(rs) > 1 else "it is"} tied most closely to {FNAME[top]} ({rng}), one of the three factors in step 3.'
+            text = f'{cap(lst(rs))}: {"each is" if len(rs) > 1 else "it is"} tied most closely to {FNAME[top]} ({rng}), one of the three factors charted above.'
             if farm and top == "g_left":
                 cs = [c for c in d.codes if isinstance(d.a.value("county", c, "ptax_ag_share"), (int, float))]
                 rac = spear([(d.a.value("county", c, "ptax_ag_share"), d.a.value("county", c, "ptax_credit_share")) for c in cs])
@@ -625,20 +625,9 @@ def shared_names(a, level: str) -> dict:
     return {c: (r["display_name"] if level == "system" else r["name"] + " County") for c, r in xw.items()}
 
 
-def map_preview(a, level: str, key: str, ptax=None) -> dict:
-    """The map page's look at one indicator: the dive's all-places chart (written as separate files the page fetches)
-    and the measures that go with it more strongly than chance, strongest first."""
-    d = Dive(a, level, key)
-    rel = d.relationships()
-    holds = [r for r in rel["tested"] if r["holds"]]
-    top = [{"key": r["key"], "name": r["name"], "rho_f": sg(r["rho"]), "word": word(r["rho"])} for r in holds[:4]]
-    return {"desk": strip(d, DESK), "phone": strip(d, PHONE), "top": top, "n_holds": len(holds), "m": len(rel["tested"]),
-            "gname": "size band" if level == "system" else "tier", "noun": d.noun, "nouns": d.nouns}
-
-
 def shared_values(a, level: str) -> str:
-    """Every number measure's value for every place at one level, for scatters drawn in the browser (step 5 and the
-    map pages). Values keep 6 significant digits; the formats needed for axis labels come with them."""
+    """Every number measure's value for every place at one level, for scatters drawn in the browser (up close, on
+    the Relationships tab). Values keep 6 significant digits; the formats needed for axis labels come with them."""
     codes = sorted(a.places(level))
     meta, vals = {}, {}
     for r in a.registry:
@@ -731,7 +720,7 @@ def page(a, level: str, key: str, ptax=None) -> dict:
         ctx["s3_desk"], ctx["s3_phone"] = ptax.strips(d, DESK), ptax.strips(d, PHONE)
     else:
         ctx["s3_lead"] = (" ".join(f'{m["why"]}' for m in mn) if mn else
-                          f"No formula connects {lc(row['short'])} to the other measures. Step 4 is exploratory: an association there is not a cause.")
+                          f"No formula connects {lc(row['short'])} to the other measures. The test below is exploratory: an association there is not a cause.")
     ctx["setaside"] = [dict(r, rho_f=sg(r["rho"])) for r in rel["setaside"]]
     # step 4
     holds = rel["holds"]; m = rel["m"]

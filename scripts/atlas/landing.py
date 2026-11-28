@@ -1,4 +1,4 @@
-"""Deeper dive landing page (approved mockup "Landing"): the background every dive assumes. Every figure is computed
+"""How it works page (from the approved mockup "Landing"): the background every measure page assumes. Every figure is computed
 here from the bundle; the worked examples are generated from certification fields and tested against the certified total."""
 import csv
 import statistics as st

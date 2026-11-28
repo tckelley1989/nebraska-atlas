@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% set place = 'system' if level == 'system' else 'county' %}
+{% block hero %}
+<section class="hero"><div class="wrap">
+<p class="crumb"><a href="{{ root }}{{ sect }}.html">{{ 'Schools' if level == 'system' else 'Counties' }}</a> / {{ group }}</p>
+<h1 class="wide">{{ label|upper }}</h1>
+<p class="herolead">{{ plain }}</p>
+<p class="quiet hero-meta">{{ period }} · {{ source }}</p>
+<div class="selbox" id="selbox">
+<p class="sel-links"><label for="msel">Measure</label>
+<select id="msel">{% for g in ix.groups %}<optgroup label="{{ g.name }}">{% for it in g['items'] %}<option value="{{ it.key }}"{% if it.key == key %} selected{% endif %}>{{ it.short }}</option>{% endfor %}</optgroup>{% endfor %}</select></p>
+{% if dv %}<p class="sel-line" id="sel-line" hidden></p>
+<p class="sel-links"><label for="pick">Follow a {{ place }}</label>
+<select id="pick"><option value="">All {{ nouns }}</option>{% for n, c in options %}<option value="{{ c }}">{{ n }}</option>{% endfor %}</select>
+<a id="sel-profile" href="#" data-base="{{ root }}{{ level }}/" hidden>Its profile</a></p>{% endif %}
+</div>
+</div></section>
+{% endblock %}
+{% block main %}
+<div class="mapgrid">
+<nav class="picker" aria-label="Key measures">
+<p class="label">Key measures</p>
+{% for it in ix.key8 %}<a class="mlink" href="{{ root }}{{ sect }}/{{ it.key }}.html"{% if it.key == key %} aria-current="page"{% endif %}>{{ it.short }}</a>{% endfor %}
+<a class="mlink all" href="{{ root }}{{ sect }}.html#all">All {{ ix.n }} measures</a>
+</nav>
+<div class="mapcol">
+<div class="mtabs" role="tablist" aria-label="Views of this measure">
+<button type="button" role="tab" id="tab-map" aria-controls="t-map" aria-selected="true" data-t="map">Map</button><button type="button" role="tab" id="tab-table" aria-controls="t-table" aria-selected="false" data-t="table">Table</button>{% if dv %}<button type="button" role="tab" id="tab-rel" aria-controls="t-rel" aria-selected="false" data-t="relationships">Relationships</button>{% endif %}
+</div>
+
+<section class="tpanel" id="t-map" role="tabpanel" aria-labelledby="tab-map">
+{% if note != plain %}<p class="quiet">{{ note }}</p>{% endif %}
+<div class="legend" aria-label="Legend">{% for l in legend %}<div><span class="sw {{ l.cls }}"></span><span>{{ l.label }}</span><span class="quiet">{{ l.count }}</span></div>{% endfor %}{% if missing %}<div><span class="sw na"></span><span>{{ missing_label or 'Not available' }}</span><span class="quiet">{{ missing }}</span></div>{% endif %}</div>
+<svg class="map" id="map" role="img" aria-label="{{ label }}, every {{ place }}"><title>{{ label }}</title></svg>
+<noscript><p class="note">The map needs JavaScript. The Table tab lists every {{ place }}.</p></noscript>
+<p class="dlrow"><span class="quiet">Download this map:</span> <button type="button" class="dlbtn" data-f="png">PNG</button> <button type="button" class="dlbtn" data-f="svg">SVG</button></p>
+<p class="quiet">{{ period }} · Source: {{ source }}{% if median_v %} · Median {{ median_v }}{% endif %}</p>
+{% if top %}
+<div class="two">
+<div><h3 class="label">Highest five</h3><ol>{% for r in top %}<li><a href="{{ root }}{{ r.href }}">{{ r.name }}</a> <b class="{{ r.tone }}">{{ r.value }}</b></li>{% endfor %}</ol></div>
+<div><h3 class="label">Lowest five</h3><ol>{% for r in bottom %}<li><a href="{{ root }}{{ r.href }}">{{ r.name }}</a> <b class="{{ r.tone }}">{{ r.value }}</b></li>{% endfor %}</ol></div>
+</div>
+{% endif %}
+{% if dv %}
+<section class="dstep" aria-labelledby="s1"><div class="dhead"><div><p class="label">What's normal</p><h2 id="s1">Is this {{ noun }} unusual?</h2></div></div>
+<p class="dlead">{{ s1_lead|safe }}</p>
+<div class="w-desk">{{ s1_desk|safe }}</div><div class="w-phone">{{ s1_phone|safe }}</div>
+<details><summary>How to read this chart</summary><p>{{ s1_note|safe }}</p></details>
+</section>
+
+<section class="dstep" aria-labelledby="s2"><div class="dhead"><div><p class="label">Kind of place</p><h2 id="s2">Is it about the kind of {{ noun }}?</h2></div></div>
+<p class="dlead">{{ s2_lead|safe }}</p>
+<div class="w-phone glist">{% for g in groups %}<div class="gi" data-g="{{ g.name }}"><b>{{ g.name }}</b><br><span>{{ g.n }} {{ nouns }} · median <b>{{ g.median_f }}</b> · middle half {{ g.q1_f }} to {{ g.q3_f }}{% if level == 'county' and g.together_f %} · all together {{ g.together_f }}{% endif %}</span></div>{% endfor %}
+<div class="gi total"><b>Nebraska</b><br><span>{{ n }} {{ nouns }} · median <b>{{ median_f }}</b>{% if level == 'county' and state_f %} · all together {{ state_f }}{% endif %}</span></div></div>
+<div class="scroll w-desk"><table class="data gtable"><thead><tr><th>{{ gname|capitalize }}</th><th class="num">{{ nouns|capitalize }}</th><th class="num">Median {{ noun }}</th><th class="num">Middle half</th>{% if level == 'county' %}<th class="num">All together</th>{% endif %}</tr></thead>
+<tbody>{% for g in groups %}<tr data-g="{{ g.name }}"><td><b>{{ g.name }}</b></td><td class="num">{{ g.n }}</td><td class="num"><b>{{ g.median_f }}</b></td><td class="num">{{ g.q1_f }} to {{ g.q3_f }}</td>{% if level == 'county' %}<td class="num">{{ g.together_f }}</td>{% endif %}</tr>{% endfor %}
+<tr class="total"><td><b>Nebraska</b></td><td class="num">{{ n }}</td><td class="num"><b>{{ median_f }}</b></td><td></td>{% if level == 'county' %}<td class="num">{{ state_f }}</td>{% endif %}</tr></tbody></table></div>
+{% if level == 'county' %}<p class="note">"All together" adds up the counties first, then divides, so large counties weigh more (methods 1.1).</p>{% endif %}
+<p class="note" id="peer-line" hidden></p>
+</section>
+<p class="tnext"><button type="button" class="golink" data-t="relationships">What goes with {{ short_lc }}: the Relationships tab</button></p>
+{% endif %}
+</section>
+
+<section class="tpanel" id="t-table" role="tabpanel" aria-labelledby="tab-table" hidden>
+<p class="tfilter"><label for="tf">Find a {{ place }}</label> <input id="tf" type="search" autocomplete="off"></p>
+<div class="scroll"><table class="data maptable"><thead><tr>
+<th scope="col" class="num"><button type="button" data-s="rank">Rank</button></th>
+<th scope="col"><button type="button" data-s="name">{{ place|capitalize }}</button></th>
+<th scope="col" class="num"><button type="button" data-s="val">{{ short }}</button></th>
+</tr></thead><tbody id="tb"></tbody></table></div>
+<p class="quiet" id="tcount"></p>
+</section>
+
+{% if dv %}
+<section class="tpanel" id="t-rel" role="tabpanel" aria-labelledby="tab-rel" hidden>
+<nav class="swnav" aria-label="On this tab"><a href="#s3">Why, by design</a><a href="#s4">What goes with it</a><a href="#s5">Up close</a></nav>
+<section class="dstep main" aria-labelledby="s3"><div class="dhead"><div><p class="label">Why, by design</p><h2 id="s3">What arithmetic ties it to other measures?</h2></div></div>
+<p class="dlead">{{ s3_lead }}</p>
+{% if mech_chart %}
+<div id="place-mech" hidden></div>
+<h3 class="mh">{{ s3_chart_title }}</h3>
+<p class="note">{{ s3_chart_note }}</p>
+<div class="w-desk">{{ s3_desk|safe }}</div><div class="w-phone">{{ s3_phone|safe }}</div>
+{% endif %}
+{% if mech %}<ul class="fnotes">{% for m in mech %}<li>Moves with {{ m.with|join(', ') }}: {{ m.why }}</li>{% endfor %}</ul>{% endif %}
+{% if setaside %}<details><summary>Measures built from the same figures</summary><p>Set aside from the test below, because they move with {{ short_lc }} by arithmetic: {% for r in setaside %}{{ r.name }} ({{ r.rho_f }}){% if not loop.last %}, {% endif %}{% endfor %}.</p></details>{% endif %}
+</section>
+
+<section class="dstep" aria-labelledby="s4"><div class="dhead"><div><p class="label">What else goes with it</p><h2 id="s4">Which relationships survive testing?</h2></div></div>
+<p class="dlead">{{ s4_lead|safe }}</p>
+{% if whys %}<div class="whybox">{% for t, w in whys %}<p><b>{{ t }}.</b> {{ w }}</p>{% endfor %}</div>{% endif %}
+<div class="scroll"><table class="data ctable"><thead><tr><th>Measure</th><th class="num">Strength, −1 to +1</th><th></th><th>In words</th><th>Result</th><th class="num">{{ nouns|capitalize }}</th></tr></thead>
+<tbody>{% for r in tested %}<tr data-x="{{ r.key }}"{% if r.holds %} class="holds"{% endif %}><td><a href="#s5" class="plotlink" data-x="{{ r.key }}"><b>{{ r.name }}</b></a>{% if r.lever %} <span class="tag">{% if r.key == "lc2_unused_share" %}Board choice{% else %}Board sets{% endif %}</span>{% endif %}</td><td class="num">{{ r.rho_f }}</td><td>{{ r.bar|safe }}</td><td>{{ r.word }}</td><td>{% if r.holds %}<b>Stronger than chance</b>{% else %}<span class="quiet">Could be chance</span>{% endif %}</td><td class="num">{{ r.n }}</td></tr>{% endfor %}</tbody></table></div>
+<details><summary>How the test works</summary><p>Each measure is compared with {{ short_lc }} by rank (Spearman), so a few extreme {{ nouns }} cannot drive the result. A result counts as stronger than chance only if it survives the Holm correction at 5% across all {{ m }}.
+{% if within_all %} All that hold also hold within {{ gname }}s, so none is just a gap between {{ gname }}s: {{ holds_within }}.{% elif holds_within %} Within {{ gname }}s: {{ holds_within }}; where that falls below half the overall figure, the pattern is mostly a gap between {{ gname }}s.{% endif %}
+All {{ m }} are listed; select a measure to plot it below.{% if few %} Too few {{ nouns }} to test (under {{ min_n }}): {% for r in few %}{{ r.name }} ({{ r.n }}){% if not loop.last %}, {% endif %}{% endfor %}.{% endif %} Methods section 5.</p></details>
+</section>
+
+<section class="dstep" aria-labelledby="s5"><div class="dhead"><div><p class="label">Up close</p><h2 id="s5">Which {{ nouns }} break the pattern?</h2></div></div>
+{% if not scatters %}<p class="dlead">Too few {{ nouns }} have {{ short_lc }} ({{ n }}) to test it against other measures.{% if others_few %} You can still plot it against any measure below; with so few {{ nouns }}, read any pattern as untested.{% endif %}</p>
+{% elif no_holds %}<p class="dlead">No measure goes with {{ short_lc }} more strongly than chance would explain. The charts below are the strongest of the rest; read them as noise unless a mechanism says otherwise.</p>{% endif %}
+{% if scatters or others_few %}<p class="sc-pick"><label for="vs">Plot against</label><select id="vs">{% if not scatters %}<option value="">Choose a measure</option>{% endif %}{% for s in scatters %}<option value="{{ loop.index0 }}" data-k="{{ s.key }}">{{ s.name }} ({{ s.rho_f }}, {{ 'stronger than chance' if s.holds else 'could be chance' }})</option>{% endfor %}
+{% if others %}<optgroup label="Every other tested measure">{% for r in others %}<option value="k:{{ r.key }}">{{ r.name }} ({{ r.rho_f }}, {{ 'stronger than chance' if r.holds else 'could be chance' }})</option>{% endfor %}</optgroup>{% endif %}
+{% if others_few %}<optgroup label="Too few {{ nouns }} to test">{% for r in others_few %}<option value="k:{{ r.key }}">{{ r.name }} ({{ r.n }} {{ nouns }})</option>{% endfor %}</optgroup>{% endif %}
+</select></p>
+{% for s in scatters %}<div class="sc" data-i="{{ loop.index0 }}"{% if not loop.first %} hidden{% endif %}>
+<p class="dlead">{{ s.name }}: {{ s.word }} (rank correlation {{ s.rho_f }}).{% if s.holds and whys %} The reason is in the box above.{% endif %}</p>
+<div class="w-desk">{{ s.desk|safe }}</div><div class="w-phone">{{ s.phone|safe }}</div></div>{% endfor %}
+<div class="sc" data-i="js" hidden><p class="dlead" id="sc-js-lead"></p><div id="sc-js"></div></div>
+<p class="note">Labeled: the five {{ nouns }} furthest from the line, and the {{ noun }} you follow.</p>{% endif %}
+</section>
+<p class="note">Methods sections 1.1, 5 and 8 · How the formula and the tests work: <a href="{{ root }}how.html">How it works</a> · Terms: <a href="{{ root }}about.html#terms">Key terms</a>.</p>
+</section>
+{% endif %}
+</div>
+</div>
+
+{% if front %}
+<section class="mindex" id="all">
+<h2 class="sect big">All {{ ix.n }} measures</h2>
+<p class="quiet">Every measure has the same page: a map, a table of every {{ place }}, and what goes with it. Bold: the key measures.</p>
+<div class="mgroups">{% for g in ix.groups %}<div><p class="label">{{ g.name }} · {{ g['items']|length }}</p>
+<ul class="mlist">{% for it in g['items'] %}<li><a href="{{ root }}{{ sect }}/{{ it.key }}.html"{% if it.key_ind %} class="key"{% endif %}>{{ it.short }}</a></li>{% endfor %}</ul></div>{% endfor %}</div>
+</section>
+{% endif %}
+{% if statewide %}
+<section class="statewide" id="statewide">
+<h2 class="sect big">Statewide picture</h2>
+<nav class="swnav" aria-label="Statewide sections">{% for s in statewide %}<a href="#{{ s.id }}">{{ s.title }}</a>{% endfor %}</nav>
+{% for s in statewide %}
+<section class="swcard" id="{{ s.id }}">
+<h3>{{ s.title }}</h3>
+<p class="dlead">{{ s.lead }}</p>
+<p class="quiet axis">{{ s.axis }}</p>
+<div class="w-desk">{{ s.desk }}</div><div class="w-phone">{{ s.phone }}</div>
+<details class="more"><summary>Table and notes</summary>
+<div class="scroll"><table class="data"><thead><tr>{% for h in s.head %}<th scope="col"{% if not loop.first %} class="num"{% endif %}>{{ h }}</th>{% endfor %}</tr></thead>
+<tbody>{% for r in s.rows %}<tr{% if s.total_last and loop.last %} class="bold"{% endif %}>{% for c in r %}{% if loop.first %}<th scope="row">{{ c }}</th>{% else %}<td class="num">{{ c }}</td>{% endif %}{% endfor %}</tr>{% endfor %}</tbody></table></div>
+<p class="quiet">{{ s.note }}</p>
+</details>
+</section>
+{% endfor %}
+</section>
+{% endif %}
+<script id="measure-data" type="application/json">{"key":{{ key|tojson }},"level":{{ level|tojson }},"sect":{{ sect|tojson }},"root":{{ root|tojson }},"noun":{{ place|tojson }},"nouns":{{ (nouns or ('systems' if level == 'system' else 'counties'))|tojson }},"title":{{ label|tojson }},"foot":{{ (period ~ " · Source: " ~ source)|tojson }},"front":{{ 'true' if front else 'false' }},"cls":{{ classes_json|safe }},"tab":{{ table_json|safe }}}</script>
+<script src="{{ root }}assets/geo-{{ level }}.js" defer></script>
+<script src="{{ root }}assets/measure.js" defer></script>
+{% if dv %}<script id="dive-data" type="application/json">{{ place_json|safe }}</script>
+<script src="{{ root }}assets/dive-places-{{ level }}.js" defer></script>
+{% if mech_chart == "formula" %}<script src="{{ root }}assets/dive-formula.js" defer></script>
+{% elif mech_chart == "ptax" %}<script src="{{ root }}assets/dive-ptax.js" defer></script>
+{% endif %}<script src="{{ root }}assets/dive-values-{{ level }}.js" defer></script>
+<script src="{{ root }}assets/dive.js" defer></script>{% endif %}
+{% endblock %}

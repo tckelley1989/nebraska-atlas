@@ -44,7 +44,7 @@ def term_id(level, key):
     return f"m-{level}-{key}"
 
 
-TERM_GROUPS = ["Students", "Need", "Resources and aid", "Aid and certification", "Property value and taxes", "Reading the dives"]
+TERM_GROUPS = ["Students", "Need", "Resources and aid", "Aid and certification", "Property value and taxes", "Reading the measure pages"]
 
 
 def term_anchor(term: str) -> str:

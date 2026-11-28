@@ -2,7 +2,7 @@
 headline: Equalization aid fell mostly because school adjusted valuation outgrew need, and foundation aid added less than it paid
 chart: equalization
 source: NDE TEEOSA state aid certifications, 2019-20 and the latest aid year.
-see: Equalization aid by district=schools.html?ind=equalized|School adjusted valuation per student=schools.html?ind=val_ps|What moved formula need=schools.html#need|How the formula works, deeper dive=dive/system/aid_ps.html
+see: Equalization aid by district=schools/equalized.html|School adjusted valuation per student=schools/val_ps.html|What moved formula need=schools.html#need|How the formula sets aid, system by system=schools/aid_ps.html#relationships
 ---
 From 2019-20 to {{ f.aid_year }}, formula need rose {{ f.need_gain }} ({{ f.need_growth }}). School adjusted valuation changed {{ f.sav_growth }}, which at the $1.00 local effort rate added {{ f.le_gain }} to resources. Resources grew faster than need, so equalization aid fell from {{ f.eq0 }} to {{ f.eq1 }}, and the systems receiving it from {{ f.equalized0 }} to {{ f.equalized1 }}.
 

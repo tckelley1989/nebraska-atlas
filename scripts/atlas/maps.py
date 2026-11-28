@@ -69,57 +69,79 @@ def classes_for(a, level: str, row: dict, ids: list) -> list:
     return out
 
 
-def map_page(a, level: str) -> dict:
+def names_for(a, level: str) -> dict:
+    return {i: (a.systems_xw[i]["display_name"] if level == "system" else a.counties_xw[i]["name"] + " County") for i in a.places(level)}
+
+
+def geo_ids(a, level: str) -> list:
     geo = a.geo_system if level == "system" else a.geo_county
-    ids = [i for i in geo["paths"] if i in a.places(level)]
-    names = {i: (a.systems_xw[i]["display_name"] if level == "system" else a.counties_xw[i]["name"] + " County") for i in ids}
+    return [i for i in geo["paths"] if i in a.places(level)]
+
+
+def geo_js(a, level: str) -> str:
+    """Map geometry for one level, shared by every measure page and cached by the browser once. Each page sends only its
+    own bin classes, aligned with these ids."""
+    geo = a.geo_system if level == "system" else a.geo_county
+    ids, names = geo_ids(a, level), names_for(a, level)
+    body = {"vb": geo["viewBox"], "ids": ids, "d": [simplify(geo["paths"][i]) for i in ids], "n": [names[i] for i in ids],
+            "href": ("system" if level == "system" else "county") + "/"}
+    return "window.LEDGER_GEO=" + json.dumps(body, ensure_ascii=False, separators=(",", ":")) + ";"
+
+
+def section(level: str) -> str:
+    return "schools" if level == "system" else "counties"
+
+
+def measure_href(level: str, key: str) -> str:
+    """Where a measure lives: one page per measure, holding its map, table and relationships."""
+    return f"{section(level)}/{key}.html"
+
+
+def has_page(row: dict) -> bool:
+    """A category measure gets a page only when it has map classes (equalized); others stay on the profiles."""
+    return row["format"] != "category" or row["key"] in CATEGORY_CLASSES
+
+
+def index(a, level: str) -> dict:
+    """Every measure at one level, in registry group order, with the key eight first: the switcher on every measure page."""
+    from .pages import GROUP_ORDER
+    groups = []
+    for g in GROUP_ORDER[level]:
+        rows = [r for r in a.registry if r["level"] == level and r["group"] == g and has_page(r)]
+        rows.sort(key=lambda r: (r["key_indicator"] != "yes", int(r["key_order"] or 99)))
+        if rows:
+            groups.append({"name": g, "items": [{"key": r["key"], "short": r["short"], "key_ind": r["key_indicator"] == "yes"} for r in rows]})
+    key8 = [{"key": r["key"], "short": r["short"]} for r in a.key_eight(level)]
+    return {"groups": groups, "key8": key8, "n": sum(len(g["items"]) for g in groups)}
+
+
+def measure_map(a, level: str, row: dict) -> dict:
+    """One measure across every place: map bin classes, legend, table values, highest and lowest five."""
+    ids, names = geo_ids(a, level), names_for(a, level)
     href = "system" if level == "system" else "county"
-    paths = [{"id": i, "d": simplify(geo["paths"][i]), "name": names[i], "href": f"{href}/{i}.html"} for i in ids]
-    indicators, cls, tab, strips = [], {}, {}, {}
-    for row in a.key_eight(level):
-        c = classes_for(a, level, row, ids)
-        cls[row["key"]] = c
-        if row["format"] == "category":
-            labels = row["legend"].split("|")
-            legend = [{"cls": n, "label": lab, "count": c.count(n)} for n, lab in zip(CATEGORY_CLASSES[row["key"]], labels)]
-        else:
-            labels = row["legend"].split("|")
-            legend = [{"cls": f"{row['ramp']}-{j + 1}", "label": lab, "count": c.count(f"{row['ramp']}-{j + 1}")} for j, lab in enumerate(labels)]
-        missing = c.count("na")
-        vals = [(a.value(level, i, row["key"]), i) for i in ids]
-        ranked = sorted((v, i) for v, i in vals if isinstance(v, (int, float)))
-        # table view: raw value (for sorting), shown value and tone, aligned with ids; None where blank
-        if row["format"] == "category":
-            labels = row["legend"].split("|")
-            names_c = CATEGORY_CLASSES[row["key"]]
-            tab[row["key"]] = [[None, labels[names_c.index(x)], ""] if x in names_c else None for x in c]
-        else:
-            tab[row["key"]] = [[round(v, 6), fmt.value(v, row), tone(row, v)] if isinstance(v, (int, float)) else None for v, _ in vals]
-        top = [{"name": names[i], "href": f"{href}/{i}.html", "value": fmt.value(v, row), "tone": tone(row, v)} for v, i in reversed(ranked[-5:])]
-        bottom = [{"name": names[i], "href": f"{href}/{i}.html", "value": fmt.value(v, row), "tone": tone(row, v)} for v, i in ranked[:5]]
-        st = a.stats(level, row["key"])
-        prev = None
-        if row["format"] != "category":
-            from . import dive
-            pv = dive.map_preview(a, level, row["key"])
-            prev = {k: pv[k] for k in ("top", "n_holds", "m", "gname")}
-            strips[row["key"]] = (pv["desk"], pv["phone"])
-        indicators.append({
-            "key": row["key"], "format": row["format"], "label": row["label"], "short": row["short"], "note": row["note"], "period": row["period"],
-            "source": row["source"], "legend": legend, "missing": missing, "missing_label": row["missing_label"],
-            "median": fmt.value(st["median"], row) if st["median"] is not None and row["format"] != "category" else None,
-            "top": top, "bottom": bottom if row["format"] != "category" else [], "preview": prev,
-        })
-    first = indicators[0]["key"]
-    for p, c in zip(paths, cls[first]):
-        p["cls"] = c
+    c = classes_for(a, level, row, ids)
+    labels = row["legend"].split("|")
+    if row["format"] == "category":
+        names_c = CATEGORY_CLASSES[row["key"]]
+        legend = [{"cls": n, "label": lab, "count": c.count(n)} for n, lab in zip(names_c, labels)]
+        tab = [[None, labels[names_c.index(x)], ""] if x in names_c else None for x in c]
+    else:
+        legend = [{"cls": f"{row['ramp']}-{j + 1}", "label": lab, "count": c.count(f"{row['ramp']}-{j + 1}")} for j, lab in enumerate(labels)]
+        tab = []
+        for i in ids:
+            v = a.value(level, i, row["key"])
+            tab.append([round(v, 6), fmt.value(v, row), tone(row, v)] if isinstance(v, (int, float)) else None)
+    vals = [(a.value(level, i, row["key"]), i) for i in ids]
+    ranked = sorted((v, i) for v, i in vals if isinstance(v, (int, float)))
+    item = lambda v, i: {"name": names[i], "href": f"{href}/{i}.html", "value": fmt.value(v, row), "tone": tone(row, v)}
+    st = a.stats(level, row["key"])
+    cat = row["format"] == "category"
     return {
-        "level": level, "title": "School systems" if level == "system" else "Counties",
-        "heading": "School systems" if level == "system" else "Counties",
-        "count": len(ids), "noun": "systems" if level == "system" else "counties",
-        "view_box": geo["viewBox"], "paths": paths, "indicators": indicators,
-        "strips": strips,
-        "classes_json": json.dumps({k: v for k, v in cls.items()}, separators=(",", ":")),
-        "table_json": json.dumps({"names": [names[i] for i in ids], "href": f"{href}/", "ids": ids, "vals": tab},
-                                 ensure_ascii=False, separators=(",", ":")),
+        "legend": legend, "missing": c.count("na"), "missing_label": row["missing_label"],
+        "median_v": fmt.value(st["median"], row) if st["median"] is not None and not cat else None,
+        "top": [item(v, i) for v, i in reversed(ranked[-5:])] if not cat else [],
+        "bottom": [item(v, i) for v, i in ranked[:5]] if not cat else [],
+        "count": len(ids),
+        "classes_json": json.dumps(c, separators=(",", ":")),
+        "table_json": json.dumps(tab, ensure_ascii=False, separators=(",", ":")),
     }

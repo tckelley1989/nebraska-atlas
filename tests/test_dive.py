@@ -1,4 +1,4 @@
-"""Deeper dive pages: identities on every place, the statistical rules, phone charts and links (design doc rules)."""
+"""Measure pages (methods 5): identities on every place, the statistical rules, phone charts and links (design doc rules)."""
 import json
 import re
 import subprocess
@@ -25,11 +25,23 @@ def atlas():
     return Atlas()
 
 
+def mpage(level, key):
+    return SITE / ("schools" if level == "system" else "counties") / f"{key}.html"
+
+
+def measure_pages():
+    """Every measure page that carries the relationship engine (number measures)."""
+    for d in ("schools", "counties"):
+        for p in (SITE / d).glob("*.html"):
+            if 'id="dive-data"' in p.read_text(encoding="utf-8"):
+                yield p
+
+
 def page_data(level, key):
     """The page's own data merged with the shared files it loads, as dive.js does."""
-    t = (SITE / "dive" / level / f"{key}.html").read_text(encoding="utf-8")
+    t = mpage(level, key).read_text(encoding="utf-8")
     d = json.loads(re.search(r'<script id="dive-data" type="application/json">(.*?)</script>', t, re.S).group(1))
-    for src in re.findall(r'<script src="\.\./\.\./assets/(dive-(?:places|formula|ptax)[a-z-]*\.js)"', t):
+    for src in re.findall(r'<script src="\.\./assets/(dive-(?:places|formula|ptax)[a-z-]*\.js)"', t):
         body = (SITE / "assets" / src).read_text(encoding="utf-8")
         shared = json.loads(body[body.index("=") + 1:-1])
         for c, p in d["places"].items():
@@ -38,9 +50,7 @@ def page_data(level, key):
 
 
 def test_pages_load_only_the_shared_data_they_draw():
-    for p in (SITE / "dive").rglob("*.html"):
-        if p.name == "index.html":
-            continue
+    for p in measure_pages():
         t = p.read_text(encoding="utf-8")
         chart = json.loads(re.search(r'<script id="dive-data" type="application/json">(.*?)</script>', t, re.S).group(1))["chart"]
         assert ("dive-formula.js" in t) == (chart == "formula"), p.name
@@ -48,11 +58,17 @@ def test_pages_load_only_the_shared_data_they_draw():
         assert '"fx"' not in t and '"px"' not in t, p.name
 
 
-def test_a_page_for_every_measure(atlas):
+def test_a_page_for_every_measure_and_old_addresses_redirect(atlas):
+    from atlas.maps import has_page
     for r in atlas.registry:
-        p = SITE / "dive" / r["level"] / f"{r['key']}.html"
-        assert p.exists() == (r["format"] != "category"), r["key"]
-    assert (SITE / "dive" / "index.html").exists()
+        assert mpage(r["level"], r["key"]).exists() == has_page(r), r["key"]
+        old = SITE / "dive" / r["level"] / f"{r['key']}.html"
+        assert old.exists() == (r["format"] != "category"), r["key"]
+        if old.exists():
+            t = old.read_text(encoding="utf-8")
+            target = re.search(r'location\.replace\("([^"]+)" \+ location\.search \+ location\.hash\)', t).group(1)
+            assert (old.parent / target).resolve() == mpage(r["level"], r["key"]).resolve(), r["key"]
+    assert "../how.html" in (SITE / "dive" / "index.html").read_text(encoding="utf-8")
 
 
 def test_formula_lines_add_to_the_certified_total_for_every_system():
@@ -102,9 +118,7 @@ def test_relationship_rules(atlas):
 
 
 def test_every_chart_has_a_phone_version_and_axis_title(atlas):
-    for p in (SITE / "dive").rglob("*.html"):
-        if p.name == "index.html":
-            continue
+    for p in measure_pages():
         t = p.read_text(encoding="utf-8")
         desk, phone = t.count('<div class="w-desk">'), t.count('<div class="w-phone">')
         assert desk == phone and desk >= 1, p.name
@@ -120,10 +134,12 @@ def test_every_place_can_be_followed_and_profile_links_resolve(atlas):
         opts = set(re.findall(r'<option value="([0-9-]+)">', pick))
         assert opts and opts <= set(d["places"]), level
     prof = (SITE / "system" / "24-0001.html").read_text(encoding="utf-8")
-    links = re.findall(r'href="\.\./dive/(system|county)/([a-z0-9_]+)\.html\?sel=24-0001"', prof)
-    assert links
-    for lvl, key in links:
-        assert (SITE / "dive" / lvl / f"{key}.html").exists(), key
+    links = re.findall(r'href="\.\./(schools|counties)/([a-z0-9_]+)\.html\?sel=24-0001"', prof)
+    assert links and all(d == "schools" for d, _ in links)
+    for d, key in links:
+        assert (SITE / d / f"{key}.html").exists(), key
+    data = (SITE / "schools" / "aid_ps.html").read_text(encoding="utf-8")
+    assert 'data-base="../system/"' in data  # the profile link the page writes for a followed place
 
 
 def test_levy_relationships_lead_with_their_explanation():
@@ -156,31 +172,32 @@ def test_why_lines_cover_every_holding_result_and_claim_no_mechanism_without_ari
             assert ("aid_ps" in holds | {r["key"]}) and (VAL & (holds | {r["key"]})), r["key"]
         if "divided by taxable valuation" in text:
             assert r["key"] in LEVY or holds & LEVY, r["key"]
-        if "factors in step 3" in text:
+        if "factors charted above" in text:
             assert r["level"] == "county" and "c07" in d.fam, r["key"]
         if "does not change its aid" in text:
             assert r["key"] == "aid_ps", r["key"]
 
 
 def test_no_empty_test_counts():
-    for p in (SITE / "dive").rglob("*.html"):
+    for p in measure_pages():
         assert "0 of 0" not in p.read_text(encoding="utf-8"), p.name
 
 
-def test_landing_page(atlas):
-    """The landing page's worked examples add to the certified total, its links resolve, and it carries no hard-coded
-    figure the bundle does not produce (spot checks against the data)."""
+def test_how_it_works_page(atlas):
+    """The How it works page's worked examples add to the certified total, its links resolve, and its figures come
+    from the bundle (spot checks against the data)."""
     from atlas import landing
     ctx = landing.build(atlas)
     for e in ctx["examples"]:
         assert abs(e["aid_raw"] - e["cert"]) <= 1, e["code"]
-    t = (SITE / "dive" / "index.html").read_text(encoding="utf-8")
-    for href in set(re.findall(r'href="((?:system|county)/[a-z0-9_]+\.html)', t)):
-        assert (SITE / "dive" / href).exists(), href
-    n_listed = len(set(re.findall(r'href="(?:system|county)/([a-z0-9_]+)\.html"', t)))
-    assert n_listed == sum(1 for r in atlas.registry if r["format"] != "category") - 0 or n_listed > 80
+    t = (SITE / "how.html").read_text(encoding="utf-8")
+    links = set(re.findall(r'href="((?:schools|counties)/[a-z0-9_]+\.html)', t))
+    assert links
+    for href in links:
+        assert (SITE / href).exists(), href
     assert ctx["aid_total"] in t and ctx["unused"] in t and str(ctx["votes"]) in t
-    assert "Deeper dive" in (SITE / "index.html").read_text(encoding="utf-8")  # in the site nav
+    nav = (SITE / "index.html").read_text(encoding="utf-8")
+    assert 'href="how.html"' in nav and "Deeper dive" not in nav
 
 
 def test_every_tested_measure_is_listed_and_plottable(atlas):
@@ -190,7 +207,7 @@ def test_every_tested_measure_is_listed_and_plottable(atlas):
         if r["format"] == "category":
             continue
         rel = dive.Dive(atlas, r["level"], r["key"]).relationships()
-        t = (SITE / "dive" / r["level"] / f"{r['key']}.html").read_text(encoding="utf-8")
+        t = mpage(r["level"], r["key"]).read_text(encoding="utf-8")
         assert len(re.findall(r'<tr data-x="', t)) == len(rel["tested"]), r["key"]
         offered = set(re.findall(r'<option value="\d+" data-k="([^"]+)"', t)) | set(re.findall(r'<option value="k:([^"]+)"', t))
         assert offered == {x["key"] for x in rel["tested"]} | {x["key"] for x in rel["few"]}, r["key"]
@@ -207,13 +224,13 @@ def test_shared_values_match_the_bundle(atlas):
                 assert abs(a - b) <= 1e-5 * max(1, abs(b)), (k, c)
 
 
-def test_map_previews_load_and_link(atlas):
-    for page, level in (("schools.html", "system"), ("counties.html", "county")):
-        t = (SITE / page).read_text(encoding="utf-8")
-        for k in re.findall(r'<div class="mstrip" data-k="([^"]+)"', t):
-            for w in ("desk", "phone"):
-                svg = (SITE / "assets" / "strips" / f"{level}-{k}-{w}.svg").read_text(encoding="utf-8")
-                assert svg.startswith("<svg") and svg.count('class="dd"') >= 10, (k, w)
-        for key, vs in re.findall(r'href="dive/' + level + r'/([a-z0-9_]+)\.html\?vs=([a-z0-9_]+)#s5"', t):
-            d = (SITE / "dive" / level / f"{key}.html").read_text(encoding="utf-8")
-            assert f'data-k="{vs}"' in d or f'value="k:{vs}"' in d, (key, vs)
+def test_measure_switcher_and_index_list_every_page(atlas):
+    """Every measure page can reach every other: the switcher lists them all, and the section front indexes them."""
+    from atlas import maps
+    for level, sect in (("system", "schools"), ("county", "counties")):
+        keys = {k for g in maps.index(atlas, level)["groups"] for k in (it["key"] for it in g["items"])}
+        assert keys == {p.stem for p in (SITE / sect).glob("*.html")}, level
+        t = (SITE / f"{sect}.html").read_text(encoding="utf-8")
+        assert set(re.findall(r'href="' + sect + r'/([a-z0-9_]+)\.html"', t[t.index('id="all"'):])) == keys, level
+        page = (SITE / sect / f"{atlas.key_eight(level)[1]['key']}.html").read_text(encoding="utf-8")
+        assert set(re.findall(r'<option value="([a-z0-9_]+)"', page[page.index('id="msel"'):page.index("</select>", page.index('id="msel"'))])) == keys

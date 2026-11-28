@@ -128,7 +128,7 @@ def test_valuation_naming_rule():
         t = re.sub(r'(?<=,)valuation(?=,)', "k", t)  # bare CSV fields
         # the glossary entry that defines taxable valuation as assessed value
         t = re.sub(r'<tr id="t-taxable-valuation">.*?</tr>', "", t, flags=re.S)
-        t = re.sub(r"<dt>Taxable valuation</dt><dd>.*?</dd>", "", t, flags=re.S)  # the same definition on the dive landing page
+        t = re.sub(r"<dt>Taxable valuation</dt><dd>.*?</dd>", "", t, flags=re.S)  # the same definition on the How it works page
         t = re.sub(r"(?<![A-Za-z])#?t-[a-z0-9-]+", "anchor", t)  # term anchors such as t-school-adjusted-valuation
         hits += [f"{p.name}: …{t[max(0, m.start() - 40):m.end() + 10]}…" for m in NAMING.finditer(t)]
     assert not hits, f"{len(hits)} hits, e.g. " + " | ".join(sorted(set(hits))[:5])
@@ -149,34 +149,38 @@ def test_periods_follow_the_bundle():
     assert lc2 in t
 
 
-def test_map_table_has_every_place_and_matches_the_map():
-    """Table view (map pages): one row per mapped place, a value wherever the map has a color, blank where it shows
-    the not-available class, and the top value equals the page's highest-five list."""
+def measure_data(path):
     import json
-    for page, n in (("schools.html", 244), ("counties.html", 93)):
-        t = (SITE / page).read_text(encoding="utf-8")
-        tab = json.loads(re.search(r"var T = (\{.*?\}), cur =", t, re.S).group(1))
-        cls = json.loads(re.search(r"var C = (\{.*?\}), ids", t, re.S).group(1))
-        assert len(tab["ids"]) == len(tab["names"]) == n, page
-        for k, vals in tab["vals"].items():
-            assert len(vals) == n, (page, k)
-            assert all((v is None) == (c == "na") for v, c in zip(vals, cls[k])), (page, k)
-            nums = [v for v in vals if v and v[0] is not None]
+    t = path.read_text(encoding="utf-8")
+    return t, json.loads(re.search(r'<script id="measure-data" type="application/json">(.*?)</script>', t, re.S).group(1))
+
+
+def test_map_table_has_every_place_and_matches_the_map():
+    """Every measure page: one table row and one map class per mapped place, a value wherever the map has a color, blank
+    where it shows the not-available class, and the top value equals the page's highest-five list."""
+    import json
+    for sect, level, n in (("schools", "system", 244), ("counties", "county", 93)):
+        geo = (SITE / "assets" / f"geo-{level}.js").read_text(encoding="utf-8")
+        G = json.loads(geo[geo.index("=") + 1:-1])
+        assert len(G["ids"]) == len(G["d"]) == len(G["n"]) == n, level
+        for p in list((SITE / sect).glob("*.html")) + [SITE / f"{sect}.html"]:
+            t, M = measure_data(p)
+            assert len(M["tab"]) == len(M["cls"]) == n, p.name
+            assert all((v is None) == (c == "na") for v, c in zip(M["tab"], M["cls"])), p.name
+            nums = [v for v in M["tab"] if v and v[0] is not None]
             if nums:
                 top = max(nums, key=lambda v: v[0])[1]
-                sect = re.search(rf'<div class="ranks" data-k="{k}".*?Highest five</h3><ol><li><a[^>]*>[^<]*</a> <b[^>]*>([^<]*)</b>', t, re.S)
-                assert sect and sect.group(1) == top, (page, k)
+                m = re.search(r'Highest five</h3><ol><li><a[^>]*>[^<]*</a> <b[^>]*>([^<]*)</b>', t)
+                assert m and m.group(1) == top, p.name
 
 
-def test_map_pages_offer_png_and_svg_with_source_lines():
-    """Downloads draw the title, legend, period and source into the file, so every indicator needs a period line."""
-    import json
-    for page in ("schools.html", "counties.html"):
-        t = (SITE / page).read_text(encoding="utf-8")
-        assert 'class="dlbtn" data-f="png"' in t and 'class="dlbtn" data-f="svg"' in t, page
-        periods = json.loads("{" + re.search(r"periods = \{(.*?)\};", t, re.S).group(1) + "}")
-        keys = re.findall(r'<section class="ind" data-k="([^"]+)"', t)
-        assert set(periods) == set(keys) and all("Source: " in v and len(v) > 12 for v in periods.values()), page
+def test_measure_pages_offer_png_and_svg_with_source_lines():
+    """Downloads draw the title, legend, period and source into the file, so every measure needs a period line."""
+    for sect in ("schools", "counties"):
+        for p in (SITE / sect).glob("*.html"):
+            t, M = measure_data(p)
+            assert 'class="dlbtn" data-f="png"' in t and 'class="dlbtn" data-f="svg"' in t, p.name
+            assert "Source: " in M["foot"] and len(M["foot"]) > 12 and M["title"], p.name
 
 
 def test_statewide_picture():
@@ -184,7 +188,7 @@ def test_statewide_picture():
     import html as h
     t = (SITE / "schools.html").read_text(encoding="utf-8")
     sw = t[t.index('<section class="statewide"'):]
-    sw = sw[:sw.index("<script>")]
+    sw = sw[:sw.index("<script")]
     ids = re.findall(r'<section class="swcard" id="([^"]+)"', sw)
     assert ids == ["spending", "who-pays", "need", "request-cap"]
     assert sw.count('<div class="w-desk">') == sw.count('<div class="w-phone">') == 4

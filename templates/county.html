@@ -13,8 +13,8 @@
 {% for g in groups %}
 <section class="block">
 <h2 class="sect">{{ g.name }}</h2>
-<div class="scroll"><table class="data"><thead><tr><th>Measure</th><th class="num">{{ name }}</th><th class="num">{{ tier }} tier</th><th class="num">Nebraska</th><th>Rank</th><th>Period</th><th><span class="vh">Deeper dive</span></th></tr></thead>
-<tbody>{% for t in g['items'] %}<tr><td>{{ term(t, t.label) }}</td><td class="num {{ t.tone }}">{{ t.value }}</td><td class="num">{{ t.tier }}</td><td class="num">{{ t.state }}</td><td>{{ t.rank }}</td><td class="quiet">{{ t.period }}</td><td>{% if not t.categorical %}<a class="dlink" href="{{ root }}dive/county/{{ t.key }}.html?sel={{ fips }}">Dive</a>{% endif %}</td></tr>{% endfor %}</tbody></table></div>
+<div class="scroll"><table class="data"><thead><tr><th>Measure</th><th class="num">{{ name }}</th><th class="num">{{ tier }} tier</th><th class="num">Nebraska</th><th>Rank</th><th>Period</th><th><span class="vh">Compare with every county</span></th></tr></thead>
+<tbody>{% for t in g['items'] %}<tr><td>{{ term(t, t.label) }}</td><td class="num {{ t.tone }}">{{ t.value }}</td><td class="num">{{ t.tier }}</td><td class="num">{{ t.state }}</td><td>{{ t.rank }}</td><td class="quiet">{{ t.period }}</td><td>{% if not t.categorical %}<a class="dlink" href="{{ root }}counties/{{ t.key }}.html?sel={{ fips }}">Compare</a>{% endif %}</td></tr>{% endfor %}</tbody></table></div>
 </section>
 {% endfor %}
 {% macro cmp(c) %}<div class="scroll"><table class="data cmp"><thead><tr><th>{{ c.head }}</th>{% for h in c.cols %}<th class="num">{{ h }}</th>{% endfor %}</tr></thead>

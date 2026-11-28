@@ -29,7 +29,9 @@ nav a[aria-current="page"]{border-bottom:3px solid var(--rust);padding-bottom:4p
 .badges{display:flex;gap:8px;flex-wrap:wrap;margin:0}
 .badge{font-size:13px;font-weight:700;background:#45423e;border-radius:3px;padding:5px 10px}
 .badge.state{background:var(--state);color:#fff}
-.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:28px;border:0;padding:0}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:28px;border:0;padding:0}
+@media (min-width:1040px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:560px){.tiles{grid-template-columns:1fr}}  /* 4, 2 or 1 across: eight tiles never leave a short row */
 .tile{background:var(--card);border-radius:4px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
 .tile h3{margin:0;font-size:14px;font-weight:600;color:var(--sub);min-height:2.6em}
 .big{margin:0;font-size:30px;font-stretch:112%;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}

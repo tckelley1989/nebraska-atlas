@@ -1,11 +1,15 @@
 {
-  "built_utc": "2026-11-26T17:54:59+00:00",
+  "built_utc": "2026-11-28T15:00:25+00:00",
   "source_repo": "nebraska-economy",
-  "source_commit": "96f3d5ab61fde12c4e444fa58a726ce611387b97",
+  "source_commit": "2e10f4ec4aec9f58abfe5d44ea414667067907d3",
   "files": {
     "counties.csv": {
       "bytes": 50167,
       "sha256": "60919f5838142e0468e786f68ae2e6576a12317ebcc98aab1101060623176f20"
+    },
+    "county_detail.json": {
+      "bytes": 2461849,
+      "sha256": "5a644fbd5d406b62c2b65058f4e23f1c2f41c368b0d927a8155a2e304f416e81"
     },
     "county_industry_jobs.csv": {
       "bytes": 87977,

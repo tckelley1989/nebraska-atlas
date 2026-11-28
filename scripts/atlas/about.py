@@ -22,6 +22,8 @@ FILES = {
     "school_formula.csv": "The latest certification, step by step for every system: need, each resource, equalization and foundation aid.",
     "school_need_components.csv": "Formula need split into its components, by system and aid year.",
     "school_revenue.csv": "Money received by system and school year from Annual Financial Reports, with credits shown separately.",
+    "school_property_taxes.csv": "Property taxes each system received (01100) plus the state's credits on them, split into what the state and local taxpayers paid, by school year.",
+    "school_tax_base.csv": "Each system's taxable valuation by October since 2019, with the latest October's shares by class of property (percent).",
     "school_outcomes.csv": "NSCAS results, graduation rates and teacher pay and experience by system.",
     "lc2_budgets.csv": "LC-2 budget forms: property tax authority, board votes and requests by system and budget year.",
     "property_taxes.csv": "Taxable valuation and taxes levied by county, tax year and taxing authority.",

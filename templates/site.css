@@ -271,3 +271,13 @@ code{overflow-wrap:anywhere}
 .mrel li{padding:6px 0;border-top:1px solid var(--rule)}
 .mrel li b{margin-left:6px}
 .tablemode .mprev{display:none}
+/* restored profile sections: closed by default, the heading and one line show */
+details.psec{border-top:2px solid var(--ink);margin:26px 0 0;padding-top:4px}
+details.psec>summary{cursor:pointer;list-style:none;padding:8px 0}
+details.psec>summary::-webkit-details-marker{display:none}
+details.psec>summary h2{display:inline;margin:0}
+details.psec>summary h2::after{content:" +";color:var(--sub)}
+details.psec[open]>summary h2::after{content:" \2212"}
+details.psec .psum{display:block;margin-top:6px;color:var(--sub);font-size:15px;line-height:1.5;max-width:860px}
+details.psec h3.sub{margin:18px 0 6px;font-size:16px}
+.note.warn{color:var(--rust)}
